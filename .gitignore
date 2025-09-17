@@ -9,6 +9,11 @@
 # Production
 /build
 
+# Build artifacts
+*.zip
+deploy-*
+deployment*
+
 # Misc
 .DS_Store
 .env
@@ -44,5 +49,17 @@ pids
 
 # Optional eslint cache
 .eslintcache
+
 # Local Netlify folder
 .netlify
+
+# Documentation and guides
+DEPLOYMENT-GUIDE.md
+
+# Firebase config files
+firebase.json
+.firebaserc
+database.rules.json
+
+# Build scripts
+build-and-deploy.js
