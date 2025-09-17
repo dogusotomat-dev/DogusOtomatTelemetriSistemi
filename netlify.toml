@@ -1,0 +1,46 @@
+[build]
+  # Build command for React app
+  command = "npm run build"
+  
+  # Directory with the static files  
+  publish = "build"
+  
+  # Directory with Netlify Functions
+  functions = "netlify/functions"
+
+[build.environment]
+  # Node.js version
+  NODE_VERSION = "18"
+  
+  # Build settings
+  CI = "false"  # Treat warnings as warnings, not errors
+
+# Redirects are handled by _redirects file
+  
+# JavaScript files
+[[headers]]
+  for = "/static/js/*.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# CSS files
+[[headers]]
+  for = "/static/css/*.css"
+  [headers.values]
+    Content-Type = "text/css; charset=utf-8"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache static assets
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Security headers (without nosniff for static files)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"

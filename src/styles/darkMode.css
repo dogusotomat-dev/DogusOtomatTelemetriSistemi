@@ -1,0 +1,558 @@
+/* Dark mode specific styles */
+.dark-mode {
+  --background-default: #0a0a0a;
+  --background-paper: #1a1a1a;
+  --background-surface: #242424;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.87);
+  --text-disabled: rgba(255, 255, 255, 0.6);
+  --primary-main: #7986f0;
+  --primary-light: rgba(121, 134, 240, 0.15);
+  --divider: rgba(255, 255, 255, 0.2);
+  --border-color: rgba(255, 255, 255, 0.3);
+  --success-main: #4caf50;
+  --warning-main: #ff9800;
+  --error-main: #f44336;
+  --info-main: #2196f3;
+}
+
+/* Scrollbar styling for dark mode */
+.dark-mode ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Table styling for dark mode */
+.dark-mode .MuiTable-root {
+  color: var(--text-primary);
+  background-color: var(--background-paper);
+}
+
+.dark-mode .MuiTableHead-root {
+  background-color: var(--background-surface);
+}
+
+.dark-mode .MuiTableHead-root .MuiTableCell-root {
+  color: var(--text-primary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--divider);
+}
+
+.dark-mode .MuiTableBody-root .MuiTableCell-root {
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--divider);
+}
+
+.dark-mode .MuiTableRow-root:hover {
+  background-color: var(--primary-light);
+}
+
+/* Card styling for dark mode */
+.dark-mode .MuiCard-root {
+  background: var(--background-paper) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .MuiCardContent-root {
+  color: var(--text-primary) !important;
+}
+
+/* Paper styling for dark mode */
+.dark-mode .MuiPaper-root {
+  background: var(--background-paper) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Input styling for dark mode */
+.dark-mode .MuiInputBase-root {
+  color: var(--text-primary) !important;
+  background-color: var(--background-surface) !important;
+}
+
+.dark-mode .MuiInputLabel-root {
+  color: var(--text-secondary) !important;
+}
+
+.dark-mode .MuiInputLabel-root.Mui-focused {
+  color: var(--primary-main) !important;
+}
+
+.dark-mode .MuiOutlinedInput-notchedOutline {
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--text-secondary) !important;
+}
+
+.dark-mode .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primary-main) !important;
+  border-width: 2px !important;
+}
+
+/* Button styling for dark mode */
+.dark-mode .MuiButton-outlined {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--text-primary);
+}
+
+.dark-mode .MuiButton-outlined:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Dialog styling for dark mode */
+.dark-mode .MuiDialog-paper {
+  background: var(--background-paper);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Menu styling for dark mode */
+.dark-mode .MuiMenu-paper {
+  background: var(--background-paper);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Tab styling for dark mode */
+.dark-mode .MuiTab-textColorPrimary.Mui-selected {
+  color: #667eea;
+}
+
+.dark-mode .MuiTabs-indicator {
+  background-color: #667eea;
+}
+
+/* Sidebar styling for dark mode */
+.dark-mode .MuiDrawer-paper {
+  background: var(--background-surface);
+  border-right: 1px solid var(--divider);
+}
+
+/* Header styling for dark mode */
+.dark-mode .MuiAppBar-root {
+  background: var(--background-surface);
+  border-bottom: 1px solid var(--divider);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Select dropdown styling for dark mode */
+.dark-mode .MuiSelect-select {
+  color: var(--text-primary);
+}
+
+.dark-mode .MuiMenuItem-root {
+  color: var(--text-primary);
+}
+
+.dark-mode .MuiMenuItem-root:hover {
+  background-color: var(--primary-light);
+}
+
+/* Chip styling for dark mode */
+.dark-mode .MuiChip-root {
+  background-color: var(--background-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* Typography improvements for dark mode */
+.dark-mode .MuiTypography-root {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .MuiTypography-body2 {
+  color: var(--text-secondary) !important;
+}
+
+.dark-mode .MuiTypography-caption {
+  color: var(--text-disabled) !important;
+}
+
+.dark-mode .MuiTypography-h1,
+.dark-mode .MuiTypography-h2,
+.dark-mode .MuiTypography-h3,
+.dark-mode .MuiTypography-h4,
+.dark-mode .MuiTypography-h5,
+.dark-mode .MuiTypography-h6 {
+  color: var(--text-primary) !important;
+}
+
+/* Form control improvements */
+.dark-mode .MuiFormLabel-root {
+  color: var(--text-secondary);
+}
+
+.dark-mode .MuiFormLabel-root.Mui-focused {
+  color: var(--primary-main);
+}
+
+/* Icon button improvements */
+.dark-mode .MuiIconButton-root {
+  color: var(--text-secondary);
+}
+
+.dark-mode .MuiIconButton-root:hover {
+  background-color: var(--primary-light);
+  color: var(--text-primary);
+}
+
+/* Alert styling for dark mode */
+.dark-mode .MuiAlert-root {
+  background: var(--background-surface);
+  border: 1px solid var(--border-color);
+}
+
+/* Autocomplete styling for dark mode */
+.dark-mode .MuiAutocomplete-paper {
+  background: var(--background-surface);
+  border: 1px solid var(--border-color);
+}
+
+.dark-mode .MuiAutocomplete-option {
+  color: var(--text-primary);
+}
+
+.dark-mode .MuiAutocomplete-option:hover {
+  background-color: var(--primary-light);
+}
+
+/* Additional dark mode improvements */
+.dark-mode .MuiTableContainer-root {
+  background: var(--background-paper) !important;
+}
+
+.dark-mode .MuiBox-root {
+  color: var(--text-primary);
+}
+
+.dark-mode .MuiDialogTitle-root {
+  color: var(--text-primary) !important;
+  background: var(--background-surface) !important;
+}
+
+.dark-mode .MuiDialogContent-root {
+  background: var(--background-paper) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .MuiDialogActions-root {
+  background: var(--background-surface) !important;
+}
+
+.dark-mode .MuiListItem-root {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .MuiListItemText-primary {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .MuiListItemText-secondary {
+  color: var(--text-secondary) !important;
+}
+
+.dark-mode .MuiSnackbar-root .MuiAlert-root {
+  background: var(--background-surface) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.dark-mode .MuiAccordion-root {
+  background: var(--background-paper) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .MuiAccordionSummary-root {
+  background: var(--background-surface) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .MuiAccordionDetails-root {
+  background: var(--background-paper) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Simple transitions for tabs and content */
+.MuiTabs-root {
+  transition: all 0.2s ease;
+}
+
+.MuiTab-root {
+  transition: all 0.2s ease;
+}
+
+.MuiTab-root:hover {
+  background-color: rgba(102, 126, 234, 0.05);
+}
+
+/* Slide animations for content */
+.slide-content {
+  transition: transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.slide-enter {
+  transform: translateX(100%);
+}
+
+.slide-enter-active {
+  transform: translateX(0);
+}
+
+.slide-exit {
+  transform: translateX(0);
+}
+
+.slide-exit-active {
+  transform: translateX(-100%);
+}
+
+/* Simple page transition animations */
+@keyframes pageSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pageFadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes simpleSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Simple page transition classes */
+.page-enter {
+  animation: pageSlideIn 0.4s ease-out forwards;
+}
+
+.page-bounce-enter {
+  animation: simpleSlideIn 0.3s ease-out forwards;
+}
+
+.page-fade-up {
+  animation: pageFadeInUp 0.4s ease-out forwards;
+}
+
+/* Content animation classes */
+.animate-slide-in-bottom {
+  animation: slideInFromBottom 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInFromRight 0.6s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInFromLeft 0.6s ease-out forwards;
+}
+
+/* Simple staggered animations for lists and cards */
+.stagger-animation > * {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideInFromBottom 0.4s ease-out forwards;
+}
+
+.stagger-animation > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-animation > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-animation > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-animation > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-animation > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-animation > *:nth-child(6) { animation-delay: 0.3s; }
+.stagger-animation > *:nth-child(7) { animation-delay: 0.35s; }
+.stagger-animation > *:nth-child(8) { animation-delay: 0.4s; }
+
+/* Simple hover animations for interactive elements */
+.hover-lift {
+  transition: all 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .hover-lift:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+}
+
+/* SIMPLE WORKING TOOLTIP */
+.MuiTooltip-tooltip {
+  font-size: 12px !important;
+  padding: 6px 8px !important;
+  border-radius: 4px !important;
+  max-width: 300px !important;
+  word-wrap: break-word !important;
+}
+
+/* Dark mode tooltip styling */
+.dark-mode .MuiTooltip-tooltip {
+  background-color: rgba(50, 50, 50, 0.95) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-mode .MuiTooltip-arrow {
+  color: rgba(50, 50, 50, 0.95) !important;
+}
+
+/* MOBILE RESPONSIVE IMPROVEMENTS */
+@media (max-width: 960px) {
+  /* Reduce padding on mobile */
+  .MuiContainer-root {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  
+  /* Stack cards vertically on mobile */
+  .MuiGrid-container {
+    flex-direction: column !important;
+  }
+  
+  /* Reduce font sizes on small screens */
+  .MuiTypography-h4 {
+    font-size: 1.5rem !important;
+  }
+  
+  .MuiTypography-h5 {
+    font-size: 1.25rem !important;
+  }
+  
+  /* Make tables scrollable on mobile */
+  .MuiTableContainer-root {
+    overflow-x: auto !important;
+    max-width: 100vw !important;
+  }
+  
+  /* Adjust dialog width on mobile */
+  .MuiDialog-paper {
+    margin: 8px !important;
+    width: calc(100vw - 16px) !important;
+    max-width: none !important;
+  }
+  
+  /* Make buttons full width on mobile */
+  .MuiButton-root {
+    min-width: auto !important;
+  }
+  
+  /* Adjust form fields on mobile */
+  .MuiTextField-root {
+    margin-bottom: 8px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Extra small screens - phones */
+  .MuiTypography-h3 {
+    font-size: 1.75rem !important;
+  }
+  
+  .MuiTypography-h4 {
+    font-size: 1.25rem !important;
+  }
+  
+  .MuiCard-root {
+    margin-bottom: 8px !important;
+  }
+  
+  /* Reduce tab padding */
+  .MuiTab-root {
+    min-width: 60px !important;
+    padding: 6px 8px !important;
+  }
+  
+  /* Stack form elements */
+  .MuiFormControl-root {
+    width: 100% !important;
+    margin-bottom: 8px !important;
+  }
+}
+
+/* Loading animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.dark-mode .loading-shimmer {
+  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+  background-size: 200px 100%;
+}

@@ -1,0 +1,5 @@
+# Static files should be served as-is (this should come first)
+/static/* /static/:splat 200
+
+# Fallback for SPA routes (this should come last)
+/* /index.html 200

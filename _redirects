@@ -1,0 +1,12 @@
+# Static assets should be served as-is
+/static/* /static/:splat 200
+
+# API endpoints
+/.netlify/functions/* /.netlify/functions/:splat 200
+
+# Specific HTML files
+/emulator-api.html /emulator-api.html 200
+/test.html /test.html 200
+
+# Fallback for SPA routes
+/* /index.html 200

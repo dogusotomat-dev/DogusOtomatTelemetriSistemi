@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netlify API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .response {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .success {
+            border-color: #28a745;
+            background-color: #d4edda;
+        }
+        .error {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Netlify IoT API Test</h1>
+    
+    <div class="container">
+        <h2>📡 Heartbeat Test</h2>
+        <form id="heartbeatForm">
+            <div class="form-group">
+                <label for="heartbeatMachineId">Makine ID:</label>
+                <input type="text" id="heartbeatMachineId" value="TEST_MACHINE_001" required>
+            </div>
+            <div class="form-group">
+                <label for="heartbeatStatus">Durum:</label>
+                <select id="heartbeatStatus">
+                    <option value="online">Online</option>
+                    <option value="offline">Offline</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="heartbeatBattery">Batarya Seviyesi (%):</label>
+                <input type="number" id="heartbeatBattery" value="85" min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label for="heartbeatSignal">Sinyal Gücü:</label>
+                <input type="number" id="heartbeatSignal" value="75" min="0" max="100">
+            </div>
+            <button type="submit">Heartbeat Gönder</button>
+        </form>
+        <div id="heartbeatResponse" class="response" style="display: none;"></div>
+    </div>
+
+    <div class="container">
+        <h2>📊 Telemetry Test</h2>
+        <form id="telemetryForm">
+            <div class="form-group">
+                <label for="telemetryMachineId">Makine ID:</label>
+                <input type="text" id="telemetryMachineId" value="TEST_MACHINE_001" required>
+            </div>
+            <div class="form-group">
+                <label for="telemetryMode">Çalışma Modu:</label>
+                <select id="telemetryMode">
+                    <option value="normal">Normal</option>
+                    <option value="maintenance">Bakım</option>
+                    <option value="cleaning">Temizlik</option>
+                    <option value="error">Hata</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="telemetryAmbient">Ortam Sıcaklığı (°C):</label>
+                <input type="number" id="telemetryAmbient" value="22" step="0.1">
+            </div>
+            <div class="form-group">
+                <label for="telemetryCompressor">Kompresör Sıcaklığı (°C):</label>
+                <input type="number" id="telemetryCompressor" value="18" step="0.1">
+            </div>
+            <div class="form-group">
+                <label for="telemetryEvaporator">Evaporatör Sıcaklığı (°C):</label>
+                <input type="number" id="telemetryEvaporator" value="15" step="0.1">
+            </div>
+            <div class="form-group">
+                <label for="telemetryDoorOpen">Kapı Açık:</label>
+                <select id="telemetryDoorOpen">
+                    <option value="false">Kapalı</option>
+                    <option value="true">Açık</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="telemetryTotalSales">Toplam Satış:</label>
+                <input type="number" id="telemetryTotalSales" value="1250">
+            </div>
+            <div class="form-group">
+                <label for="telemetryDailySales">Günlük Satış:</label>
+                <input type="number" id="telemetryDailySales" value="45">
+            </div>
+            <button type="submit">Telemetry Gönder</button>
+        </form>
+        <div id="telemetryResponse" class="response" style="display: none;"></div>
+    </div>
+
+    <div class="container">
+        <h2>🎮 Uzaktan Kontrol Test</h2>
+        <form id="remoteControlForm">
+            <div class="form-group">
+                <label for="remoteMachineId">Makine ID:</label>
+                <input type="text" id="remoteMachineId" value="TEST_MACHINE_001" required>
+            </div>
+            <div class="form-group">
+                <label for="remoteCommand">Komut:</label>
+                <select id="remoteCommand">
+                    <option value="start">Başlat</option>
+                    <option value="stop">Durdur</option>
+                    <option value="maintenance_mode">Bakım Modu</option>
+                    <option value="cleaning_mode">Temizlik Modu</option>
+                    <option value="normal_mode">Normal Mod</option>
+                </select>
+            </div>
+            <button type="submit">Komut Gönder</button>
+        </form>
+        <div id="remoteControlResponse" class="response" style="display: none;"></div>
+    </div>
+
+    <div class="container">
+        <h2>📋 Makine Durumu Sorgulama</h2>
+        <form id="statusForm">
+            <div class="form-group">
+                <label for="statusMachineId">Makine ID:</label>
+                <input type="text" id="statusMachineId" value="TEST_MACHINE_001" required>
+            </div>
+            <button type="submit">Durum Sorgula</button>
+            <button type="button" id="allMachinesBtn">Tüm Makineler</button>
+        </form>
+        <div id="statusResponse" class="response" style="display: none;"></div>
+    </div>
+
+    <script>
+        // API Base URL - Netlify Functions
+        const API_BASE = '/.netlify/functions';
+
+        // Checksum hesaplama fonksiyonu
+        function calculateChecksum(data) {
+            let checksum = 0;
+            for (let i = 0; i < data.length; i++) {
+                checksum += data.charCodeAt(i);
+            }
+            return checksum.toString();
+        }
+
+        // Heartbeat form handler
+        document.getElementById('heartbeatForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const machineId = document.getElementById('heartbeatMachineId').value;
+            const status = document.getElementById('heartbeatStatus').value;
+            const batteryLevel = parseInt(document.getElementById('heartbeatBattery').value);
+            const signalStrength = parseInt(document.getElementById('heartbeatSignal').value);
+
+            const heartbeatData = {
+                machineId,
+                timestamp: new Date().toISOString(),
+                status,
+                batteryLevel,
+                signalStrength,
+            };
+
+            const data = JSON.stringify(heartbeatData);
+            const checksum = calculateChecksum(data);
+
+            try {
+                const response = await fetch(`${API_BASE}/heartbeat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ data, checksum }),
+                });
+
+                const result = await response.json();
+                showResponse('heartbeatResponse', result, response.ok);
+            } catch (error) {
+                showResponse('heartbeatResponse', { error: error.message }, false);
+            }
+        });
+
+        // Telemetry form handler
+        document.getElementById('telemetryForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const machineId = document.getElementById('telemetryMachineId').value;
+            const operationalMode = document.getElementById('telemetryMode').value;
+            const ambientTemp = parseFloat(document.getElementById('telemetryAmbient').value);
+            const compressorTemp = parseFloat(document.getElementById('telemetryCompressor').value);
+            const evaporatorTemp = parseFloat(document.getElementById('telemetryEvaporator').value);
+            const doorOpen = document.getElementById('telemetryDoorOpen').value === 'true';
+            const totalSales = parseInt(document.getElementById('telemetryTotalSales').value);
+            const dailySales = parseInt(document.getElementById('telemetryDailySales').value);
+
+            const telemetryData = {
+                machineId,
+                timestamp: new Date().toISOString(),
+                operationalMode,
+                powerStatus: true,
+                doorStatus: doorOpen,
+                temperatureReadings: {
+                    internalTemperature: ambientTemp,
+                    ambientTemperature: ambientTemp + 2,
+                    refrigerationTemperature: compressorTemp,
+                    compressorStatus: 'on'
+                },
+                salesData: {
+                    todaySales: dailySales,
+                    todayTransactions: Math.floor(dailySales / 5),
+                    weeklySales: totalSales,
+                    monthlySales: totalSales * 4
+                },
+                cleaningStatus: {
+                    isInCleaningMode: false,
+                    lastCleaningTimestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+                    daysSinceLastCleaning: 2,
+                },
+                errors: [],
+                slotStatus: {},
+                systemInfo: {
+                    uptime: 86400,
+                    memoryUsage: 45,
+                    diskSpace: 80
+                }
+            };
+
+            const data = JSON.stringify(telemetryData);
+            const checksum = calculateChecksum(data);
+
+            try {
+                const response = await fetch(`${API_BASE}/telemetry`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ data, checksum }),
+                });
+
+                const result = await response.json();
+                showResponse('telemetryResponse', result, response.ok);
+            } catch (error) {
+                showResponse('telemetryResponse', { error: error.message }, false);
+            }
+        });
+
+        // Remote control form handler
+        document.getElementById('remoteControlForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const machineId = document.getElementById('remoteMachineId').value;
+            const command = document.getElementById('remoteCommand').value;
+
+            try {
+                const response = await fetch(`${API_BASE}/remote-control`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ machineId, command }),
+                });
+
+                const result = await response.json();
+                showResponse('remoteControlResponse', result, response.ok);
+            } catch (error) {
+                showResponse('remoteControlResponse', { error: error.message }, false);
+            }
+        });
+
+        // Status form handler
+        document.getElementById('statusForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const machineId = document.getElementById('statusMachineId').value;
+
+            try {
+                const response = await fetch(`${API_BASE}/machine-status?machineId=${machineId}`);
+                const result = await response.json();
+                showResponse('statusResponse', result, response.ok);
+            } catch (error) {
+                showResponse('statusResponse', { error: error.message }, false);
+            }
+        });
+
+        // All machines button handler
+        document.getElementById('allMachinesBtn').addEventListener('click', async () => {
+            try {
+                const response = await fetch(`${API_BASE}/all-machines-status`);
+                const result = await response.json();
+                showResponse('statusResponse', result, response.ok);
+            } catch (error) {
+                showResponse('statusResponse', { error: error.message }, false);
+            }
+        });
+
+        // Response gösterici fonksiyon
+        function showResponse(elementId, data, success) {
+            const element = document.getElementById(elementId);
+            element.textContent = JSON.stringify(data, null, 2);
+            element.className = `response ${success ? 'success' : 'error'}`;
+            element.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

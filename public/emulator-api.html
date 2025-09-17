@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emulator API Handler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+        .logs {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            border-radius: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .url-box {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Emulator API Handler</h1>
+        
+        <div class="status info">
+            Bu sayfa emülatörden gelen API isteklerini işler. Netlify Functions'ı bypass eder.
+        </div>
+
+        <div id="status" class="status info">
+            Status: Ready
+        </div>
+
+        <h3>Test Buttons</h3>
+        <button onclick="testHeartbeat()">Test Heartbeat</button>
+        <button onclick="testTelemetry()">Test Telemetry</button>
+        <button onclick="testConnection()">Test Firebase Connection</button>
+
+        <h3>API URLs</h3>
+        <div class="url-box">
+            Heartbeat: <span id="heartbeatUrl"></span><br>
+            Telemetry: <span id="telemetryUrl"></span>
+        </div>
+
+        <h3>Logs</h3>
+        <div id="logs" class="logs"></div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC_Q5gaAwz1sUWVK5UN4Ei2zs3xYHwRfBE",
+            authDomain: "dogus-otomat-telemetri-sistemi.firebaseapp.com",
+            databaseURL: "https://dogus-otomat-telemetri-sistemi-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "dogus-otomat-telemetri-sistemi",
+            storageBucket: "dogus-otomat-telemetri-sistemi.firebasestorage.app",
+            messagingSenderId: "695378354180",
+            appId: "1:695378354180:web:32c2e4903efaf20c03d551",
+            measurementId: "G-EDCE5E7KR5"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Set URLs
+        document.getElementById('heartbeatUrl').textContent = 
+            window.location.origin + '/emulator-api.html?action=heartbeat&machineId=2506211449&iotNumber=8990010873499834749';
+        document.getElementById('telemetryUrl').textContent = 
+            window.location.origin + '/emulator-api.html?action=telemetry&machineId=2506211449&iotNumber=8990010873499834749';
+
+        let logs = [];
+
+        function addLog(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            logs.push(`${timestamp}: ${message}`);
+            if (logs.length > 20) logs.shift(); // Keep only last 20 logs
+            document.getElementById('logs').innerHTML = logs.join('<br>');
+        }
+
+        function setStatus(message, type = 'info') {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = `Status: ${message}`;
+            statusEl.className = `status ${type}`;
+        }
+
+        async function processHeartbeat(machineId, iotNumber) {
+            try {
+                setStatus('Processing heartbeat...', 'info');
+                addLog(`Heartbeat request: Machine ${machineId}, IoT ${iotNumber}`);
+
+                const timestamp = new Date().toISOString();
+                const now = Date.now();
+
+                // 1. Create or update machine record
+                await ensureMachineExists(machineId, iotNumber, timestamp);
+
+                // 2. Update heartbeat
+                await database.ref(`heartbeat/${machineId}`).set({
+                    status: 'online',
+                    lastSeen: now,
+                    timestamp: timestamp,
+                    machineId: machineId,
+                    iotNumber: iotNumber,
+                    batteryLevel: 85,
+                    signalStrength: 90,
+                    temperature: -15
+                });
+
+                // 3. Update machine connection info
+                await database.ref(`machines/${machineId}/connectionInfo`).update({
+                    status: 'online',
+                    lastHeartbeat: timestamp
+                });
+
+                setStatus('Heartbeat processed successfully', 'success');
+                addLog(`✅ Heartbeat başarıyla işlendi: Machine ${machineId}`);
+
+            } catch (error) {
+                setStatus('Heartbeat failed', 'error');
+                addLog(`❌ Error: ${error.message}`);
+            }
+        }
+
+        async function processTelemetry(machineId, iotNumber) {
+            try {
+                setStatus('Processing telemetry...', 'info');
+                addLog(`Telemetry request: Machine ${machineId}, IoT ${iotNumber}`);
+
+                const timestamp = new Date().toISOString();
+
+                // Ensure machine exists
+                await ensureMachineExists(machineId, iotNumber, timestamp);
+
+                // Add telemetry data
+                const telemetryData = {
+                    timestamp: timestamp,
+                    powerStatus: true,
+                    doorStatus: false,
+                    errors: [],
+                    slotStatus: {},
+                    systemInfo: {
+                        uptime: 3600000,
+                        memoryUsage: 75,
+                        diskSpace: 85
+                    },
+                    temperatureReadings: {
+                        internalTemperature: -15,
+                        ambientTemperature: 20,
+                        refrigerationTemperature: -18,
+                        compressorStatus: 'on',
+                        temperatureZone: 'main'
+                    },
+                    salesData: {
+                        todaySales: 150,
+                        todayTransactions: 5,
+                        weeklySales: 800,
+                        monthlySales: 3200
+                    },
+                    cleaningStatus: {
+                        isInCleaningMode: false,
+                        lastCleaningTimestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+                        daysSinceLastCleaning: 2
+                    }
+                };
+
+                await database.ref(`machines/${machineId}/telemetry/${Date.now()}`).set(telemetryData);
+
+                setStatus('Telemetry processed successfully', 'success');
+                addLog(`✅ Telemetri başarıyla işlendi: Machine ${machineId}`);
+
+            } catch (error) {
+                setStatus('Telemetry failed', 'error');
+                addLog(`❌ Error: ${error.message}`);
+            }
+        }
+
+        async function ensureMachineExists(machineId, iotNumber, timestamp) {
+            try {
+                const machineRef = database.ref(`machines/${machineId}`);
+                const machineSnapshot = await machineRef.once('value');
+
+                if (!machineSnapshot.exists()) {
+                    addLog(`Creating machine record for ${machineId}`);
+
+                    const machineData = {
+                        serialNumber: machineId,
+                        type: 'ice_cream',
+                        model: 'DGS-ICE-EMULATOR',
+                        name: `Emülatör Makinesi ${machineId}`,
+                        iotNumber: iotNumber,
+                        location: {
+                            address: 'Emülatör Lokasyonu',
+                            latitude: 0,
+                            longitude: 0
+                        },
+                        connectionInfo: {
+                            version: '1.0.0',
+                            status: 'online',
+                            lastHeartbeat: timestamp
+                        },
+                        configuration: {
+                            slots: {},
+                            settings: {
+                                modes: ['normal'],
+                                currentMode: 'normal',
+                                temperature: -15,
+                                features: {},
+                                capabilities: {
+                                    hasTemperatureControl: true,
+                                    hasAutoCleaning: false,
+                                    supportedPayments: ['cash']
+                                }
+                            },
+                            notifications: {
+                                emailAddresses: [],
+                                enableOfflineAlerts: true,
+                                enableErrorAlerts: true,
+                                alertThresholdMinutes: 5
+                            }
+                        },
+                        createdAt: timestamp,
+                        updatedAt: timestamp
+                    };
+
+                    await machineRef.set(machineData);
+                    addLog(`✅ Created machine record: ${machineId}`);
+                }
+            } catch (error) {
+                addLog(`❌ Error ensuring machine exists: ${error.message}`);
+                throw error;
+            }
+        }
+
+        function testHeartbeat() {
+            processHeartbeat('2506211449', '8990010873499834749');
+        }
+
+        function testTelemetry() {
+            processTelemetry('2506211449', '8990010873499834749');
+        }
+
+        async function testConnection() {
+            try {
+                setStatus('Testing Firebase connection...', 'info');
+                const testRef = database.ref('test');
+                await testRef.set({ timestamp: new Date().toISOString() });
+                await testRef.set(null); // Clean up
+                setStatus('Firebase connection successful', 'success');
+                addLog('✅ Firebase connection test successful');
+            } catch (error) {
+                setStatus('Firebase connection failed', 'error');
+                addLog(`❌ Firebase connection test failed: ${error.message}`);
+            }
+        }
+
+        // Handle URL parameters
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const action = urlParams.get('action');
+            const machineId = urlParams.get('machineId');
+            const iotNumber = urlParams.get('iotNumber');
+
+            if (action === 'heartbeat' && machineId && iotNumber) {
+                processHeartbeat(machineId, iotNumber);
+            } else if (action === 'telemetry' && machineId && iotNumber) {
+                processTelemetry(machineId, iotNumber);
+            }
+        };
+    </script>
+</body>
+</html>

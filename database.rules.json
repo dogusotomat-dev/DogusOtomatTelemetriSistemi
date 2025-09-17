@@ -1,0 +1,154 @@
+{
+  "rules": {
+    "users": {
+      ".read": "auth != null",
+      "$uid": {
+        ".read": "$uid === auth.uid || root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child($uid).child('parentAccountId').val() === auth.uid",
+        ".write": "auth != null",
+        ".validate": "auth != null",
+        "permissions": {
+          ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || $uid === auth.uid)"
+        },
+        "lastLogin": {
+          ".write": "auth != null && $uid === auth.uid"
+        }
+      }
+    },
+    "machines": {
+      ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canViewMachines').val() === true)",
+      "$machineId": {
+        ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || (root.child('users').child(auth.uid).child('permissions').child('canViewMachines').val() === true && (root.child('users').child(auth.uid).child('assignedMachineIds').hasChild($machineId) || root.child('users').child(auth.uid).child('assignedGroupIds').hasChildren())))",
+        ".write": "true",
+        ".validate": "newData.hasChildren(['serialNumber', 'type', 'name', 'iotNumber', 'location', 'connectionInfo']) && newData.child('serialNumber').isString() && newData.child('type').isString() && newData.child('name').isString()",
+        "telemetry": {
+          ".read": "auth != null",
+          ".write": "auth != null"
+        },
+        "configuration": {
+          ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'admin'"
+        },
+        "connectionInfo": {
+          ".write": "auth != null"
+        }
+      }
+    },
+    "userProducts": {
+      "$userId": {
+        ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || ($userId === auth.uid && root.child('users').child(auth.uid).child('permissions').child('canViewProducts').val() === true))",
+        ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || ($userId === auth.uid && root.child('users').child(auth.uid).child('permissions').child('canManageProducts').val() === true))",
+        "$productId": {
+          ".validate": "newData.hasChildren(['name', 'barcode', 'categoryId', 'supplierId', 'costPrice', 'sellPrice']) && newData.child('name').isString() && newData.child('barcode').isString() && newData.child('categoryId').isString() && newData.child('supplierId').isString() && newData.child('costPrice').isNumber() && newData.child('sellPrice').isNumber()"
+        }
+      }
+    },
+    "userCategories": {
+      "$userId": {
+        ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || $userId === auth.uid)",
+        ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || $userId === auth.uid)",
+        "$categoryId": {
+          ".validate": "newData.hasChildren(['name', 'isActive', 'sortOrder']) && newData.child('name').isString() && newData.child('isActive').isBoolean() && newData.child('sortOrder').isNumber()"
+        }
+      }
+    },
+    "userSuppliers": {
+      "$userId": {
+        ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || $userId === auth.uid)",
+        ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || $userId === auth.uid)",
+        "$supplierId": {
+          ".validate": "newData.hasChildren(['name', 'isActive']) && newData.child('name').isString() && newData.child('isActive').isBoolean()"
+        }
+      }
+    },
+    "sales": {
+      ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canViewReports').val() === true)",
+      ".write": "auth != null",
+      "$saleId": {
+        ".validate": "newData.hasChildren(['machineId', 'productId', 'quantity', 'totalAmount', 'timestamp']) && newData.child('machineId').isString() && newData.child('productId').isString() && newData.child('quantity').isNumber() && newData.child('totalAmount').isNumber() && newData.child('timestamp').isString()"
+      }
+    },
+    "alarms": {
+      ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canViewAlarms').val() === true)",
+      ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canManageAlarms').val() === true)",
+      "$alarmId": {
+        ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canViewAlarms').val() === true)",
+        ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canManageAlarms').val() === true)",
+        ".validate": "newData.hasChildren(['machineId', 'type', 'code', 'message', 'severity', 'status', 'timestamp']) && newData.child('machineId').isString() && newData.child('type').isString() && newData.child('code').isString() && newData.child('message').isString() && newData.child('severity').isString() && newData.child('status').isString() && newData.child('timestamp').isString()"
+      }
+    },
+    "operations": {
+      ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canViewOperations').val() === true)",
+      ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canManageOperations').val() === true)",
+      "$operationId": {
+        ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canViewOperations').val() === true || data.child('createdBy').val() === auth.uid)",
+        ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canManageOperations').val() === true || data.child('createdBy').val() === auth.uid)",
+        ".validate": "newData.hasChildren(['machineId', 'type', 'performedBy', 'createdBy', 'createdAt', 'updatedAt', 'reportNumber']) && newData.child('machineId').isString() && newData.child('type').isString() && newData.child('performedBy').isString() && newData.child('createdBy').isString() && newData.child('createdAt').isString() && newData.child('updatedAt').isString() && newData.child('reportNumber').isString()",
+        "waste": {
+          ".validate": "newData.hasChildren(['expired', 'damaged', 'other', 'totalCost']) && newData.child('expired').isNumber() && newData.child('damaged').isNumber() && newData.child('other').isNumber() && newData.child('totalCost').isNumber()"
+        },
+        "vendingDetails": {
+          ".validate": "true"
+        },
+        "refillDetails": {
+          ".validate": "true"
+        },
+        "beforePhotos": {
+          ".validate": "true"
+        },
+        "afterPhotos": {
+          ".validate": "true"
+        },
+        "iceCreamDetails": {
+          ".validate": "true"
+        },
+        "notes": {
+          ".validate": "newData.isString()"
+        },
+        "isFaultReport": {
+          ".validate": "newData.isBoolean()"
+        }
+      }
+    },
+    "machineGroups": {
+      ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canViewMachines').val() === true)",
+      ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canAssignGroups').val() === true)",
+      "$groupId": {
+        ".validate": "newData.hasChildren(['name', 'description', 'machineIds']) && newData.child('name').isString() && newData.child('description').isString()"
+      }
+    },
+    "waste": {
+      ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('role').val() === 'operator')",
+      ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('role').val() === 'operator')",
+      "$wasteId": {
+        ".validate": "newData.hasChildren(['machineId', 'productId', 'quantity', 'reason', 'costImpact', 'reportedBy', 'timestamp']) && newData.child('machineId').isString() && newData.child('productId').isString() && newData.child('quantity').isNumber() && newData.child('reason').isString() && newData.child('costImpact').isNumber() && newData.child('reportedBy').isString() && newData.child('timestamp').isString()"
+      }
+    },
+    "heartbeat": {
+      ".read": "auth != null",
+      ".write": "true",
+      "$machineId": {
+        ".write": "true",
+        "lastSeen": {
+          ".validate": "newData.isNumber() || newData.val() === null"
+        },
+        "status": {
+          ".validate": "newData.isString() && (newData.val() === 'online' || newData.val() === 'offline')"
+        },
+        "machineId": {
+          ".validate": "newData.isString()"
+        }
+      }
+    },
+    "cleaning": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$machineId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    },
+    "config": {
+      ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'admin'",
+      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'admin'"
+    }
+  }
+}

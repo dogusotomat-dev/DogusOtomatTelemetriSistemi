@@ -1,0 +1,1835 @@
+[
+  null,
+  {
+    "Commodity code": "3333",
+    "Cost price": "8",
+    "Description": "",
+    "Product name": "Kruvasan",
+    "Specs": "no",
+    "Supplier": "UNO",
+    "Type": "Pastane Ürünü",
+    "Unit price": "25"
+  },
+  {
+    "Commodity code": "7013",
+    "Cost price": "70",
+    "Description": "",
+    "Product name": "Damla Cikolatalı Pancake",
+    "Specs": "",
+    "Supplier": "BBM FOOD",
+    "Type": "Pastane Ürünü",
+    "Unit price": "105"
+  },
+  {
+    "Commodity code": "1302",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Beylerbeyi Profiterol Bitter ",
+    "Specs": "",
+    "Supplier": "Beylerbeyi Profiterol",
+    "Type": "Pastane Ürünü",
+    "Unit price": "221"
+  },
+  {
+    "Commodity code": "20006",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Beylerbeyi Ekler Sade",
+    "Specs": "400 gr",
+    "Supplier": "Beylerbeyi Profiterol",
+    "Type": "Pastane Ürünü",
+    "Unit price": "275"
+  },
+  {
+    "Commodity code": "20004",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Beylerbeyi Kazandibi",
+    "Specs": "",
+    "Supplier": "Beylerbeyi Profiterol",
+    "Type": "Pastane Ürünü",
+    "Unit price": "221"
+  },
+  {
+    "Commodity code": "20005",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Beylerbeyi Ekler karısık",
+    "Specs": "400 gr",
+    "Supplier": "Beylerbeyi Profiterol",
+    "Type": "Pastane Ürünü",
+    "Unit price": "275"
+  },
+  {
+    "Commodity code": "20266",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Beylerbeyi Profiterol ekler karamel ",
+    "Specs": "400 gr",
+    "Supplier": "Beylerbeyi Profiterol",
+    "Type": "Pastane Ürünü",
+    "Unit price": "275"
+  },
+  {
+    "Commodity code": "20262",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Beylerbeyi Profiterol ekler Vanilya",
+    "Specs": "400 gr",
+    "Supplier": "Beylerbeyi Profiterol",
+    "Type": "Pastane Ürünü",
+    "Unit price": "275"
+  },
+  {
+    "Commodity code": "26556",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Beylerbeyi Profiterol ekler Findik Tanesi",
+    "Specs": "400 gr",
+    "Supplier": "Beylerbeyi Profiterol",
+    "Type": "Pastane Ürünü",
+    "Unit price": "275"
+  },
+  {
+    "Commodity code": "805155",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Beylerbeyi Profiterol Spesiyal",
+    "Specs": "400 gr",
+    "Supplier": "Beylerbeyi Profiterol",
+    "Type": "Pastane Ürünü",
+    "Unit price": "275"
+  },
+  {
+    "Commodity code": "2565",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Beylerbeyi Profiterol Spesiyal Ekler ",
+    "Specs": "400 gr",
+    "Supplier": "Beylerbeyi Profiterol",
+    "Type": "Pastane Ürünü",
+    "Unit price": "275"
+  },
+  {
+    "Commodity code": "3335",
+    "Cost price": "20.9",
+    "Description": "",
+    "Product name": "Glutensiz Kek",
+    "Specs": "no",
+    "Supplier": "Sanpanino",
+    "Type": "Pastane Ürünü",
+    "Unit price": "39.5"
+  },
+  {
+    "Commodity code": "30006",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Miskos Antep Fistiklıiçekme Helva",
+    "Specs": "",
+    "Supplier": "Nevka Gida",
+    "Type": "Pastane Ürünü",
+    "Unit price": "45"
+  },
+  {
+    "Commodity code": "3338",
+    "Cost price": "23.09",
+    "Description": "",
+    "Product name": "Havuclu Kek",
+    "Specs": "no",
+    "Supplier": "BTA",
+    "Type": "Pastane Ürünü",
+    "Unit price": "50"
+  },
+  {
+    "Commodity code": "3337",
+    "Cost price": "29",
+    "Description": "",
+    "Product name": "Parca Cıkolatalı Cookıe",
+    "Specs": "no",
+    "Supplier": "BTA",
+    "Type": "Pastane Ürünü",
+    "Unit price": "60"
+  },
+  {
+    "Commodity code": "3336",
+    "Cost price": "32.5",
+    "Description": "",
+    "Product name": "Yaban Mersinli Muffin",
+    "Specs": "no",
+    "Supplier": "UNO",
+    "Type": "Pastane Ürünü",
+    "Unit price": "49.5"
+  },
+  {
+    "Commodity code": "98745",
+    "Cost price": "22",
+    "Description": "",
+    "Product name": "Cikolatalı Brownie",
+    "Specs": "no",
+    "Supplier": "Sanpanino",
+    "Type": "Pastane Ürünü",
+    "Unit price": "39.5"
+  },
+  {
+    "Commodity code": "5555",
+    "Cost price": "29.24",
+    "Description": "",
+    "Product name": "Limonlu Cheescake",
+    "Specs": "no",
+    "Supplier": "BTA",
+    "Type": "Pastane Ürünü",
+    "Unit price": "48.5"
+  },
+  {
+    "Commodity code": "3334",
+    "Cost price": "35.03",
+    "Description": "",
+    "Product name": "Marble Kek",
+    "Specs": "no",
+    "Supplier": "BTA",
+    "Type": "Pastane Ürünü",
+    "Unit price": "70"
+  },
+  {
+    "Commodity code": "0008",
+    "Cost price": "48",
+    "Description": "",
+    "Product name": "Yellow Star Smoothie",
+    "Specs": "no",
+    "Supplier": "Only Fresh",
+    "Type": "Meyve Suyu",
+    "Unit price": "80"
+  },
+  {
+    "Commodity code": "0009",
+    "Cost price": "44",
+    "Description": "",
+    "Product name": "Cilekli Limonata",
+    "Specs": "no",
+    "Supplier": "Only Fresh",
+    "Type": "Meyve Suyu",
+    "Unit price": "70"
+  },
+  {
+    "Commodity code": "0000",
+    "Cost price": "44",
+    "Description": "",
+    "Product name": "Portakal Suyu",
+    "Specs": "no",
+    "Supplier": "Only Fresh",
+    "Type": "Meyve Suyu",
+    "Unit price": "70"
+  },
+  {
+    "Commodity code": "0001",
+    "Cost price": "48",
+    "Description": "",
+    "Product name": "Green Star Smoothie",
+    "Specs": "no",
+    "Supplier": "Only Fresh",
+    "Type": "Meyve Suyu",
+    "Unit price": "80"
+  },
+  {
+    "Commodity code": "0003",
+    "Cost price": "24.7",
+    "Description": "",
+    "Product name": "Greyfurt Suyu",
+    "Specs": "no",
+    "Supplier": "Only Fresh",
+    "Type": "Meyve Suyu",
+    "Unit price": "60"
+  },
+  {
+    "Commodity code": "0002",
+    "Cost price": "24.7",
+    "Description": "",
+    "Product name": "Nar&Portakal Suyu",
+    "Specs": "no",
+    "Supplier": "Only Fresh",
+    "Type": "Meyve Suyu",
+    "Unit price": "61"
+  },
+  {
+    "Commodity code": "0004",
+    "Cost price": "44",
+    "Description": "",
+    "Product name": "Nar Suyu",
+    "Specs": "no",
+    "Supplier": "Only Fresh",
+    "Type": "Meyve Suyu",
+    "Unit price": "70"
+  },
+  {
+    "Commodity code": "0006",
+    "Cost price": "44",
+    "Description": "",
+    "Product name": "Lİmonata",
+    "Specs": "no",
+    "Supplier": "Only Fresh",
+    "Type": "Meyve Suyu",
+    "Unit price": "70"
+  },
+  {
+    "Commodity code": "0005",
+    "Cost price": "24.7",
+    "Description": "",
+    "Product name": "Havuc&Portakal Suyu",
+    "Specs": "no",
+    "Supplier": "Only Fresh",
+    "Type": "Meyve Suyu",
+    "Unit price": "61"
+  },
+  null,
+  {
+    "Commodity code": "1550",
+    "Cost price": "45",
+    "Description": "",
+    "Product name": "Kasarli Zeytin Ezmeli Sandvic ",
+    "Specs": "",
+    "Supplier": "BBM FOOD",
+    "Type": "Sandvic",
+    "Unit price": "108"
+  },
+  {
+    "Commodity code": "1555",
+    "Cost price": "79",
+    "Description": "",
+    "Product name": "3 peynirli avakadolu sandvic",
+    "Specs": "",
+    "Supplier": "BBM FOOD",
+    "Type": "Sandvic",
+    "Unit price": "176"
+  },
+  {
+    "Commodity code": "1556",
+    "Cost price": "79",
+    "Description": "",
+    "Product name": "Citir Tavuk Sandvic",
+    "Specs": "",
+    "Supplier": "BBM FOOD",
+    "Type": "Sandvic",
+    "Unit price": "176"
+  },
+  {
+    "Commodity code": "6671",
+    "Cost price": "42.3",
+    "Description": "",
+    "Product name": "Cecil Peynirli Baget",
+    "Specs": "no",
+    "Supplier": "Sanpanino",
+    "Type": "Sandvic",
+    "Unit price": "89"
+  },
+  {
+    "Commodity code": "6667",
+    "Cost price": "41.8",
+    "Description": "",
+    "Product name": "Ay Cekirdekli Club Sandviç",
+    "Specs": "no",
+    "Supplier": "Sanpanino",
+    "Type": "Sandvic",
+    "Unit price": "88"
+  },
+  {
+    "Commodity code": "6668",
+    "Cost price": "38.95",
+    "Description": "",
+    "Product name": "Mozarella Peynirli Focaccia",
+    "Specs": "no",
+    "Supplier": "Sanpanino",
+    "Type": "Sandvic",
+    "Unit price": "82"
+  },
+  {
+    "Commodity code": "6669",
+    "Cost price": "35.15",
+    "Description": "",
+    "Product name": "Tahıllı Kasar Peynirli Pnini",
+    "Specs": "no",
+    "Supplier": "Sanpanino",
+    "Type": "Sandvic",
+    "Unit price": "74"
+  },
+  {
+    "Commodity code": "1655",
+    "Cost price": "41",
+    "Description": "",
+    "Product name": "Tam bugdaylı hindi fumeli kasarli sandvic",
+    "Specs": "",
+    "Supplier": "BBM FOOD",
+    "Type": "Sandvic",
+    "Unit price": "100"
+  },
+  {
+    "Commodity code": "8506",
+    "Cost price": "41",
+    "Description": "",
+    "Product name": "Hindi Fümeli ve Kaşar Peynirli Sandvic",
+    "Specs": "125 gr",
+    "Supplier": "BBM FOOD",
+    "Type": "Sandvic",
+    "Unit price": "100"
+  },
+  {
+    "Commodity code": "8505",
+    "Cost price": "41",
+    "Description": "",
+    "Product name": "Beyaz Peynirli Zeytin Ezmeli Sandvic",
+    "Specs": "125 gr",
+    "Supplier": "BBM FOOD",
+    "Type": "Sandvic",
+    "Unit price": "100"
+  },
+  {
+    "Commodity code": "8052",
+    "Cost price": "98",
+    "Description": "",
+    "Product name": "Mozzarella Jambon Sandvic",
+    "Specs": "145 gr",
+    "Supplier": "Dardanel",
+    "Type": "Sandvic",
+    "Unit price": "149"
+  },
+  {
+    "Commodity code": "6670",
+    "Cost price": "33.25",
+    "Description": "",
+    "Product name": "Üc Peynirli Simit Panini",
+    "Specs": "no",
+    "Supplier": "Sanpanino",
+    "Type": "Sandvic",
+    "Unit price": "70"
+  },
+  {
+    "Commodity code": "8010",
+    "Cost price": "65.25",
+    "Description": "",
+    "Product name": "Viyana Ekmekli Ton Balıklı Sandviç",
+    "Specs": "",
+    "Supplier": "Dardanel",
+    "Type": "Sandvic",
+    "Unit price": "86.5"
+  },
+  {
+    "Commodity code": "8004",
+    "Cost price": "98.91",
+    "Description": "",
+    "Product name": "Ton Gurme",
+    "Specs": "",
+    "Supplier": "Dardanel",
+    "Type": "Sandvic",
+    "Unit price": "149"
+  },
+  {
+    "Commodity code": "8006",
+    "Cost price": "113.78",
+    "Description": "",
+    "Product name": "Ezine Peynirli Gurme",
+    "Specs": "",
+    "Supplier": "Dardanel",
+    "Type": "Sandvic",
+    "Unit price": "150.5"
+  },
+  {
+    "Commodity code": "8005",
+    "Cost price": "106.26",
+    "Description": "",
+    "Product name": "Tavuk Teriyaki Gurme",
+    "Specs": "220 gr",
+    "Supplier": "Dardanel",
+    "Type": "Sandvic",
+    "Unit price": "159"
+  },
+  {
+    "Commodity code": "8050",
+    "Cost price": "106",
+    "Description": "",
+    "Product name": "Gurme Somon Sandvic",
+    "Specs": "",
+    "Supplier": "Dardanel",
+    "Type": "Sandvic",
+    "Unit price": "159"
+  },
+  {
+    "Commodity code": "000036",
+    "Cost price": "54",
+    "Description": "",
+    "Product name": "Kasar peynirli salamlı sandvic",
+    "Specs": "120",
+    "Supplier": "BBM FOOD",
+    "Type": "Sandvic",
+    "Unit price": "100"
+  },
+  {
+    "Commodity code": "000040",
+    "Cost price": "91",
+    "Description": "",
+    "Product name": "Teriyaki Soslu Tavuk Şinitzel",
+    "Specs": "220 gr",
+    "Supplier": "TADA",
+    "Type": "Sandvic",
+    "Unit price": "200"
+  },
+  {
+    "Commodity code": "000043",
+    "Cost price": "90",
+    "Description": "",
+    "Product name": "Izgara Tavuklu Pesto Soslu Sandviç",
+    "Specs": "170 gr",
+    "Supplier": "TADA",
+    "Type": "Sandvic",
+    "Unit price": "200"
+  },
+  {
+    "Commodity code": "000038",
+    "Cost price": "50",
+    "Description": "",
+    "Product name": "Citir Tavuk Burger",
+    "Specs": "180 gr",
+    "Supplier": "TADA",
+    "Type": "Sandvic",
+    "Unit price": "100"
+  },
+  {
+    "Commodity code": "000041",
+    "Cost price": "71",
+    "Description": "",
+    "Product name": "Üç Peynirli Zeytin Ezmeli Sandviç",
+    "Specs": "160 gr",
+    "Supplier": "TADA",
+    "Type": "Sandvic",
+    "Unit price": "160"
+  },
+  {
+    "Commodity code": "6663",
+    "Cost price": "66.05",
+    "Description": "",
+    "Product name": "Tavuklu Ekşi Mayalı Sandviç",
+    "Specs": "no",
+    "Supplier": "BTA",
+    "Type": "Sandvic",
+    "Unit price": "130"
+  },
+  {
+    "Commodity code": "6664",
+    "Cost price": "48.55",
+    "Description": "",
+    "Product name": "Ezine Peynirli Sandvic",
+    "Specs": "no",
+    "Supplier": "BTA",
+    "Type": "Sandvic",
+    "Unit price": "97.5"
+  },
+  {
+    "Commodity code": "000051",
+    "Cost price": "115",
+    "Description": "",
+    "Product name": "Tada Izgara Tavuklı Baget",
+    "Specs": "190 gr",
+    "Supplier": "TADA",
+    "Type": "Sandvic",
+    "Unit price": "210"
+  },
+  {
+    "Commodity code": "6673",
+    "Cost price": "40",
+    "Description": "",
+    "Product name": "Ton Balıklı Panini",
+    "Specs": "no",
+    "Supplier": "Sanpanino",
+    "Type": "Sandvic",
+    "Unit price": "84"
+  },
+  {
+    "Commodity code": "6675",
+    "Cost price": "39.6",
+    "Description": "",
+    "Product name": "Izgara Tavuklu Baget",
+    "Specs": "no",
+    "Supplier": "Sanpanino",
+    "Type": "Sandvic",
+    "Unit price": "83.16"
+  },
+  {
+    "Commodity code": "6676",
+    "Cost price": "59",
+    "Description": "",
+    "Product name": "Hindi Fümeli Ücgen Sandvic",
+    "Specs": "",
+    "Supplier": "",
+    "Type": "Sandvic",
+    "Unit price": "82"
+  },
+  {
+    "Commodity code": "6677",
+    "Cost price": "59",
+    "Description": "",
+    "Product name": "Jambon Mozarella Ücgen Sandvic",
+    "Specs": "no",
+    "Supplier": "",
+    "Type": "Sandvic",
+    "Unit price": "82"
+  },
+  {
+    "Commodity code": "6666",
+    "Cost price": "35.15",
+    "Description": "",
+    "Product name": "Tahıllı Beyaz Peynirli Panini",
+    "Specs": "",
+    "Supplier": "Sanpanino",
+    "Type": "Sandvic",
+    "Unit price": "60"
+  },
+  {
+    "Commodity code": "6678",
+    "Cost price": "33",
+    "Description": "",
+    "Product name": "Hindi Jambon Cheddar Peynirli Panini",
+    "Specs": "no",
+    "Supplier": "Sanpanino",
+    "Type": "Sandvic",
+    "Unit price": "60"
+  },
+  {
+    "Commodity code": "6681",
+    "Cost price": "54.54",
+    "Description": "",
+    "Product name": "Ton Balıklı Ucgen Sandvic",
+    "Specs": "no",
+    "Supplier": "TADA",
+    "Type": "Sandvic",
+    "Unit price": "100"
+  },
+  {
+    "Commodity code": "6672",
+    "Cost price": "34.2",
+    "Description": "",
+    "Product name": "Dört Peynirli Bagel",
+    "Specs": "no",
+    "Supplier": "Sanpanino",
+    "Type": "Sandvic",
+    "Unit price": "71.8"
+  },
+  {
+    "Commodity code": "6674",
+    "Cost price": "37.8",
+    "Description": "",
+    "Product name": "Hindi Füme Bagel",
+    "Specs": "no",
+    "Supplier": "Sanpanino",
+    "Type": "Sandvic",
+    "Unit price": "79.5"
+  },
+  {
+    "Commodity code": "200099",
+    "Cost price": "60",
+    "Description": "",
+    "Product name": "Sosisli Sandvic",
+    "Specs": "",
+    "Supplier": "BBM FOOD",
+    "Type": "Sandvic",
+    "Unit price": "138"
+  },
+  {
+    "Commodity code": "1114",
+    "Cost price": "54",
+    "Description": "",
+    "Product name": "Cold Brew Hazelnut",
+    "Specs": "no",
+    "Supplier": "Hasan Efendi Kahve",
+    "Type": "Kahve",
+    "Unit price": "120"
+  },
+  {
+    "Commodity code": "1113",
+    "Cost price": "54",
+    "Description": "",
+    "Product name": "Cold Brew Vanilla",
+    "Specs": "no",
+    "Supplier": "Hasan Efendi Kahve",
+    "Type": "Kahve",
+    "Unit price": "120"
+  },
+  {
+    "Commodity code": "1112",
+    "Cost price": "54",
+    "Description": "",
+    "Product name": "Cold Brew Latte",
+    "Specs": "no",
+    "Supplier": "Hasan Efendi Kahve",
+    "Type": "Kahve",
+    "Unit price": "120"
+  },
+  {
+    "Commodity code": "1111",
+    "Cost price": "54",
+    "Description": "",
+    "Product name": "Cold Brew",
+    "Specs": "no",
+    "Supplier": "Hasan Efendi Kahve",
+    "Type": "Kahve",
+    "Unit price": "120"
+  },
+  {
+    "Commodity code": "8556",
+    "Cost price": "54",
+    "Description": "",
+    "Product name": "Cold Brew Pistachio",
+    "Specs": "",
+    "Supplier": "Hasan Efendi Kahve",
+    "Type": "Kahve",
+    "Unit price": "135"
+  },
+  {
+    "Commodity code": "1165",
+    "Cost price": "87.5",
+    "Description": "",
+    "Product name": "Daim Bites 145 gr",
+    "Specs": "145 Gr",
+    "Supplier": "EKOLFOOD",
+    "Type": "Atıştırmalık",
+    "Unit price": "170"
+  },
+  {
+    "Commodity code": "1203",
+    "Cost price": "87.5",
+    "Description": "",
+    "Product name": "Oreolu Sutlu Kakaolu Dolglu cikolata",
+    "Specs": "140 gr ",
+    "Supplier": "EKOLFOOD",
+    "Type": "Atıştırmalık",
+    "Unit price": "160"
+  },
+  {
+    "Commodity code": "1101",
+    "Cost price": "28.9",
+    "Description": "",
+    "Product name": "F&R Freeze Dried Strawberry",
+    "Specs": "15GR",
+    "Supplier": "HSM EXPORT",
+    "Type": "Atıştırmalık",
+    "Unit price": "55"
+  },
+  {
+    "Commodity code": "1102",
+    "Cost price": "35",
+    "Description": "",
+    "Product name": "F&R Freeze Dried Orange",
+    "Specs": "20 gr",
+    "Supplier": "HSM EXPORT",
+    "Type": "Atıştırmalık",
+    "Unit price": "65"
+  },
+  {
+    "Commodity code": "1024",
+    "Cost price": "42",
+    "Description": "",
+    "Product name": "POL'S Frezee Fresh Muz",
+    "Specs": "20 gr",
+    "Supplier": "DMC",
+    "Type": "Atıştırmalık",
+    "Unit price": "69"
+  },
+  {
+    "Commodity code": "1255",
+    "Cost price": "42",
+    "Description": "",
+    "Product name": "POL'S Frezee Fresh Cilek",
+    "Specs": "15GR",
+    "Supplier": "DMC",
+    "Type": "Atıştırmalık",
+    "Unit price": "69"
+  },
+  {
+    "Commodity code": "1156",
+    "Cost price": "42",
+    "Description": "",
+    "Product name": "POL'S Frezee Fresh Portakal",
+    "Specs": "20 gr",
+    "Supplier": "DMC",
+    "Type": "Atıştırmalık",
+    "Unit price": "65"
+  },
+  {
+    "Commodity code": "30001",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Miskots susamli krokan",
+    "Specs": "",
+    "Supplier": "Nevka Gida",
+    "Type": "Atıştırmalık",
+    "Unit price": "30"
+  },
+  {
+    "Commodity code": "30003",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Yer Fistikli Krokan",
+    "Specs": "",
+    "Supplier": "Nevka Gida",
+    "Type": "Atıştırmalık",
+    "Unit price": "25"
+  },
+  {
+    "Commodity code": "000046",
+    "Cost price": "45",
+    "Description": "",
+    "Product name": "Glutensiz Kakaolu Ve Portakallı Kurabiye",
+    "Specs": "110 gr",
+    "Supplier": "TADA",
+    "Type": "Atıştırmalık",
+    "Unit price": "130"
+  },
+  {
+    "Commodity code": "000045",
+    "Cost price": "82",
+    "Description": "",
+    "Product name": "Glutensiz Fındıklı Ve Çikolatalı Biscotti",
+    "Specs": "110 gr",
+    "Supplier": "TADA",
+    "Type": "Atıştırmalık",
+    "Unit price": "190"
+  },
+  {
+    "Commodity code": "2227",
+    "Cost price": "65",
+    "Description": "",
+    "Product name": "Antep Fıstıklı Meyve Topları",
+    "Specs": "no",
+    "Supplier": "DMC",
+    "Type": "Atıştırmalık",
+    "Unit price": "95"
+  },
+  {
+    "Commodity code": "2228",
+    "Cost price": "40",
+    "Description": "",
+    "Product name": "Afrika Atesi",
+    "Specs": "no",
+    "Supplier": "DMC",
+    "Type": "Atıştırmalık",
+    "Unit price": "60"
+  },
+  {
+    "Commodity code": "2229",
+    "Cost price": "130",
+    "Description": "",
+    "Product name": "Antep Fistigi",
+    "Specs": "no",
+    "Supplier": "DMC",
+    "Type": "Atıştırmalık",
+    "Unit price": "80"
+  },
+  {
+    "Commodity code": "2230",
+    "Cost price": "140",
+    "Description": "",
+    "Product name": "Soyulmus Kavrulmus Badem",
+    "Specs": "no",
+    "Supplier": "DMC",
+    "Type": "Atıştırmalık",
+    "Unit price": "85"
+  },
+  {
+    "Commodity code": "000047",
+    "Cost price": "41",
+    "Description": "",
+    "Product name": "Oreo",
+    "Specs": "154 gr",
+    "Supplier": "EKOLFOOD",
+    "Type": "Atıştırmalık",
+    "Unit price": "85"
+  },
+  {
+    "Commodity code": "2224",
+    "Cost price": "35",
+    "Description": "",
+    "Product name": "Tuzlu Kraker",
+    "Specs": "no",
+    "Supplier": "DMC",
+    "Type": "Atıştırmalık",
+    "Unit price": "60"
+  },
+  {
+    "Commodity code": "2222",
+    "Cost price": "54.6",
+    "Description": "",
+    "Product name": "Mini Kekler",
+    "Specs": "",
+    "Supplier": "DMC",
+    "Type": "Atıştırmalık",
+    "Unit price": "75"
+  },
+  {
+    "Commodity code": "2223",
+    "Cost price": "44.8",
+    "Description": "",
+    "Product name": "Yulafli Yer FistikliTruf",
+    "Specs": "no",
+    "Supplier": "DMC",
+    "Type": "Atıştırmalık",
+    "Unit price": "90"
+  },
+  {
+    "Commodity code": "2231",
+    "Cost price": "110",
+    "Description": "",
+    "Product name": "Kavrulmuş Fındık",
+    "Specs": "",
+    "Supplier": "DMC",
+    "Type": "Atıştırmalık",
+    "Unit price": "110"
+  },
+  {
+    "Commodity code": "2232",
+    "Cost price": "120",
+    "Description": "",
+    "Product name": "Badem",
+    "Specs": "",
+    "Supplier": "DMC",
+    "Type": "Atıştırmalık",
+    "Unit price": "120"
+  },
+  {
+    "Commodity code": "2233",
+    "Cost price": "125",
+    "Description": "",
+    "Product name": "Ceviz",
+    "Specs": "",
+    "Supplier": "DMC",
+    "Type": "Atıştırmalık",
+    "Unit price": "125"
+  },
+  {
+    "Commodity code": "4445",
+    "Cost price": "49",
+    "Description": "",
+    "Product name": "Ballı Muzlu Yogurt",
+    "Specs": "no",
+    "Supplier": "",
+    "Type": "Granola",
+    "Unit price": "75"
+  },
+  {
+    "Commodity code": "4446",
+    "Cost price": "49",
+    "Description": "",
+    "Product name": "Orman Meyveli Yogurt",
+    "Specs": "no",
+    "Supplier": "",
+    "Type": "Granola",
+    "Unit price": "75"
+  },
+  {
+    "Commodity code": "4444",
+    "Cost price": "49",
+    "Description": "",
+    "Product name": "Cilekli Yogurt",
+    "Specs": "no",
+    "Supplier": "",
+    "Type": "Granola",
+    "Unit price": "75"
+  },
+  {
+    "Commodity code": "30007",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Tudobranco Kruvasan",
+    "Specs": "40",
+    "Supplier": "Nevka Gida",
+    "Type": "Tatlı",
+    "Unit price": "30"
+  },
+  {
+    "Commodity code": "92000",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Bol Cevizli  Vakumlu Sucuk",
+    "Specs": "",
+    "Supplier": "Nevka Gida",
+    "Type": "Tatlı",
+    "Unit price": "45"
+  },
+  {
+    "Commodity code": "9876",
+    "Cost price": "10.5",
+    "Description": "",
+    "Product name": "Cevizli Baklava",
+    "Specs": "no",
+    "Supplier": "payna",
+    "Type": "Tatlı",
+    "Unit price": "25"
+  },
+  {
+    "Commodity code": "98678",
+    "Cost price": "16",
+    "Description": "",
+    "Product name": "Fistikli Baklava",
+    "Specs": "no",
+    "Supplier": "payna",
+    "Type": "Tatlı",
+    "Unit price": "29"
+  },
+  {
+    "Commodity code": "2226",
+    "Cost price": "25",
+    "Description": "",
+    "Product name": "Tam Cookıe-Frambuaz-Elma-Fındık",
+    "Specs": "no",
+    "Supplier": "UNO",
+    "Type": "Tatlı",
+    "Unit price": "50"
+  },
+  {
+    "Commodity code": "2225",
+    "Cost price": "25",
+    "Description": "",
+    "Product name": "Tam Cookıe-Kayısı-Hurma-Badem",
+    "Specs": "no",
+    "Supplier": "UNO",
+    "Type": "Tatlı",
+    "Unit price": "50"
+  },
+  {
+    "Commodity code": "9001",
+    "Cost price": "30.75",
+    "Description": "",
+    "Product name": "Miskets Sütlü Mini Kornet",
+    "Specs": "70 gr",
+    "Supplier": "PAKEL",
+    "Type": "Tatlı",
+    "Unit price": "61.5"
+  },
+  {
+    "Commodity code": "9002",
+    "Cost price": "92",
+    "Description": "",
+    "Product name": "Miskets Sütlü Ç.Antep Baklava",
+    "Specs": "80 gr",
+    "Supplier": "PAKEL",
+    "Type": "Tatlı",
+    "Unit price": "184"
+  },
+  {
+    "Commodity code": "9003",
+    "Cost price": "50.5",
+    "Description": "",
+    "Product name": "Miskets Sutlu Ç.Kaplı Mango",
+    "Specs": "80 gr",
+    "Supplier": "PAKEL",
+    "Type": "Tatlı",
+    "Unit price": "101"
+  },
+  {
+    "Commodity code": "9004",
+    "Cost price": "41.4",
+    "Description": "",
+    "Product name": "Miskets Sütlü Ç.Kaplı Çilek",
+    "Specs": "80 gr",
+    "Supplier": "PAKEL",
+    "Type": "Tatlı",
+    "Unit price": "83"
+  },
+  {
+    "Commodity code": "9005",
+    "Cost price": "39.7",
+    "Description": "",
+    "Product name": "Miskets Sütlü Ç.Kaplı ceviz",
+    "Specs": "70 gr",
+    "Supplier": "PAKEL",
+    "Type": "Tatlı",
+    "Unit price": "81"
+  },
+  {
+    "Commodity code": "8009",
+    "Cost price": "72.46",
+    "Description": "",
+    "Product name": "Tereyağlı Kruvasan",
+    "Specs": "",
+    "Supplier": "Dardanel",
+    "Type": "Tatlı",
+    "Unit price": "99.9"
+  },
+  {
+    "Commodity code": "30004",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Miskos dubai Çikolatali Gofret",
+    "Specs": "",
+    "Supplier": "Nevka Gida",
+    "Type": "Tatlı",
+    "Unit price": "60"
+  },
+  {
+    "Commodity code": "30000",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Findikli Ucgen Pestil",
+    "Specs": "",
+    "Supplier": "Nevka Gida",
+    "Type": "Tatlı",
+    "Unit price": "30"
+  },
+  {
+    "Commodity code": "1202",
+    "Cost price": "90",
+    "Description": "",
+    "Product name": "Sutlu Bademli Karamel Dolgulu cikolata",
+    "Specs": "200 GR",
+    "Supplier": "EKOLFOOD",
+    "Type": "Tatlı",
+    "Unit price": "199"
+  },
+  {
+    "Commodity code": "8503",
+    "Cost price": "8.3",
+    "Description": "",
+    "Product name": "Gusto Kruvasan Çikolatalı 40 Gr. ",
+    "Specs": "40 gr",
+    "Supplier": "Elvan",
+    "Type": "Tatlı",
+    "Unit price": "35"
+  },
+  {
+    "Commodity code": "8501",
+    "Cost price": "426.68",
+    "Description": "",
+    "Product name": "Melodi Dubai cikoltası 300 GR",
+    "Specs": "300 gr ",
+    "Supplier": "Melodi cikolata",
+    "Type": "Tatlı",
+    "Unit price": "626"
+  },
+  {
+    "Commodity code": "8502",
+    "Cost price": "148.5",
+    "Description": "",
+    "Product name": "Melodi Dubai çikoltası 90 GR",
+    "Specs": "90 gr",
+    "Supplier": "Melodi cikolata",
+    "Type": "Tatlı",
+    "Unit price": "250"
+  },
+  {
+    "Commodity code": "2900",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Miskete Antep Fıstıklı Cikolata",
+    "Specs": "",
+    "Supplier": "PAKEL",
+    "Type": "Tatlı",
+    "Unit price": "101"
+  },
+  {
+    "Commodity code": "7575",
+    "Cost price": "1.8",
+    "Description": "",
+    "Product name": "6'Lı Plastik Yemek Seti",
+    "Specs": "145 gr",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "6"
+  },
+  {
+    "Commodity code": "1124",
+    "Cost price": "143",
+    "Description": "",
+    "Product name": "Izgara Tavuk Gogsu Ve Basmati Pirinc Pilavi",
+    "Specs": "370 gr",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "265"
+  },
+  {
+    "Commodity code": "1128",
+    "Cost price": "50",
+    "Description": "",
+    "Product name": "Bulut Omlet",
+    "Specs": "150 Gr",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "110"
+  },
+  {
+    "Commodity code": "1110",
+    "Cost price": "149",
+    "Description": "",
+    "Product name": "Haslanmis Tavuk Gogusu ve Pirinç Pilavı",
+    "Specs": "350 gr",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "275"
+  },
+  {
+    "Commodity code": "1123",
+    "Cost price": "172",
+    "Description": "",
+    "Product name": "Yağsız Kırmızı Et ve Basmati Pilavı",
+    "Specs": "315 gr",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "305"
+  },
+  {
+    "Commodity code": "000015",
+    "Cost price": "150",
+    "Description": "",
+    "Product name": "Tavuk Dürüm Döner",
+    "Specs": "-",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "275"
+  },
+  {
+    "Commodity code": "000019",
+    "Cost price": "136",
+    "Description": "",
+    "Product name": "Cheddar Peynirli Paneli Tavuk Wrap",
+    "Specs": "-",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "252"
+  },
+  {
+    "Commodity code": "000016",
+    "Cost price": "49",
+    "Description": "",
+    "Product name": "Çiğ Köfte Porsiyon",
+    "Specs": "-",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "97"
+  },
+  {
+    "Commodity code": "000017",
+    "Cost price": "90",
+    "Description": "",
+    "Product name": "Kabak Mücver",
+    "Specs": "-",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "200"
+  },
+  {
+    "Commodity code": "000018",
+    "Cost price": "103",
+    "Description": "",
+    "Product name": "Zeytinyağlı Lahana Sarma",
+    "Specs": "-",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "197"
+  },
+  {
+    "Commodity code": "8001",
+    "Cost price": "146.38",
+    "Description": "",
+    "Product name": "Karidesli Poke Bowl",
+    "Specs": "",
+    "Supplier": "Dardanel",
+    "Type": "Yemek",
+    "Unit price": "194"
+  },
+  {
+    "Commodity code": "8002",
+    "Cost price": "139.05",
+    "Description": "",
+    "Product name": "California Roll",
+    "Specs": "",
+    "Supplier": "Dardanel",
+    "Type": "Yemek",
+    "Unit price": "184.5"
+  },
+  {
+    "Commodity code": "8003",
+    "Cost price": "139.05",
+    "Description": "",
+    "Product name": "Tokyo Mix",
+    "Specs": "",
+    "Supplier": "Dardanel",
+    "Type": "Yemek",
+    "Unit price": "184.5"
+  },
+  {
+    "Commodity code": "8007",
+    "Cost price": "57.99",
+    "Description": "",
+    "Product name": "California Onigiri",
+    "Specs": "",
+    "Supplier": "Dardanel",
+    "Type": "Yemek",
+    "Unit price": "79.9"
+  },
+  {
+    "Commodity code": "8051",
+    "Cost price": "146.38",
+    "Description": "",
+    "Product name": "Somon Poke bowl",
+    "Specs": "",
+    "Supplier": "Dardanel",
+    "Type": "Yemek",
+    "Unit price": "199"
+  },
+  {
+    "Commodity code": "8008",
+    "Cost price": "57.99",
+    "Description": "",
+    "Product name": "Somon Teriyaki Onigiri",
+    "Specs": "",
+    "Supplier": "Dardanel",
+    "Type": "Yemek",
+    "Unit price": "79.9"
+  },
+  {
+    "Commodity code": "000049",
+    "Cost price": "150",
+    "Description": "",
+    "Product name": "Kremali Mantarli Tavuk ve Pancarli Makarna",
+    "Specs": "320 gr",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "250"
+  },
+  {
+    "Commodity code": "000050",
+    "Cost price": "78",
+    "Description": "",
+    "Product name": "Ton Balık Mısırlı Sandviç",
+    "Specs": "160gr",
+    "Supplier": "UNO",
+    "Type": "Yemek",
+    "Unit price": "150"
+  },
+  {
+    "Commodity code": "7014",
+    "Cost price": "60",
+    "Description": "",
+    "Product name": "Ayran Ası Corbası",
+    "Specs": "",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "115"
+  },
+  null,
+  {
+    "Commodity code": "00052",
+    "Cost price": "1495",
+    "Description": "",
+    "Product name": "MARINA SOSLU TAVUK VE TEREYAGLI MAKARNA",
+    "Specs": "340",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "250"
+  },
+  {
+    "Commodity code": "7001",
+    "Cost price": "91",
+    "Description": "",
+    "Product name": "Nohutlu Pilav ve Tavuk",
+    "Specs": "no",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "205"
+  },
+  {
+    "Commodity code": "7003",
+    "Cost price": "136",
+    "Description": "",
+    "Product name": "Tavuklu Sezar Salata",
+    "Specs": "no",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "255"
+  },
+  {
+    "Commodity code": "7002",
+    "Cost price": "136",
+    "Description": "",
+    "Product name": "Ton Balıklı Salata",
+    "Specs": "300 gr ",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "250"
+  },
+  {
+    "Commodity code": "7004",
+    "Cost price": "137",
+    "Description": "",
+    "Product name": "Tavuk Şinitzel ve Pilav",
+    "Specs": "no",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "190"
+  },
+  {
+    "Commodity code": "7005",
+    "Cost price": "155",
+    "Description": "",
+    "Product name": "Calıfornıa Roll",
+    "Specs": "no",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "195"
+  },
+  {
+    "Commodity code": "7006",
+    "Cost price": "170",
+    "Description": "",
+    "Product name": "Whıte Salmon Roll",
+    "Specs": "no",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "195"
+  },
+  {
+    "Commodity code": "7007",
+    "Cost price": "149",
+    "Description": "",
+    "Product name": "Izgara Tavuk Şiş ve Siyez Bulguru",
+    "Specs": "no",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "280"
+  },
+  {
+    "Commodity code": "7008",
+    "Cost price": "162",
+    "Description": "",
+    "Product name": "Sebzeli Hindi Köftesi ve Fırınlanmış Patates",
+    "Specs": "no",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "300"
+  },
+  {
+    "Commodity code": "7009",
+    "Cost price": "170",
+    "Description": "",
+    "Product name": "Phıladelphıa Roll",
+    "Specs": "no",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "195"
+  },
+  {
+    "Commodity code": "7010",
+    "Cost price": "185",
+    "Description": "",
+    "Product name": "Beğendili Köfte",
+    "Specs": "no",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "316"
+  },
+  {
+    "Commodity code": "000039",
+    "Cost price": "70",
+    "Description": "",
+    "Product name": "Tada Zeytinyagli Yaprak Sarma",
+    "Specs": "190 gr",
+    "Supplier": "TADA",
+    "Type": "Yemek",
+    "Unit price": "150"
+  },
+  {
+    "Commodity code": "000044",
+    "Cost price": "80",
+    "Description": "",
+    "Product name": "Citir Tavuklu Dürüm",
+    "Specs": "180 gr",
+    "Supplier": "TADA",
+    "Type": "Yemek",
+    "Unit price": "180"
+  },
+  {
+    "Commodity code": "000042",
+    "Cost price": "32",
+    "Description": "",
+    "Product name": "Cig Kofte Dürüm",
+    "Specs": "180 gr",
+    "Supplier": "TADA",
+    "Type": "Yemek",
+    "Unit price": "90"
+  },
+  {
+    "Commodity code": "000037",
+    "Cost price": "189",
+    "Description": "",
+    "Product name": "hindi tandır iç pilav",
+    "Specs": "320",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "280"
+  },
+  {
+    "Commodity code": "000033",
+    "Cost price": "82",
+    "Description": "",
+    "Product name": "Haydari",
+    "Specs": "200 GR",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "100"
+  },
+  {
+    "Commodity code": "945656",
+    "Cost price": "107",
+    "Description": "",
+    "Product name": "Boldy Zeytinyagli Yaprak Sarma",
+    "Specs": "",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "202"
+  },
+  {
+    "Commodity code": "90555",
+    "Cost price": "88",
+    "Description": "",
+    "Product name": "PENNE ARABİATA",
+    "Specs": "300 gr ",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "196"
+  },
+  {
+    "Commodity code": "000032",
+    "Cost price": "134",
+    "Description": "",
+    "Product name": "Hindi Göğüsü ve Siyez Bulguru",
+    "Specs": "300 gr ",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "280"
+  },
+  {
+    "Commodity code": "000031",
+    "Cost price": "52",
+    "Description": "",
+    "Product name": "Chocomel",
+    "Specs": "250 ml",
+    "Supplier": "EKOLFOOD",
+    "Type": "İcecek",
+    "Unit price": "100"
+  },
+  {
+    "Commodity code": "1125",
+    "Cost price": "24.75",
+    "Description": "",
+    "Product name": "Saol Vitamin Water Men 500 Ml",
+    "Specs": "500 ml",
+    "Supplier": "Beylerbeyi Profiterol",
+    "Type": "İcecek",
+    "Unit price": "39.5"
+  },
+  {
+    "Commodity code": "1126",
+    "Cost price": "24.75",
+    "Description": "",
+    "Product name": "Saol Multi Vitamin Water 500 ml",
+    "Specs": "500 ml",
+    "Supplier": "Beylerbeyi Profiterol",
+    "Type": "İcecek",
+    "Unit price": "39.5"
+  },
+  {
+    "Commodity code": "1135",
+    "Cost price": "24.72",
+    "Description": "",
+    "Product name": "Saol Vitamin Antioxsidant",
+    "Specs": "",
+    "Supplier": "Beylerbeyi Profiterol",
+    "Type": "İcecek",
+    "Unit price": "39.5"
+  },
+  {
+    "Commodity code": "1600",
+    "Cost price": "49",
+    "Description": "",
+    "Product name": "STRAWBERRY LEMONADE",
+    "Specs": "",
+    "Supplier": "Nesco",
+    "Type": "İcecek",
+    "Unit price": "99"
+  },
+  {
+    "Commodity code": "1601",
+    "Cost price": "49",
+    "Description": "",
+    "Product name": "MANGO PASSION FRUIT",
+    "Specs": "",
+    "Supplier": "Nesco",
+    "Type": "İcecek",
+    "Unit price": "99"
+  },
+  {
+    "Commodity code": "1603",
+    "Cost price": "49",
+    "Description": "",
+    "Product name": "GREEN APPLE LEMONADE",
+    "Specs": "",
+    "Supplier": "Nesco",
+    "Type": "İcecek",
+    "Unit price": "99"
+  },
+  {
+    "Commodity code": "1501",
+    "Cost price": "47",
+    "Description": "",
+    "Product name": "vegan peynir aromali protein cips 50 gr",
+    "Specs": "50 gr",
+    "Supplier": "saffoods",
+    "Type": "Protein besinleri",
+    "Unit price": "90"
+  },
+  {
+    "Commodity code": "1502",
+    "Cost price": "47",
+    "Description": "",
+    "Product name": "Acili protein cips 50 gr",
+    "Specs": "50 gr",
+    "Supplier": "saffoods",
+    "Type": "Protein besinleri",
+    "Unit price": "90"
+  },
+  {
+    "Commodity code": "1510",
+    "Cost price": "62",
+    "Description": "",
+    "Product name": "tahinli & amarantlı yulaflı kurabiye 45 gr",
+    "Specs": "45 gr",
+    "Supplier": "saffoods",
+    "Type": "Protein besinleri",
+    "Unit price": "111"
+  },
+  {
+    "Commodity code": "1511",
+    "Cost price": "47",
+    "Description": "",
+    "Product name": "Cranberry coconut slim bar 40 gr",
+    "Specs": "40 gr",
+    "Supplier": "saffoods",
+    "Type": "Protein besinleri",
+    "Unit price": "87"
+  },
+  {
+    "Commodity code": "1500",
+    "Cost price": "47",
+    "Description": "",
+    "Product name": "Peanut chocolate high protein bar 50 gr",
+    "Specs": "50 gr",
+    "Supplier": "saffoods",
+    "Type": "Protein besinleri",
+    "Unit price": "87"
+  },
+  {
+    "Commodity code": "1509",
+    "Cost price": "47",
+    "Description": "",
+    "Product name": "chocolate chip energy bar 50 gr",
+    "Specs": "45 gr",
+    "Supplier": "saffoods",
+    "Type": "Protein besinleri",
+    "Unit price": "87"
+  },
+  {
+    "Commodity code": "1507",
+    "Cost price": "62",
+    "Description": "",
+    "Product name": "tahin & yaban mersinli granola 45 gr",
+    "Specs": "45 gr",
+    "Supplier": "saffoods",
+    "Type": "Protein besinleri",
+    "Unit price": "111"
+  },
+  {
+    "Commodity code": "1503",
+    "Cost price": "47",
+    "Description": "",
+    "Product name": "Barbeku aromali protein cips 50 gr",
+    "Specs": "50 gr",
+    "Supplier": "saffoods",
+    "Type": "Protein besinleri",
+    "Unit price": "90"
+  },
+  {
+    "Commodity code": "1504",
+    "Cost price": "47",
+    "Description": "",
+    "Product name": "mevsim yesillikli protein cips 50 gr",
+    "Specs": "50 gr",
+    "Supplier": "saffoods",
+    "Type": "Protein besinleri",
+    "Unit price": "90"
+  },
+  {
+    "Commodity code": "1505",
+    "Cost price": "83",
+    "Description": "",
+    "Product name": "Amarantli & pirinc patlakli cikolata 40 gr",
+    "Specs": "40 gr",
+    "Supplier": "saffoods",
+    "Type": "Protein besinleri",
+    "Unit price": "111"
+  },
+  {
+    "Commodity code": "1506",
+    "Cost price": "62",
+    "Description": "",
+    "Product name": "fistik ezmeli & findikli granola",
+    "Specs": "45 gr",
+    "Supplier": "saffoods",
+    "Type": "Protein besinleri",
+    "Unit price": "111"
+  },
+  {
+    "Commodity code": "1508",
+    "Cost price": "62",
+    "Description": "",
+    "Product name": "Damla cikolatali kurabiye 45 gr",
+    "Specs": "45 gr",
+    "Supplier": "saffoods",
+    "Type": "Protein besinleri",
+    "Unit price": "111"
+  },
+  {
+    "Commodity code": "000020",
+    "Cost price": "29",
+    "Description": "",
+    "Product name": "Fropie Fındık & Kakao Probiyotik Bar",
+    "Specs": "35 gr",
+    "Supplier": "Fropie",
+    "Type": "Protein besinleri",
+    "Unit price": "60"
+  },
+  {
+    "Commodity code": "000022",
+    "Cost price": "29",
+    "Description": "",
+    "Product name": "Fropie Badem & Kakao Probiyotik Bar",
+    "Specs": "35 gr",
+    "Supplier": "Fropie",
+    "Type": "Protein besinleri",
+    "Unit price": "60"
+  },
+  {
+    "Commodity code": "000023",
+    "Cost price": "29",
+    "Description": "",
+    "Product name": "Fropie Yer Fıstığı & Kakao Probiyotik Bar",
+    "Specs": "35 gr",
+    "Supplier": "Fropie",
+    "Type": "Protein besinleri",
+    "Unit price": "60"
+  },
+  {
+    "Commodity code": "000021",
+    "Cost price": "29",
+    "Description": "",
+    "Product name": "Fropie Kaju & Chia Probiyotik Bar",
+    "Specs": "35 gr",
+    "Supplier": "Fropie",
+    "Type": "Protein besinleri",
+    "Unit price": "60"
+  },
+  {
+    "Commodity code": "000025",
+    "Cost price": "32",
+    "Description": "",
+    "Product name": "Fropie Yer Fıstığı Ezmeli & Nibli Protein Bar",
+    "Specs": "40 gr",
+    "Supplier": "Fropie",
+    "Type": "Protein besinleri",
+    "Unit price": "65"
+  },
+  {
+    "Commodity code": "000024",
+    "Cost price": "32",
+    "Description": "",
+    "Product name": "Fropie Yer Fıstığı Ezmeli & Çilekli Protein Bar",
+    "Specs": "40 gr",
+    "Supplier": "Fropie",
+    "Type": "Protein besinleri",
+    "Unit price": "65"
+  },
+  {
+    "Commodity code": "000027",
+    "Cost price": "32",
+    "Description": "",
+    "Product name": "Fropie Yer Fıstığı Ezmeli & Hind. Cev. Protein Bar",
+    "Specs": "40 gr",
+    "Supplier": "Fropie",
+    "Type": "Protein besinleri",
+    "Unit price": "65"
+  },
+  {
+    "Commodity code": "000028",
+    "Cost price": "29",
+    "Description": "",
+    "Product name": "Fropie Hind. Cev. Kaplı & Kaju Ez. Mini Probiyotik",
+    "Specs": "32 gr",
+    "Supplier": "Fropie",
+    "Type": "Protein besinleri",
+    "Unit price": "60"
+  },
+  {
+    "Commodity code": "000030",
+    "Cost price": "29",
+    "Description": "",
+    "Product name": "Fropie Hind. Cev. Kap. & Yer Fıst. Mini Probiyotik",
+    "Specs": "32 gr",
+    "Supplier": "Fropie",
+    "Type": "Protein besinleri",
+    "Unit price": "60"
+  },
+  {
+    "Commodity code": "000026",
+    "Cost price": "32",
+    "Description": "",
+    "Product name": "Fropie Yer Fıstığı Ezmeli & Fındıklı Protein Bar",
+    "Specs": "40 gr",
+    "Supplier": "Fropie",
+    "Type": "Protein besinleri",
+    "Unit price": "65"
+  },
+  {
+    "Commodity code": "000029",
+    "Cost price": "35",
+    "Description": "",
+    "Product name": "Fropie Ant. Fıs. Kap. & Fındık Ez. Mini Probiyotik",
+    "Specs": "32 gr",
+    "Supplier": "Fropie",
+    "Type": "Protein besinleri",
+    "Unit price": "70"
+  },
+  {
+    "Commodity code": "000034",
+    "Cost price": "163",
+    "Description": "",
+    "Product name": "İzmir Köfte",
+    "Specs": "",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "250"
+  },
+  {
+    "Commodity code": "000035",
+    "Cost price": "143",
+    "Description": "",
+    "Product name": "Pilavüstü Tavuk Döner",
+    "Specs": "320 gr",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "280"
+  },
+  {
+    "Commodity code": "000048",
+    "Cost price": "0",
+    "Description": "",
+    "Product name": "Tavuklu Fettuccine Alfredo",
+    "Specs": "300 gr",
+    "Supplier": "BBM FOOD",
+    "Type": "Yemek",
+    "Unit price": "220"
+  }
+]

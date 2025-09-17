@@ -1,0 +1,103 @@
+const admin = require('firebase-admin');
+
+// Initialize Firebase Admin SDK
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.applicationDefault(),
+    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL
+  });
+}
+
+const db = admin.database();
+
+exports.handler = async (event, context) => {
+  // Handle preflight requests
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS'
+      }
+    };
+  }
+
+  // Only allow POST requests
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: 'Method Not Allowed' })
+    };
+  }
+
+  try {
+    // Parse the request body
+    const { machineId, deviceData } = JSON.parse(event.body);
+    
+    // Validate required fields
+    if (!machineId) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Machine ID is required' })
+      };
+    }
+
+    const now = Date.now();
+    
+    // Update heartbeat data
+    await db.ref(`heartbeat/${machineId}`).update({
+      lastSeen: now,
+      status: 'online',
+      deviceId: deviceData?.deviceId || null,
+      updatedAt: new Date().toISOString()
+    });
+
+    // Update machine connection info
+    await db.ref(`machines/${machineId}/connectionInfo`).update({
+      status: 'online',
+      lastHeartbeat: new Date(now).toISOString()
+    });
+
+    // Update device-specific data if provided
+    if (deviceData) {
+      await db.ref(`machines/${machineId}/deviceStatus`).update({
+        batteryLevel: deviceData.batteryLevel,
+        signalStrength: deviceData.signalStrength,
+        temperature: deviceData.temperature,
+        lastError: deviceData.lastError || null,
+        lastUpdated: new Date().toISOString()
+      });
+    }
+
+    console.log(`✅ Heartbeat updated for machine: ${machineId}`);
+
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        success: true, 
+        message: 'Heartbeat updated successfully',
+        timestamp: new Date().toISOString()
+      })
+    };
+  } catch (error) {
+    console.error('❌ Error updating heartbeat:', error);
+    
+    return {
+      statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        success: false, 
+        error: 'Failed to update heartbeat',
+        message: error.message
+      })
+    };
+  }
+};
