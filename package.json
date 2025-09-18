@@ -63,6 +63,7 @@
     ]
   },
   "devDependencies": {
+    "@netlify/plugin-scheduled-functions": "^1.0.0",
     "@types/react-router-dom": "^5.3.3",
     "firebase-admin": "^13.5.0"
   },
