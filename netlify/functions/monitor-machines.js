@@ -48,8 +48,12 @@ exports.handler = async (event, context) => {
     };
   }
 
-  // Check if this is a scheduled execution
-  const isScheduled = event.headers && event.headers['x-netlify-scheduled-function'];
+  // Check if this is a scheduled execution (from external cron service)
+  const isScheduled = event.headers && (
+    event.headers['x-netlify-scheduled-function'] || 
+    event.headers['x-cron-secret'] ||
+    event.queryStringParameters?.cron === 'true'
+  );
 
   try {
     if (isScheduled) {

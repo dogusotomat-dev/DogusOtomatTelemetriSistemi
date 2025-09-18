@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otomatik Monitoring Kurulumu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1976d2;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .step {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #1976d2;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+        .url-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            word-break: break-all;
+            margin: 10px 0;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1565c0;
+        }
+        .test-result {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .test-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .test-error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Otomatik Monitoring Kurulumu</h1>
+        
+        <div class="step">
+            <h3>📋 Adım 1: Cron Job URL'si</h3>
+            <p>Bu URL'yi cron servisine ekleyeceksiniz:</p>
+            <div class="url-box" id="cronUrl">
+                https://dogusotomattelemetrisistemi.netlify.app/.netlify/functions/monitor-machines?cron=true
+            </div>
+            <button onclick="copyUrl()">📋 URL'yi Kopyala</button>
+        </div>
+
+        <div class="step">
+            <h3>⏰ Adım 2: Cron Servisi Kurulumu</h3>
+            <p><strong>Önerilen ücretsiz servisler:</strong></p>
+            <ul>
+                <li><strong>Cron-job.org:</strong> <a href="https://cron-job.org" target="_blank">https://cron-job.org</a></li>
+                <li><strong>EasyCron:</strong> <a href="https://www.easycron.com" target="_blank">https://www.easycron.com</a></li>
+                <li><strong>CronHub:</strong> <a href="https://cronhub.io" target="_blank">https://cronhub.io</a></li>
+            </ul>
+            
+            <div class="warning">
+                <strong>⚠️ Önemli Ayarlar:</strong>
+                <ul>
+                    <li><strong>Zamanlama:</strong> Her 2 dakikada bir (0 */2 * * * *)</li>
+                    <li><strong>HTTP Method:</strong> GET</li>
+                    <li><strong>Timeout:</strong> En az 30 saniye</li>
+                    <li><strong>Retry:</strong> 3 kez</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>🔧 Adım 3: Test</h3>
+            <p>Kurulumu test etmek için:</p>
+            <button onclick="testMonitoring()">🧪 Monitoring Test Et</button>
+            <button onclick="testHeartbeat()">💓 Heartbeat Test Et</button>
+            <div id="testResult" class="test-result" style="display: none;"></div>
+        </div>
+
+        <div class="step">
+            <h3>✅ Adım 4: Doğrulama</h3>
+            <p>Kurulum başarılı olduğunda:</p>
+            <ul>
+                <li>✅ Her 2 dakikada otomatik monitoring çalışacak</li>
+                <li>✅ Site açık olmasa bile çalışacak</li>
+                <li>✅ Offline makineler için email alarmları gönderilecek</li>
+                <li>✅ Telemetri verileri kontrol edilecek</li>
+                <li>✅ Temizlik durumu kontrol edilecek</li>
+            </ul>
+        </div>
+
+        <div class="success">
+            <strong>🎉 Kurulum Tamamlandı!</strong><br>
+            Artık sistem tamamen otomatik çalışacak. Manuel müdahale gerekmeyecek.
+        </div>
+    </div>
+
+    <script>
+        function copyUrl() {
+            const url = document.getElementById('cronUrl').textContent;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('✅ URL kopyalandı!');
+            });
+        }
+
+        async function testMonitoring() {
+            const resultDiv = document.getElementById('testResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'test-result';
+            resultDiv.innerHTML = '🔄 Test ediliyor...';
+
+            try {
+                const response = await fetch('/.netlify/functions/monitor-machines?cron=true');
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.className = 'test-result test-success';
+                    resultDiv.innerHTML = `
+                        ✅ Monitoring test başarılı!<br>
+                        📊 Toplam makine: ${data.stats?.totalMachines || 0}<br>
+                        🔴 Offline makine: ${data.stats?.offlineMachines || 0}<br>
+                        🚨 Kritik offline: ${data.stats?.criticalOfflineMachines || 0}<br>
+                        📧 Oluşturulan alarm: ${data.stats?.alarmsCreated || 0}
+                    `;
+                } else {
+                    throw new Error(data.error || 'Test başarısız');
+                }
+            } catch (error) {
+                resultDiv.className = 'test-result test-error';
+                resultDiv.innerHTML = `❌ Test hatası: ${error.message}`;
+            }
+        }
+
+        async function testHeartbeat() {
+            const resultDiv = document.getElementById('testResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'test-result';
+            resultDiv.innerHTML = '🔄 Heartbeat test ediliyor...';
+
+            try {
+                const response = await fetch('/.netlify/functions/update-heartbeat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        machineId: '2506211449',
+                        iotNumber: '8990010873499834749',
+                        deviceData: {
+                            batteryLevel: 95,
+                            signalStrength: 90,
+                            temperature: -15,
+                            powerStatus: true,
+                            operationalMode: 'normal'
+                        }
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.className = 'test-result test-success';
+                    resultDiv.innerHTML = `✅ Heartbeat test başarılı!<br>📡 Makine: ${data.machineId}<br>⏰ Zaman: ${data.timestamp}`;
+                } else {
+                    throw new Error(data.error || 'Heartbeat test başarısız');
+                }
+            } catch (error) {
+                resultDiv.className = 'test-result test-error';
+                resultDiv.innerHTML = `❌ Heartbeat test hatası: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
