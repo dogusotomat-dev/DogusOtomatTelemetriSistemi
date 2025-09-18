@@ -60,12 +60,30 @@ Projeyi çalıştırmadan önce Firebase yapılandırmanızı ayarlamanız gerek
 2. `.env` dosyasını açın ve Firebase projenizden aldığınız bilgilerle doldurun:
    - Firebase Console > Proje Ayarları > Genel sekmesinden bilgileri alın
 
-### 3. Bağımlılıkları Yükleyin
+### 3. Firebase Yapılandırması (Yerel Geliştirme için)
+Yerel geliştirme için Firebase yapılandırması gerekir:
+
+1. Firebase CLI'yi yükleyin:
+   ```bash
+   npm install -g firebase-tools
+   ```
+
+2. Firebase projenizde oturum açın:
+   ```bash
+   firebase login
+   ```
+
+3. Projeyi Firebase projenize bağlayın:
+   ```bash
+   firebase use --add
+   ```
+
+### 4. Bağımlılıkları Yükleyin
 ```bash
 npm install
 ```
 
-### 4. Projeyi Başlatın
+### 5. Projeyi Başlatın
 ```bash
 npm start
 ```
