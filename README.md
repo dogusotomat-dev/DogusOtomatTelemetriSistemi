@@ -49,12 +49,23 @@ git clone [proje-adresi]
 cd "Doğuş Otomat Telemetri Sistemi v2"
 ```
 
-### 2. Bağımlılıkları Yükleyin
+### 2. Ortam Değişkenlerini Ayarlayın
+Projeyi çalıştırmadan önce Firebase yapılandırmanızı ayarlamanız gerekir:
+
+1. `.env.example` dosyasını kopyalayın ve `.env` olarak yeniden adlandırın:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. `.env` dosyasını açın ve Firebase projenizden aldığınız bilgilerle doldurun:
+   - Firebase Console > Proje Ayarları > Genel sekmesinden bilgileri alın
+
+### 3. Bağımlılıkları Yükleyin
 ```bash
 npm install
 ```
 
-### 3. Projeyi Başlatın
+### 4. Projeyi Başlatın
 ```bash
 npm start
 ```
