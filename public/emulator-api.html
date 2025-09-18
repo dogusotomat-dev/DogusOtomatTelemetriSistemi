@@ -75,7 +75,11 @@
         <h3>Test Buttons</h3>
         <button onclick="testHeartbeat()">Test Heartbeat</button>
         <button onclick="testTelemetry()">Test Telemetry</button>
-        <button onclick="testConnection()">Test Firebase Connection</button>
+        <button onclick="testConnection()">Test Netlify Connection</button>
+        
+        <h3>Auto Heartbeat</h3>
+        <button onclick="startAutoHeartbeat()">Start Auto Heartbeat (30s)</button>
+        <button onclick="stopAutoHeartbeat()" style="background-color: #dc3545;">Stop Auto Heartbeat</button>
 
         <h3>API URLs</h3>
         <div class="url-box">
@@ -183,6 +187,37 @@
             processTelemetry('2506211449', '8990010873499834749');
         }
 
+        let heartbeatInterval = null;
+
+        function startAutoHeartbeat() {
+            if (heartbeatInterval) {
+                addLog('❌ Auto heartbeat already running');
+                return;
+            }
+
+            addLog('🚀 Starting auto heartbeat (every 30 seconds)');
+            setStatus('Auto heartbeat started', 'success');
+            
+            // Send initial heartbeat
+            processHeartbeat('2506211449', '8990010873499834749');
+            
+            // Set up interval for every 30 seconds
+            heartbeatInterval = setInterval(() => {
+                processHeartbeat('2506211449', '8990010873499834749');
+            }, 30000);
+        }
+
+        function stopAutoHeartbeat() {
+            if (heartbeatInterval) {
+                clearInterval(heartbeatInterval);
+                heartbeatInterval = null;
+                addLog('⏹️ Auto heartbeat stopped');
+                setStatus('Auto heartbeat stopped', 'info');
+            } else {
+                addLog('❌ Auto heartbeat not running');
+            }
+        }
+
         async function testConnection() {
             try {
                 setStatus('Testing Netlify function connection...', 'info');
@@ -215,6 +250,11 @@
                 processHeartbeat(machineId, iotNumber);
             } else if (action === 'telemetry' && machineId && iotNumber) {
                 processTelemetry(machineId, iotNumber);
+            } else {
+                // Auto-start heartbeat when page loads
+                setTimeout(() => {
+                    startAutoHeartbeat();
+                }, 2000); // Start after 2 seconds
             }
         };
     </script>

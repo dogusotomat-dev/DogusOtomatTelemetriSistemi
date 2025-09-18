@@ -929,7 +929,17 @@ const Dashboard: React.FC = () => {
 
     const unsubscribeMachines = onValue(machinesRef, (snapshot) => {
       const machines: Record<string, Machine> = snapshot.val() || {};
-      const machinesList = Object.values(machines);
+      const allMachines = Object.values(machines);
+      
+      // Filter out invalid machines (undefined name, serialNumber, or id)
+      const machinesList = allMachines.filter(machine => 
+        machine && 
+        machine.id && 
+        machine.name && 
+        machine.serialNumber &&
+        machine.name !== 'undefined' &&
+        machine.serialNumber !== 'undefined'
+      );
       
       const totalMachines = machinesList.length;
       

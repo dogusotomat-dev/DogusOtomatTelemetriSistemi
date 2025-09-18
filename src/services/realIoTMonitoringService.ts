@@ -64,7 +64,18 @@ export class RealIoTMonitoringService {
   private static async checkOfflineMachines(): Promise<void> {
     try {
       // Get all machines first
-      const machines = await MachineService.getAllMachines();
+      const allMachines = await MachineService.getAllMachines();
+      
+      // Filter out invalid machines (undefined name, serialNumber, or id)
+      const machines = allMachines.filter(machine => 
+        machine && 
+        machine.id && 
+        machine.name && 
+        machine.serialNumber &&
+        machine.name !== 'undefined' &&
+        machine.serialNumber !== 'undefined'
+      );
+      
       const now = Date.now();
       const offlineMachines: string[] = [];
       const criticalOfflineMachines: string[] = [];

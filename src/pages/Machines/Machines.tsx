@@ -205,7 +205,16 @@ const Machines: React.FC = () => {
       setLoading(true);
       setError(null);
       const machineList = await MachineService.getAllMachines();
-      setMachines(machineList);
+      // Filter out invalid machines (undefined name, serialNumber, or id)
+      const validMachines = machineList.filter(machine => 
+        machine && 
+        machine.id && 
+        machine.name && 
+        machine.serialNumber &&
+        machine.name !== 'undefined' &&
+        machine.serialNumber !== 'undefined'
+      );
+      setMachines(validMachines);
     } catch (err: any) {
       setError(err.message || 'Failed to load machines');
       console.error('Error loading machines:', err);
