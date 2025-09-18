@@ -11,4 +11,4 @@
   targetPort = 3000
 
 [secrets_scanning]
-  omit_paths = [".firebaserc", "firebase.json", "database.rules.json"]
+  enabled = false
