@@ -219,12 +219,7 @@ class ProductionEmailService {
       .replace(/&gt;/g, '>')
       .replace(/&quot;/g, '"')
       .replace(/&#39;/g, "'")
-      .replace(/
-\s*
-\s*
-/g, '
-
-') // Remove excessive line breaks
+      .replace(/\s*\n\s*\n\s*/g, '\n') // Remove excessive line breaks
       .trim();
   }
 
