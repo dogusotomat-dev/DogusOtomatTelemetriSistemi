@@ -1008,6 +1008,18 @@ const Machines: React.FC = () => {
                     }}>Bugünkü Satış</TableCell>
                     <TableCell sx={{ 
                       fontWeight: 600,
+                      minWidth: { xs: 80, sm: 'auto' },
+                      fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                      display: { xs: 'none', md: 'table-cell' }
+                    }}>Temizlik (Gün)</TableCell>
+                    <TableCell sx={{ 
+                      fontWeight: 600,
+                      minWidth: { xs: 80, sm: 'auto' },
+                      fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                      display: { xs: 'none', md: 'table-cell' }
+                    }}>Elektrik (Saat)</TableCell>
+                    <TableCell sx={{ 
+                      fontWeight: 600,
                       minWidth: { xs: 100, sm: 'auto' },
                       fontSize: { xs: '0.75rem', sm: '0.875rem' }
                     }}>{t('machines.actions')}</TableCell>
@@ -1116,16 +1128,16 @@ const Machines: React.FC = () => {
                         }}>
                           {telemetryData[machine.id]?.operationalMode ? (
                             <Chip 
-                              label={telemetryData[machine.id].operationalMode === 'normal' ? 'Normal' : 
-                                    telemetryData[machine.id].operationalMode === 'maintenance' ? 'Bakım' :
-                                    telemetryData[machine.id].operationalMode === 'cleaning' ? 'Temizlik' :
-                                    telemetryData[machine.id].operationalMode === 'error' ? 'Hata' : 'Bilinmiyor'}
+                              label={telemetryData[machine.id].operationalMode === 'Automatic' ? 'Automatic' : 
+                                    telemetryData[machine.id].operationalMode === 'Auto' ? 'Auto' :
+                                    telemetryData[machine.id].operationalMode === 'Keep Fresh' ? 'Keep Fresh' :
+                                    telemetryData[machine.id].operationalMode === 'Preservation' ? 'Preservation' :
+                                    telemetryData[machine.id].operationalMode === 'Standby' ? 'Standby' : 'Bilinmiyor'}
                               size="small" 
                               sx={{
-                                background: telemetryData[machine.id].operationalMode === 'normal' ? '#2e7d32' :
-                                           telemetryData[machine.id].operationalMode === 'maintenance' ? '#ff9800' :
-                                           telemetryData[machine.id].operationalMode === 'cleaning' ? '#2196f3' :
-                                           telemetryData[machine.id].operationalMode === 'error' ? '#f44336' : '#9e9e9e',
+                                background: telemetryData[machine.id].operationalMode === 'Automatic' || telemetryData[machine.id].operationalMode === 'Auto' ? '#2e7d32' :
+                                           telemetryData[machine.id].operationalMode === 'Keep Fresh' || telemetryData[machine.id].operationalMode === 'Preservation' ? '#2196f3' :
+                                           telemetryData[machine.id].operationalMode === 'Standby' ? '#ff9800' : '#9e9e9e',
                                 color: 'white',
                                 fontWeight: 600,
                                 borderRadius: 2,
@@ -1150,6 +1162,49 @@ const Machines: React.FC = () => {
                                 {telemetryData[machine.id].salesData!.todayTransactions} işlem
                               </Typography>
                             </Box>
+                          ) : (
+                            <Typography variant="body2" color="text.secondary">-</Typography>
+                          )}
+                        </TableCell>
+                        <TableCell sx={{ 
+                          fontWeight: 500,
+                          fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                          display: { xs: 'none', md: 'table-cell' }
+                        }}>
+                          {machine.daysSinceCleaning !== undefined ? (
+                            <Chip 
+                              label={`${machine.daysSinceCleaning} gün`}
+                              size="small" 
+                              sx={{
+                                background: machine.daysSinceCleaning > 7 ? '#f44336' : 
+                                           machine.daysSinceCleaning > 3 ? '#ff9800' : '#2e7d32',
+                                color: 'white',
+                                fontWeight: 600,
+                                borderRadius: 2,
+                                fontSize: { xs: '0.6rem', sm: '0.75rem' }
+                              }}
+                            />
+                          ) : (
+                            <Typography variant="body2" color="text.secondary">-</Typography>
+                          )}
+                        </TableCell>
+                        <TableCell sx={{ 
+                          fontWeight: 500,
+                          fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                          display: { xs: 'none', md: 'table-cell' }
+                        }}>
+                          {machine.hoursWithoutPower !== undefined && machine.hoursWithoutPower > 0 ? (
+                            <Chip 
+                              label={`${machine.hoursWithoutPower} saat`}
+                              size="small" 
+                              sx={{
+                                background: '#f44336',
+                                color: 'white',
+                                fontWeight: 600,
+                                borderRadius: 2,
+                                fontSize: { xs: '0.6rem', sm: '0.75rem' }
+                              }}
+                            />
                           ) : (
                             <Typography variant="body2" color="text.secondary">-</Typography>
                           )}

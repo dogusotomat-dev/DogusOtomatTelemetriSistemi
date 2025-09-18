@@ -53,6 +53,13 @@ export interface Machine {
   groupId?: string;
   createdAt: string;
   updatedAt: string;
+  // Monitoring counters
+  daysSinceCleaning?: number;
+  hoursWithoutPower?: number;
+  powerOutageStart?: string | null;
+  lastOperationalMode?: string | null;
+  lastCleaningCheck?: string | null;
+  lastPowerCheck?: string | null;
 }
 
 // Machine capabilities based on actual models

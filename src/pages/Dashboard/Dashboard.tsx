@@ -919,6 +919,11 @@ const Dashboard: React.FC = () => {
     todaySales: 0,
     todayProfit: 0,
     todayCost: 0,
+    // Monitoring counters
+    machinesNeedingCleaning: 0,
+    machinesWithoutPower: 0,
+    totalCleaningDays: 0,
+    totalPowerOutageHours: 0,
   });
   const [loading, setLoading] = useState(true);
 
@@ -976,10 +981,36 @@ const Dashboard: React.FC = () => {
         
         console.log(`📊 Dashboard: ${onlineMachines}/${totalMachines} makine çevrimiçi`);
         
+        // Calculate monitoring counters
+        let machinesNeedingCleaning = 0;
+        let machinesWithoutPower = 0;
+        let totalCleaningDays = 0;
+        let totalPowerOutageHours = 0;
+        
+        for (const machine of machinesList) {
+          // Cleaning counter
+          if (machine.daysSinceCleaning !== undefined) {
+            totalCleaningDays += machine.daysSinceCleaning;
+            if (machine.daysSinceCleaning > 7) {
+              machinesNeedingCleaning++;
+            }
+          }
+          
+          // Power outage counter
+          if (machine.hoursWithoutPower !== undefined && machine.hoursWithoutPower > 0) {
+            machinesWithoutPower++;
+            totalPowerOutageHours += machine.hoursWithoutPower;
+          }
+        }
+        
         setStats(prev => ({
           ...prev,
           totalMachines,
-          onlineMachines
+          onlineMachines,
+          machinesNeedingCleaning,
+          machinesWithoutPower,
+          totalCleaningDays,
+          totalPowerOutageHours
         }));
       }).catch(error => {
         console.error('Error getting heartbeat data for dashboard:', error);
@@ -1308,6 +1339,102 @@ const Dashboard: React.FC = () => {
                       </Typography>
                     </Box>
                   </Box>
+                </Paper>
+              </Box>
+            </Slide>
+          </Stack>
+
+          {/* Fourth row - Monitoring Counters */}
+          <Stack direction={{ xs: 'column', lg: 'row' }} spacing={4} sx={{ mt: 4 }}>
+            <Slide direction="left" in timeout={2400}>
+              <Box sx={{ flex: 1 }}>
+                <Paper 
+                  elevation={0}
+                  sx={{ 
+                    p: { xs: 2, sm: 4 }, 
+                    borderRadius: 3,
+                    background: '#ffffff',
+                    border: '1px solid rgba(102, 126, 234, 0.1)',
+                    boxShadow: '0 4px 20px rgba(102, 126, 234, 0.08)',
+                    minHeight: { xs: 200, sm: 250 }
+                  }}
+                >
+                  <Typography 
+                    variant="h5"
+                    gutterBottom
+                    sx={{ 
+                      fontWeight: 600,
+                      color: 'text.primary',
+                      mb: { xs: 2, sm: 3 },
+                      fontSize: { xs: '1.25rem', sm: '1.5rem' }
+                    }}
+                  >
+                    Temizlik Takibi
+                  </Typography>
+                  <Stack direction="row" spacing={3} alignItems="center">
+                    <Box sx={{ textAlign: 'center' }}>
+                      <Typography variant="h3" sx={{ fontWeight: 700, color: stats.machinesNeedingCleaning > 0 ? '#f44336' : '#2e7d32' }}>
+                        {stats.machinesNeedingCleaning}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        Temizlik Gereken Makine
+                      </Typography>
+                    </Box>
+                    <Box sx={{ textAlign: 'center' }}>
+                      <Typography variant="h3" sx={{ fontWeight: 700, color: '#2196f3' }}>
+                        {stats.totalCleaningDays}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        Toplam Temizlik Günü
+                      </Typography>
+                    </Box>
+                  </Stack>
+                </Paper>
+              </Box>
+            </Slide>
+            <Slide direction="right" in timeout={2600}>
+              <Box sx={{ flex: 1 }}>
+                <Paper 
+                  elevation={0}
+                  sx={{ 
+                    p: { xs: 2, sm: 4 }, 
+                    borderRadius: 3,
+                    background: '#ffffff',
+                    border: '1px solid rgba(102, 126, 234, 0.1)',
+                    boxShadow: '0 4px 20px rgba(102, 126, 234, 0.08)',
+                    minHeight: { xs: 200, sm: 250 }
+                  }}
+                >
+                  <Typography 
+                    variant="h5"
+                    gutterBottom
+                    sx={{ 
+                      fontWeight: 600,
+                      color: 'text.primary',
+                      mb: { xs: 2, sm: 3 },
+                      fontSize: { xs: '1.25rem', sm: '1.5rem' }
+                    }}
+                  >
+                    Elektrik Kesintisi Takibi
+                  </Typography>
+                  <Stack direction="row" spacing={3} alignItems="center">
+                    <Box sx={{ textAlign: 'center' }}>
+                      <Typography variant="h3" sx={{ fontWeight: 700, color: stats.machinesWithoutPower > 0 ? '#f44336' : '#2e7d32' }}>
+                        {stats.machinesWithoutPower}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        Elektriksiz Makine
+                      </Typography>
+                    </Box>
+                    <Box sx={{ textAlign: 'center' }}>
+                      <Typography variant="h3" sx={{ fontWeight: 700, color: '#ff9800' }}>
+                        {stats.totalPowerOutageHours}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        Toplam Kesinti Saati
+                      </Typography>
+                    </Box>
+                  </Stack>
                 </Paper>
               </Box>
             </Slide>
