@@ -1,4 +1,5 @@
-const admin = require('firebase-admin');
+import { schedule } from '@netlify/functions';
+import admin from 'firebase-admin';
 
 // Initialize Firebase Admin SDK
 if (!admin.apps.length) {
@@ -26,7 +27,7 @@ if (!admin.apps.length) {
 
 const db = admin.database();
 
-exports.handler = async (event, context) => {
+const handler = async (event, context) => {
   // Set CORS headers
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -592,3 +593,6 @@ function createEmailContent(machine, alarmData) {
     </div>
   `;
 }
+
+// Export as scheduled function - runs every 2 minutes
+export default schedule('*/2 * * * *', handler);

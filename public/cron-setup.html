@@ -87,33 +87,31 @@
 </head>
 <body>
     <div class="container">
-        <h1>🤖 Otomatik Monitoring Kurulumu</h1>
+        <h1>🤖 Otomatik Monitoring Sistemi</h1>
         
-        <div class="step">
-            <h3>📋 Adım 1: Cron Job URL'si</h3>
-            <p>Bu URL'yi cron servisine ekleyeceksiniz:</p>
-            <div class="url-box" id="cronUrl">
-                https://dogusotomattelemetrisistemi.netlify.app/.netlify/functions/monitor-machines?cron=true
-            </div>
-            <button onclick="copyUrl()">📋 URL'yi Kopyala</button>
+        <div class="success">
+            <strong>✅ Sistem Hazır!</strong><br>
+            Netlify'ın native scheduled functions kullanılıyor. Herhangi bir external kurulum gerekmez.
         </div>
 
         <div class="step">
-            <h3>⏰ Adım 2: Cron Servisi Kurulumu</h3>
-            <p><strong>Önerilen ücretsiz servisler:</strong></p>
+            <h3>⏰ Otomatik Çalışma</h3>
+            <p><strong>Sistem otomatik olarak:</strong></p>
             <ul>
-                <li><strong>Cron-job.org:</strong> <a href="https://cron-job.org" target="_blank">https://cron-job.org</a></li>
-                <li><strong>EasyCron:</strong> <a href="https://www.easycron.com" target="_blank">https://www.easycron.com</a></li>
-                <li><strong>CronHub:</strong> <a href="https://cronhub.io" target="_blank">https://cronhub.io</a></li>
+                <li>✅ Her 2 dakikada bir monitoring çalışır</li>
+                <li>✅ Site açık olmasa bile çalışır</li>
+                <li>✅ Netlify'da native olarak çalışır</li>
+                <li>✅ External servis gerektirmez</li>
             </ul>
             
             <div class="warning">
-                <strong>⚠️ Önemli Ayarlar:</strong>
+                <strong>📋 Monitoring İşlemleri:</strong>
                 <ul>
-                    <li><strong>Zamanlama:</strong> Her 2 dakikada bir (0 */2 * * * *)</li>
-                    <li><strong>HTTP Method:</strong> GET</li>
-                    <li><strong>Timeout:</strong> En az 30 saniye</li>
-                    <li><strong>Retry:</strong> 3 kez</li>
+                    <li><strong>Online/Offline Kontrolü:</strong> Makine durumu kontrolü</li>
+                    <li><strong>Mod Değişikliği:</strong> Automatic, Keep Fresh, Standby</li>
+                    <li><strong>Temizlik Kontrolü:</strong> Temizlenmeyen gün sayacı</li>
+                    <li><strong>Elektrik Kontrolü:</strong> Elektriksiz kalınan süre sayacı</li>
+                    <li><strong>Email Alarmları:</strong> Otomatik bildirim gönderimi</li>
                 </ul>
             </div>
         </div>
@@ -159,7 +157,7 @@
             resultDiv.innerHTML = '🔄 Test ediliyor...';
 
             try {
-                const response = await fetch('/.netlify/functions/monitor-machines?cron=true');
+                const response = await fetch('/.netlify/functions/monitor-machines');
                 const data = await response.json();
                 
                 if (data.success) {
