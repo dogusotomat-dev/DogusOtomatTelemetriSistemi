@@ -834,9 +834,12 @@ const Machines: React.FC = () => {
                           color: '#2e7d32',
                           fontSize: { xs: '1.5rem', sm: '2.125rem' }
                         }}>
-                          {Object.values(machineStatuses).filter(s => {
+                          {machines.filter(machine => {
+                            const status = machineStatuses[machine.id];
+                            if (!status) return false; // No heartbeat data = offline
+                            
                             const now = Date.now();
-                            const timeSinceLastHeartbeat = now - s.lastSeen;
+                            const timeSinceLastHeartbeat = now - status.lastSeen;
                             const OFFLINE_THRESHOLD = 5 * 60 * 1000; // 5 minutes
                             return timeSinceLastHeartbeat <= OFFLINE_THRESHOLD;
                           }).length}
@@ -875,11 +878,14 @@ const Machines: React.FC = () => {
                           {t('machines.offlineMachines')}
                         </Typography>
                         <Typography variant="h3" sx={{ fontWeight: 700, color: '#d32f2f' }}>
-                          {Object.values(machineStatuses).filter(s => {
+                          {machines.filter(machine => {
+                            const status = machineStatuses[machine.id];
+                            if (!status) return true; // No heartbeat data = offline
+                            
                             const now = Date.now();
-                            const timeSinceLastHeartbeat = now - s.lastSeen;
+                            const timeSinceLastHeartbeat = now - status.lastSeen;
                             const OFFLINE_THRESHOLD = 5 * 60 * 1000; // 5 minutes
-                            return s.status === 'offline' || timeSinceLastHeartbeat > OFFLINE_THRESHOLD;
+                            return status.status === 'offline' || timeSinceLastHeartbeat > OFFLINE_THRESHOLD;
                           }).length}
                         </Typography>
                       </Box>
