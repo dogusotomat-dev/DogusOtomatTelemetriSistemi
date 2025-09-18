@@ -87,27 +87,10 @@
         <div id="logs" class="logs"></div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+    <!-- No Firebase SDK needed - using Netlify functions -->
 
     <script>
-        // Firebase configuration - using placeholder values for security
-        // Actual values should be set via environment variables in production
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY_HERE",
-            authDomain: "YOUR_AUTH_DOMAIN_HERE",
-            databaseURL: "YOUR_DATABASE_URL_HERE",
-            projectId: "YOUR_PROJECT_ID_HERE",
-            storageBucket: "YOUR_STORAGE_BUCKET_HERE",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID_HERE",
-            appId: "YOUR_APP_ID_HERE",
-            measurementId: "YOUR_MEASUREMENT_ID_HERE"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
+        // No Firebase config needed - using Netlify functions instead
 
         // Set URLs
         document.getElementById('heartbeatUrl').textContent = 
@@ -135,32 +118,34 @@
                 setStatus('Processing heartbeat...', 'info');
                 addLog(`Heartbeat request: Machine ${machineId}, IoT ${iotNumber}`);
 
-                const timestamp = new Date().toISOString();
-                const now = Date.now();
-
-                // 1. Create or update machine record
-                await ensureMachineExists(machineId, iotNumber, timestamp);
-
-                // 2. Update heartbeat
-                await database.ref(`heartbeat/${machineId}`).set({
-                    status: 'online',
-                    lastSeen: now,
-                    timestamp: timestamp,
-                    machineId: machineId,
-                    iotNumber: iotNumber,
-                    batteryLevel: 85,
-                    signalStrength: 90,
-                    temperature: -15
+                // Use Netlify function instead of direct Firebase
+                const response = await fetch('/.netlify/functions/update-heartbeat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        machineId: machineId,
+                        deviceData: {
+                            batteryLevel: 85,
+                            signalStrength: 90,
+                            temperature: -15,
+                            deviceId: 'emulator-' + machineId
+                        }
+                    })
                 });
 
-                // 3. Update machine connection info
-                await database.ref(`machines/${machineId}/connectionInfo`).update({
-                    status: 'online',
-                    lastHeartbeat: timestamp
-                });
-
-                setStatus('Heartbeat processed successfully', 'success');
-                addLog(`✅ Heartbeat başarıyla işlendi: Machine ${machineId}`);
+                if (response.ok) {
+                    const result = await response.json();
+                    setStatus('Heartbeat processed successfully', 'success');
+                    addLog(`✅ Heartbeat başarıyla işlendi: Machine ${machineId}`);
+                    addLog(`Response: ${JSON.stringify(result)}`);
+                } else {
+                    const errorText = await response.text();
+                    setStatus('Heartbeat failed', 'error');
+                    addLog(`❌ Error: ${response.status} ${response.statusText}`);
+                    addLog(`Error details: ${errorText}`);
+                }
 
             } catch (error) {
                 setStatus('Heartbeat failed', 'error');
@@ -288,15 +273,22 @@
 
         async function testConnection() {
             try {
-                setStatus('Testing Firebase connection...', 'info');
-                const testRef = database.ref('test');
-                await testRef.set({ timestamp: new Date().toISOString() });
-                await testRef.set(null); // Clean up
-                setStatus('Firebase connection successful', 'success');
-                addLog('✅ Firebase connection test successful');
+                setStatus('Testing Netlify function connection...', 'info');
+                
+                const response = await fetch('/.netlify/functions/update-heartbeat?test=true');
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    setStatus('Netlify function connection successful', 'success');
+                    addLog('✅ Netlify function connection test successful');
+                    addLog(`Response: ${JSON.stringify(result)}`);
+                } else {
+                    setStatus('Netlify function connection failed', 'error');
+                    addLog(`❌ Netlify function test failed: ${response.status} ${response.statusText}`);
+                }
             } catch (error) {
-                setStatus('Firebase connection failed', 'error');
-                addLog(`❌ Firebase connection test failed: ${error.message}`);
+                setStatus('Netlify function connection failed', 'error');
+                addLog(`❌ Netlify function connection test failed: ${error.message}`);
             }
         }
 

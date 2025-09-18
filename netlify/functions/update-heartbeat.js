@@ -103,6 +103,57 @@ exports.handler = async (event, context) => {
     const now = Date.now();
     console.log('⏰ Updating heartbeat for machine:', machineId, 'at', new Date(now).toISOString());
     
+    // Check if machine exists, if not create it
+    const machineRef = db.ref(`machines/${machineId}`);
+    const machineSnapshot = await machineRef.once('value');
+    
+    if (!machineSnapshot.exists()) {
+      console.log('🔧 Creating machine record for:', machineId);
+      const timestamp = new Date().toISOString();
+      
+      await machineRef.set({
+        id: machineId,
+        serialNumber: machineId,
+        type: 'ice_cream',
+        model: 'DGS-ICE-TEST',
+        name: `Test Makinesi ${machineId}`,
+        iotNumber: `TEST-${machineId}`,
+        location: {
+          address: 'Test Lokasyonu',
+          latitude: 0,
+          longitude: 0
+        },
+        connectionInfo: {
+          version: '1.0.0',
+          status: 'online',
+          lastHeartbeat: timestamp
+        },
+        configuration: {
+          slots: {},
+          settings: {
+            modes: ['normal'],
+            currentMode: 'normal',
+            temperature: -15,
+            features: {},
+            capabilities: {
+              hasTemperatureControl: true,
+              hasAutoCleaning: false,
+              supportedPayments: ['cash']
+            }
+          },
+          notifications: {
+            emailAddresses: [],
+            enableOfflineAlerts: true,
+            enableErrorAlerts: true,
+            alertThresholdMinutes: 5
+          }
+        },
+        createdAt: timestamp,
+        updatedAt: timestamp
+      });
+      console.log('✅ Machine record created');
+    }
+    
     // Update heartbeat data
     await db.ref(`heartbeat/${machineId}`).update({
       lastSeen: now,
