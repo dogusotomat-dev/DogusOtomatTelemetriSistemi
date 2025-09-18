@@ -1,7 +1,7 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, ThemeOptions } from '@mui/material/styles';
 
 // Define theme configurations
-const lightTheme = {
+const lightTheme: ThemeOptions = {
   palette: {
     mode: 'light' as const,
     primary: {
@@ -25,7 +25,7 @@ const lightTheme = {
   },
 };
 
-const darkTheme = {
+const darkTheme: ThemeOptions = {
   palette: {
     mode: 'dark' as const,
     primary: {
@@ -49,7 +49,7 @@ const darkTheme = {
   },
 };
 
-const commonComponents = {
+const commonComponents: ThemeOptions = {
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
     h1: {
