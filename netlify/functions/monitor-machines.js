@@ -594,5 +594,11 @@ function createEmailContent(machine, alarmData) {
   `;
 }
 
-// Export as scheduled function - runs every 2 minutes
-export default schedule('*/2 * * * *', handler);
+// Export the handler for manual calls and scheduled execution
+export { handler };
+export default handler;
+
+// Netlify scheduled function configuration
+export const config = {
+  schedule: '*/2 * * * *' // Every 2 minutes
+};

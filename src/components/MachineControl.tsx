@@ -308,12 +308,14 @@ const MachineControl: React.FC<Props> = ({ machine, open, onClose }) => {
               value={getParams().mode || ''}
               onChange={(e) => updateParams({ mode: e.target.value })}
             >
-              <MenuItem value="normal">Normal Çalışma</MenuItem>
-              <MenuItem value="maintenance">Bakım Modu</MenuItem>
-              <MenuItem value="cleaning">Temizlik Modu</MenuItem>
+              <MenuItem value="Automatic">Automatic</MenuItem>
+              <MenuItem value="Auto">Auto</MenuItem>
+              <MenuItem value="Keep Fresh">Keep Fresh</MenuItem>
+              <MenuItem value="Preservation">Preservation</MenuItem>
+              <MenuItem value="Standby">Standby</MenuItem>
             </Select>
             <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
-              Makineyi yeniden başlatmak için bakım modunu seçin
+              Automatic: Dondurma yapar, alışveriş yapılabilir | Keep Fresh: Taze tutar | Standby: Fonksiyonlar kapalı
             </Typography>
           </FormControl>
         );
