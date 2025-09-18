@@ -1,4 +1,3 @@
-import { schedule } from '@netlify/functions';
 import admin from 'firebase-admin';
 
 // Initialize Firebase Admin SDK
@@ -594,11 +593,6 @@ function createEmailContent(machine, alarmData) {
   `;
 }
 
-// Export the handler for manual calls and scheduled execution
+// Export the handler for manual calls
 export { handler };
 export default handler;
-
-// Netlify scheduled function configuration
-export const config = {
-  schedule: '*/2 * * * *' // Every 2 minutes
-};
