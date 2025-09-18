@@ -503,14 +503,14 @@ const Machines: React.FC = () => {
       if (telemetry.errors && telemetry.errors.length > 0) {
         return { status: 'Hata', color: 'error' as const };
       }
-      if (telemetry.operationalMode === 'cleaning') {
-        return { status: 'Temizlik', color: 'info' as const };
+      if (telemetry.operationalMode === 'Automatic' || telemetry.operationalMode === 'Auto') {
+        return { status: 'Automatic', color: 'success' as const };
       }
-      if (telemetry.operationalMode === 'maintenance') {
-        return { status: 'Bakım', color: 'warning' as const };
+      if (telemetry.operationalMode === 'Keep Fresh' || telemetry.operationalMode === 'Preservation') {
+        return { status: 'Keep Fresh', color: 'info' as const };
       }
-      if (telemetry.operationalMode === 'error') {
-        return { status: 'Hata', color: 'error' as const };
+      if (telemetry.operationalMode === 'Standby') {
+        return { status: 'Standby', color: 'warning' as const };
       }
       return { status: 'Çevrimiçi', color: 'success' as const };
     }
