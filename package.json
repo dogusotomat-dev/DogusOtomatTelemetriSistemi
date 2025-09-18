@@ -33,8 +33,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 react-scripts build",
-    "build:memory": "cross-env NODE_OPTIONS=--max-old-space-size=8192 react-scripts build",
+    "build": "cross-env CI=false NODE_OPTIONS=--max-old-space-size=4096 react-scripts build",
+    "build:memory": "cross-env CI=false NODE_OPTIONS=--max-old-space-size=8192 react-scripts build",
     "build:deploy": "node build-and-deploy.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
