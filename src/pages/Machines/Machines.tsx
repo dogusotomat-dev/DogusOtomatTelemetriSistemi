@@ -266,33 +266,33 @@ const Machines: React.FC = () => {
       name: machine.name,
       iotNumber: machine.iotNumber,
       location: {
-        address: machine.location.address,
-        latitude: machine.location.latitude || 0,
-        longitude: machine.location.longitude || 0
+        address: machine.location?.address || '',
+        latitude: machine.location?.latitude || 0,
+        longitude: machine.location?.longitude || 0
       },
       connectionInfo: {
-        version: machine.connectionInfo.version,
-        status: machine.connectionInfo.status,
-        lastHeartbeat: machine.connectionInfo.lastHeartbeat
+        version: machine.connectionInfo?.version || '1.0.0',
+        status: machine.connectionInfo?.status || 'offline',
+        lastHeartbeat: machine.connectionInfo?.lastHeartbeat || new Date().toISOString()
       },
       configuration: {
-        slots: machine.configuration.slots || {},
+        slots: machine.configuration?.slots || {},
         settings: {
-          modes: machine.configuration.settings.modes,
-          currentMode: machine.configuration.settings.currentMode,
-          temperature: machine.configuration.settings.temperature || 20,
-          features: machine.configuration.settings.features || {},
-          capabilities: machine.configuration.settings.capabilities || {
+          modes: machine.configuration?.settings?.modes || ['normal'],
+          currentMode: machine.configuration?.settings?.currentMode || 'normal',
+          temperature: machine.configuration?.settings?.temperature || 20,
+          features: machine.configuration?.settings?.features || {},
+          capabilities: machine.configuration?.settings?.capabilities || {
             hasTemperatureControl: false,
             hasAutoCleaning: false,
             supportedPayments: ['cash']
           }
         },
         notifications: {
-          emailAddresses: machine.configuration.notifications?.emailAddresses || [],
-          enableOfflineAlerts: machine.configuration.notifications?.enableOfflineAlerts ?? true,
-          enableErrorAlerts: machine.configuration.notifications?.enableErrorAlerts ?? true,
-          alertThresholdMinutes: machine.configuration.notifications?.alertThresholdMinutes || 2
+          emailAddresses: machine.configuration?.notifications?.emailAddresses || [],
+          enableOfflineAlerts: machine.configuration?.notifications?.enableOfflineAlerts ?? true,
+          enableErrorAlerts: machine.configuration?.notifications?.enableErrorAlerts ?? true,
+          alertThresholdMinutes: machine.configuration?.notifications?.alertThresholdMinutes || 2
         }
       },
       groupId: machine.groupId || ''
@@ -561,7 +561,7 @@ const Machines: React.FC = () => {
     // Search term filter
     if (filters.searchTerm && !machine.name.toLowerCase().includes(filters.searchTerm.toLowerCase()) &&
         !machine.serialNumber.toLowerCase().includes(filters.searchTerm.toLowerCase()) &&
-        !machine.location.address.toLowerCase().includes(filters.searchTerm.toLowerCase())) {
+        !(machine.location?.address || '').toLowerCase().includes(filters.searchTerm.toLowerCase())) {
       return false;
     }
 
@@ -1055,7 +1055,7 @@ const Machines: React.FC = () => {
                           fontWeight: 500,
                           fontSize: { xs: '0.75rem', sm: '0.875rem' },
                           display: { xs: 'none', md: 'table-cell' }
-                        }}>{machine.location.address}</TableCell>
+                        }}>{machine.location?.address || 'Lokasyon bilgisi yok'}</TableCell>
                         <TableCell>
                           <Chip
                             label={status.status}
