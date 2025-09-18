@@ -29,6 +29,10 @@ exports.handler = async (event, context) => {
   if (event.httpMethod !== 'POST' && event.httpMethod !== 'GET') {
     return {
       statusCode: 405,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ error: 'Method Not Allowed' })
     };
   }
@@ -52,6 +56,10 @@ exports.handler = async (event, context) => {
     if (!machineId) {
       return {
         statusCode: 400,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ error: 'Machine ID is required' })
       };
     }
@@ -94,6 +102,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ 
         success: true, 
         message: 'Heartbeat updated successfully',
+        machineId: machineId,
         timestamp: new Date().toISOString()
       })
     };
@@ -109,7 +118,8 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ 
         success: false, 
         error: 'Failed to update heartbeat',
-        message: error.message
+        message: error.message,
+        details: error.toString()
       })
     };
   }
