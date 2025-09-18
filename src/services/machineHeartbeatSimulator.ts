@@ -35,7 +35,7 @@ export class MachineHeartbeatSimulator {
     const machineName = machine ? `${machine.name} (${machine.serialNumber})` : machineId;
 
     if (isOnline) {
-      console.log(`🟢 [DEVELOPMENT] Starting heartbeat simulation for machine: ${machineName}`);
+      console.log(`🟢 [DEVELOPMENT] Makine için heartbeat simülasyonu başlatılıyor: ${machineName}`);
       
       // Send initial heartbeat
       this.sendHeartbeat(machineId);
@@ -47,7 +47,7 @@ export class MachineHeartbeatSimulator {
       
       this.activeSimulations.set(machineId, intervalId);
     } else {
-      console.log(`🔴 [DEVELOPMENT] Machine ${machineName} set to offline (no heartbeat simulation)`);
+      console.log(`🔴 [DEVELOPMENT] Makine ${machineName} offline olarak ayarlandı (heartbeat simülasyonu yok)`);
     }
   }
 

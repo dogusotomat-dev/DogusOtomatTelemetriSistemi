@@ -40,7 +40,7 @@ export class CleaningLogService {
         id: logId
       });
 
-      console.log(`🧹 Cleaning log created for ${machineName}: Cleaning mode activated`);
+      console.log(`🧹 Temizlik kaydı oluşturuldu: ${machineName}: Temizlik modu aktifleştirildi`);
       
       return logId;
     } catch (error) {
@@ -231,7 +231,7 @@ if (process.env.NODE_ENV === 'development') {
   };
   
   console.log('\n🔧 Cleaning Log Service loaded!');
-  console.log('Available commands in browser console:');
+  console.log('Tarayıcı konsolunda mevcut komutlar:');
   console.log('- CleaningLogService.createLog("machineId")');
   console.log('- CleaningLogService.getLogs("machineId")');
   console.log('- CleaningLogService.getStatistics("machineId")');

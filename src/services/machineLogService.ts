@@ -40,7 +40,7 @@ export class MachineLogService {
         id: logId
       });
 
-      console.log(`🧹 Cleaning logged for ${machineName}`);
+      console.log(`🧹 Temizlik kaydedildi: ${machineName}`);
       return logId;
     } catch (error) {
       console.error('Error logging cleaning:', error);
@@ -74,7 +74,7 @@ export class MachineLogService {
         id: logId
       });
 
-      console.log(`📴 Offline logged for ${machineName} - ${daysOffline} days`);
+      console.log(`📴 Offline kaydedildi: ${machineName} - ${daysOffline} gün`);
       return logId;
     } catch (error) {
       console.error('Error logging offline status:', error);
@@ -109,7 +109,7 @@ export class MachineLogService {
         id: logId
       });
 
-      console.log(`🧼 Cleaning needed logged for ${machineName} - ${daysWithoutCleaning} days`);
+      console.log(`🧼 Temizlik gerekli kaydedildi: ${machineName} - ${daysWithoutCleaning} gün`);
       return logId;
     } catch (error) {
       console.error('Error logging cleaning needed:', error);

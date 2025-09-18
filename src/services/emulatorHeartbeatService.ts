@@ -26,7 +26,7 @@ export class EmulatorHeartbeatService {
     }
   ): Promise<{ success: boolean; message: string }> {
     try {
-      console.log(`🔄 Processing emulator heartbeat: Machine ${machineId}, IoT ${iotNumber}`);
+      console.log(`🔄 Emülatör heartbeat işleniyor: Makine ${machineId}, IoT ${iotNumber}`);
       
       // Check if machine exists
       const machine = await MachineService.getMachine(machineId);
@@ -64,7 +64,7 @@ export class EmulatorHeartbeatService {
         });
       }
       
-      console.log(`✅ Emulator heartbeat processed successfully: Machine ${machineId}`);
+      console.log(`✅ Emülatör heartbeat başarıyla işlendi: Makine ${machineId}`);
       
       return {
         success: true,
@@ -126,7 +126,7 @@ export class EmulatorHeartbeatService {
     };
     
     await set(ref(database, `machines/${machineId}`), machineData);
-    console.log(`✅ Created emulator machine record: ${machineId}`);
+    console.log(`✅ Emülatör makine kaydı oluşturuldu: ${machineId}`);
   }
   
   /**
@@ -138,7 +138,7 @@ export class EmulatorHeartbeatService {
     telemetryData: any
   ): Promise<{ success: boolean; message: string }> {
     try {
-      console.log(`🔄 Processing emulator telemetry: Machine ${machineId}`);
+      console.log(`🔄 Emülatör telemetri işleniyor: Makine ${machineId}`);
       
       // Add telemetry data
       await MachineService.addTelemetryData(machineId, {
@@ -157,7 +157,7 @@ export class EmulatorHeartbeatService {
         cleaningStatus: telemetryData.cleaningStatus
       });
       
-      console.log(`✅ Emulator telemetry processed successfully: Machine ${machineId}`);
+      console.log(`✅ Emülatör telemetri başarıyla işlendi: Makine ${machineId}`);
       
       return {
         success: true,

@@ -40,7 +40,7 @@ export class RealIoTDeviceService {
       await MachineService.updateHeartbeat(machine.id, deviceData);
       
       const machineName = `${machine.name} (${machine.serialNumber})`;
-      console.log(`✅ Heartbeat received from IoT device: ${machineName} (${iotNumber})`);
+      console.log(`✅ IoT cihazından heartbeat alındı: ${machineName} (${iotNumber})`);
       
       return {
         success: true,
@@ -139,7 +139,7 @@ export class RealIoTDeviceService {
       await MachineService.addTelemetryData(machine.id, processedTelemetryData);
       
       const machineName = `${machine.name} (${machine.serialNumber})`;
-      console.log(`✅ Telemetry data received from IoT device: ${machineName} (${iotNumber})`);
+      console.log(`✅ IoT cihazından telemetri verisi alındı: ${machineName} (${iotNumber})`);
       
       return {
         success: true,
@@ -233,7 +233,7 @@ export class RealIoTDeviceService {
       await MachineService.initializeMachineHeartbeat(machineId);
 
       const machineName = `${machine.name} (${machine.serialNumber})`;
-      console.log(`✅ IoT device registered: ${iotNumber} -> ${machineName}`);
+      console.log(`✅ IoT cihazı kaydedildi: ${iotNumber} -> ${machineName}`);
       
       return {
         success: true,
@@ -271,7 +271,7 @@ export class RealIoTDeviceService {
       });
 
       const machineName = `${machine.name} (${machine.serialNumber})`;
-      console.log(`✅ IoT device unregistered: ${iotNumber} -> ${machineName}`);
+      console.log(`✅ IoT cihazı kaydı silindi: ${iotNumber} -> ${machineName}`);
       
       return {
         success: true,
@@ -398,8 +398,8 @@ if (process.env.NODE_ENV === 'development') {
   console.log('Available commands in browser console:');
   console.log('- RealIoTDevice.heartbeat("IOT123") // Send heartbeat');
   console.log('- RealIoTDevice.telemetry("IOT123", {...}) // Send telemetry');
-  console.log('- RealIoTDevice.register("IOT123", "machineId", {...}) // Register device');
-  console.log('- RealIoTDevice.getStatus("IOT123") // Get device status\n');
+  console.log('- RealIoTDevice.register("IOT123", "machineId", {...}) // Cihaz kaydet');
+  console.log('- RealIoTDevice.getStatus("IOT123") // Cihaz durumu al\n');
 }
 
 export default RealIoTDeviceService;

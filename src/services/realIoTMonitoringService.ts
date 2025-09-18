@@ -78,7 +78,7 @@ export class RealIoTMonitoringService {
           
           if (!heartbeatSnapshot.exists()) {
             // No heartbeat data - machine is offline
-            console.log(`⚠️ No heartbeat data for machine: ${machine.name} (${machine.serialNumber})`);
+            console.log(`⚠️ Makine için heartbeat verisi yok: ${machine.name} (${machine.serialNumber})`);
             offlineMachines.push(machine.id);
             continue;
           }
@@ -92,7 +92,7 @@ export class RealIoTMonitoringService {
 
           // Validate lastSeen timestamp
           if (!heartbeatData.lastSeen || typeof heartbeatData.lastSeen !== 'number') {
-            console.log(`⚠️ Invalid heartbeat data for machine: ${machine.name} (${machine.serialNumber})`);
+            console.log(`⚠️ Makine için geçersiz heartbeat verisi: ${machine.name} (${machine.serialNumber})`);
             offlineMachines.push(machine.id);
             continue;
           }
@@ -119,7 +119,7 @@ export class RealIoTMonitoringService {
       }
 
       if (offlineMachines.length > 0) {
-        console.log(`📊 Found ${offlineMachines.length} offline machines (${criticalOfflineMachines.length} critical)`);
+        console.log(`📊 ${offlineMachines.length} offline makine bulundu (${criticalOfflineMachines.length} kritik)`);
       }
 
     } catch (error) {
@@ -158,7 +158,7 @@ export class RealIoTMonitoringService {
 
       await MachineService.createAlarm(alarmData);
       
-      console.log(`❌ Machine marked offline: ${machineName} (${isCritical ? 'CRITICAL' : 'NORMAL'})`);
+      console.log(`❌ Makine offline olarak işaretlendi: ${machineName} (${isCritical ? 'KRİTİK' : 'NORMAL'})`);
       
     } catch (error) {
       console.error(`❌ Error handling offline machine ${machineId}:`, error);

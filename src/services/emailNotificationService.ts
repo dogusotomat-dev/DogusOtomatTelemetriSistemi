@@ -130,7 +130,7 @@ This alert was generated automatically by the Doğuş Otomat Telemetry System.
 
       // Check if notifications are enabled for this machine
       if (!machine.configuration.notifications?.emailAddresses?.length) {
-        console.log(`No email addresses configured for machine: ${machine.name}`);
+        console.log(`Makine için email adresi yapılandırılmamış: ${machine.name}`);
         return;
       }
 
@@ -139,12 +139,12 @@ This alert was generated automatically by the Doğuş Otomat Telemetry System.
       const isErrorAlert = alarm.type === 'error';
       
       if (isOfflineAlert && !machine.configuration.notifications.enableOfflineAlerts) {
-        console.log(`Offline alerts disabled for machine: ${machine.name}`);
+        console.log(`Makine için offline uyarıları devre dışı: ${machine.name}`);
         return;
       }
       
       if (isErrorAlert && !machine.configuration.notifications.enableErrorAlerts) {
-        console.log(`Error alerts disabled for machine: ${machine.name}`);
+        console.log(`Makine için hata uyarıları devre dışı: ${machine.name}`);
         return;
       }
 
@@ -293,7 +293,7 @@ This alert was generated automatically by the Doğuş Otomat Telemetry System.
     console.log(`📧 To: ${notification.recipients.join(', ')}`);
     console.log(`📋 Subject: ${notification.subject}`);
     console.log(`🏷️  Priority: ${notification.priority.toUpperCase()}`);
-    console.log(`🤖 Machine: ${notification.machineName}`);
+    console.log(`🤖 Makine: ${notification.machineName}`);
     console.log(`⏰ Time: ${new Date().toLocaleString('tr-TR')}`);
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     

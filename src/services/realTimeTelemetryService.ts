@@ -459,7 +459,7 @@ export class RealTimeTelemetryService {
       // New machine log for UI
       await MachineLogService.logCleaning(machineId, machine);
 
-      console.log(`🧹 Cleaning mode activated for ${machineName} - Logged to system`);
+      console.log(`🧹 Temizlik modu aktifleştirildi ${machineName} - Sisteme kaydedildi`);
 
     } catch (error) {
       console.error(`Error logging cleaning mode activation for machine ${machineId}:`, error);

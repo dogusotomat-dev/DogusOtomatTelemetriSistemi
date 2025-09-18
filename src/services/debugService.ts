@@ -12,11 +12,11 @@ export class DebugService {
    */
   static async checkMachineStatus(): Promise<void> {
     try {
-      console.log('🔍 Starting machine status debug...');
+      console.log('🔍 Makine durumu debug başlatılıyor...');
       
       // Get all machines
       const machines = await MachineService.getAllMachines();
-      console.log(`📊 Found ${machines.length} machines in database`);
+      console.log(`📊 Veritabanında ${machines.length} makine bulundu`);
       
       // Get heartbeat data
       const heartbeatRef = ref(database, 'heartbeat');
@@ -47,12 +47,12 @@ export class DebugService {
         const isOffline = timeDiff > offlineThreshold;
         
         console.log(`🔍 ${machineName}:`);
-        console.log(`  Machine ID: ${machineId}`);
-        console.log(`  IoT Number: ${machineData.iotNumber || 'N/A'}`);
-        console.log(`  Status: ${machineData.status}`);
-        console.log(`  Last seen: ${timeDiffMinutes}m ${timeDiffSeconds}s ago`);
-        console.log(`  Is offline: ${isOffline ? '❌ YES' : '✅ NO'}`);
-        console.log(`  Last seen timestamp: ${new Date(machineData.lastSeen).toLocaleString()}`);
+        console.log(`  Makine ID: ${machineId}`);
+        console.log(`  IoT Numarası: ${machineData.iotNumber || 'N/A'}`);
+        console.log(`  Durum: ${machineData.status}`);
+        console.log(`  Son görülme: ${timeDiffMinutes}d ${timeDiffSeconds}s önce`);
+        console.log(`  Offline mi: ${isOffline ? '❌ EVET' : '✅ HAYIR'}`);
+        console.log(`  Son görülme zamanı: ${new Date(machineData.lastSeen).toLocaleString()}`);
         console.log('');
       }
       
@@ -68,7 +68,7 @@ export class DebugService {
    */
   static async forceHeartbeatUpdate(machineId: string): Promise<void> {
     try {
-      console.log(`🔄 Force updating heartbeat for machine: ${machineId}`);
+      console.log(`🔄 Makine için heartbeat zorla güncelleniyor: ${machineId}`);
       
       // Update heartbeat
       await MachineService.updateHeartbeat(machineId, {
@@ -77,7 +77,7 @@ export class DebugService {
         temperature: -15
       });
       
-      console.log(`✅ Heartbeat force updated for machine: ${machineId}`);
+      console.log(`✅ Makine için heartbeat zorla güncellendi: ${machineId}`);
       
     } catch (error) {
       console.error('❌ Error force updating heartbeat:', error);
@@ -92,13 +92,13 @@ export class DebugService {
       const machine = await MachineService.getMachine(machineId);
       const exists = !!machine;
       
-      console.log(`🔍 Machine ${machineId} exists: ${exists ? '✅ YES' : '❌ NO'}`);
+      console.log(`🔍 Makine ${machineId} mevcut: ${exists ? '✅ EVET' : '❌ HAYIR'}`);
       
       if (machine) {
-        console.log(`  Name: ${machine.name}`);
-        console.log(`  Serial: ${machine.serialNumber}`);
-        console.log(`  Type: ${machine.type}`);
-        console.log(`  IoT Number: ${machine.iotNumber}`);
+        console.log(`  İsim: ${machine.name}`);
+        console.log(`  Seri: ${machine.serialNumber}`);
+        console.log(`  Tip: ${machine.type}`);
+        console.log(`  IoT Numarası: ${machine.iotNumber}`);
         console.log(`  ID: ${machine.id}`);
       }
       
@@ -115,19 +115,19 @@ export class DebugService {
    */
   static async recreateTestMachine(machineId: string): Promise<void> {
     try {
-      console.log(`🧹 Cleaning up and recreating machine: ${machineId}`);
+      console.log(`🧹 Makine temizleniyor ve yeniden oluşturuluyor: ${machineId}`);
       
       // Remove existing machine and heartbeat data
       const { ref, remove } = await import('firebase/database');
       await remove(ref(database, `machines/${machineId}`));
       await remove(ref(database, `heartbeat/${machineId}`));
       
-      console.log(`✅ Cleaned up existing data for machine: ${machineId}`);
+      console.log(`✅ Makine için mevcut veriler temizlendi: ${machineId}`);
       
       // Force heartbeat update to recreate machine
       await this.forceHeartbeatUpdate(machineId);
       
-      console.log(`✅ Recreated machine: ${machineId}`);
+      console.log(`✅ Makine yeniden oluşturuldu: ${machineId}`);
       
     } catch (error) {
       console.error('❌ Error recreating test machine:', error);

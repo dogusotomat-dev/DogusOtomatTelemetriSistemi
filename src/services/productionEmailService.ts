@@ -28,9 +28,10 @@ class ProductionEmailService {
   private static config: EmailConfig = {
     provider: window.location.hostname === 'localhost' ? 'console' : 'netlify-function', // Use Netlify Function in production
     apiKey: process.env.REACT_APP_SENDGRID_API_KEY || undefined,
-    senderEmail: process.env.REACT_APP_EMAIL_SENDER || 'noreply@dogusotomat.com',
-    senderName: process.env.REACT_APP_EMAIL_SENDER_NAME || 'Doğuş Otomat Telemetri Sistemi'
+    senderEmail: 'info@dogusotomat.com',
+    senderName: 'Doğuş Otomat Telemetri Sistemi'
   };
+
 
   // Configure email service
   static configure(config: Partial<EmailConfig>): void {
@@ -314,9 +315,11 @@ export class IntegratedEmailService {
         throw new Error('Machine not found');
       }
 
-      // Check if email addresses are configured
-      if (!machine.configuration.notifications?.emailAddresses?.length) {
-        console.log(`⚠️ No email addresses configured for machine: ${machine.name} (${machine.serialNumber})`);
+      // Check if email addresses are configured for this machine
+      const machineEmails = machine.configuration.notifications?.emailAddresses || [];
+      
+      if (!machineEmails.length) {
+        console.log(`⚠️ Makine için email adresi yapılandırılmamış: ${machine.name} (${machine.serialNumber})`);
         return false;
       }
 
@@ -333,7 +336,7 @@ export class IntegratedEmailService {
         : this.createErrorEmailContent(machine, customMessage);
 
       const emailData: EmailData = {
-        to: machine.configuration.notifications.emailAddresses,
+        to: machineEmails,
         subject,
         htmlContent,
         priority: 'high'
@@ -342,7 +345,7 @@ export class IntegratedEmailService {
       const success = await ProductionEmailService.sendEmail(emailData);
       
       if (success) {
-        console.log(`📧 Email alert sent for machine: ${machineName}`);
+        console.log(`📧 Makine için email uyarısı gönderildi: ${machineName}`);
       } else {
         console.error(`❌ Failed to send email alert for machine: ${machineName}`);
       }
@@ -438,7 +441,7 @@ if (process.env.NODE_ENV === 'development') {
   console.log('- EmailService.sendTestEmail("your-email@example.com")');
   console.log('- EmailService.getConfiguration()');
   console.log('- IntegratedEmailService.sendMachineAlert("machineId", "offline")');
-  console.log('- IntegratedEmailService.sendMachineAlert("machineId", "error", "Custom message")\n');
+  console.log('- IntegratedEmailService.sendMachineAlert("machineId", "error", "Özel mesaj")\n');
 }
 
 export default ProductionEmailService;

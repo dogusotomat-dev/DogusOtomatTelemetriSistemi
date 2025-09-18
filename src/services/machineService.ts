@@ -37,7 +37,7 @@ export class MachineService {
       // Heartbeat izleme için kayıt oluştur
       await this.initializeMachineHeartbeat(machineId);
       
-      console.log(`Machine added successfully: ${machine.name} (${machine.serialNumber})`);
+      console.log(`✅ Makine başarıyla eklendi: ${machine.name} (${machine.serialNumber})`);
       return machineId;
     } catch (error) {
       console.error('Error adding machine:', error);
@@ -60,7 +60,7 @@ export class MachineService {
       const updatedMachine = await this.getMachine(machineId);
       const machineName = updatedMachine ? `${updatedMachine.name} (${updatedMachine.serialNumber})` : machineId;
       
-      console.log(`Machine updated successfully: ${machineName}`);
+      console.log(`✅ Makine başarıyla güncellendi: ${machineName}`);
     } catch (error) {
       console.error('Error updating machine:', error);
       throw new Error(`Failed to update machine: ${error}`);
@@ -97,7 +97,7 @@ export class MachineService {
       
       // If permission denied, return null instead of throwing
       if (error instanceof Error && error.message.includes('Permission denied')) {
-        console.log('Permission denied for machine access, returning null');
+        console.log('⚠️ Makine erişimi için izin reddedildi, null döndürülüyor');
         return null;
       }
       
@@ -143,7 +143,7 @@ export class MachineService {
       const heartbeatRef = ref(database, `heartbeat/${machineId}`);
       await set(heartbeatRef, null);
       
-      console.log(`Machine deleted successfully: ${machineName}`);
+      console.log(`✅ Makine başarıyla silindi: ${machineName}`);
     } catch (error) {
       console.error('Error deleting machine:', error);
       throw new Error(`Failed to delete machine: ${error}`);
@@ -201,7 +201,7 @@ export class MachineService {
         });
       }
       
-      console.log(`✅ Heartbeat updated for machine: ${machineName} at ${new Date(now).toLocaleTimeString()}`);
+      console.log(`✅ Makine için heartbeat güncellendi: ${machineName} - ${new Date(now).toLocaleTimeString()}`);
     } catch (error) {
       console.error('❌ Error updating heartbeat:', error);
       throw error;
@@ -262,7 +262,7 @@ export class MachineService {
       const machine = await this.getMachine(alarmData.machineId);
       const machineName = machine ? `${machine.name} (${machine.serialNumber})` : alarmData.machineId;
       
-      console.log(`⚠️ Alarm created: ${alarmId} for machine ${machineName}`);
+      console.log(`⚠️ Alarm oluşturuldu: ${alarmId} - Makine: ${machineName}`);
       
       // Send email notification using integrated email service
       if (alarm.severity === 'high' || alarm.severity === 'critical') {
@@ -275,9 +275,9 @@ export class MachineService {
           const emailSent = await IntegratedEmailService.sendMachineAlert(alarm.machineId, alertType, customMessage);
           
           if (emailSent) {
-            console.log(`📧 Email notification sent successfully for alarm: ${alarmId} (${machineName})`);
+            console.log(`📧 Alarm için email bildirimi başarıyla gönderildi: ${alarmId} (${machineName})`);
           } else {
-            console.log(`⚠️ Email notification processed but no recipients configured for machine: ${machineName}`);
+            console.log(`⚠️ Email bildirimi işlendi ancak makine için alıcı yapılandırılmamış: ${machineName}`);
           }
         } catch (emailError) {
           console.error('❌ Failed to send email notification:', emailError);
@@ -405,7 +405,7 @@ export class MachineService {
         status: 'offline'
       });
       
-      console.log(`❌ Machine marked offline: ${machineName}`);
+      console.log(`❌ Makine offline olarak işaretlendi: ${machineName}`);
     } catch (error) {
       console.error('Error marking machine offline:', error);
       throw error;
@@ -441,11 +441,11 @@ if (process.env.NODE_ENV === 'development') {
           const timeDiffMinutes = Math.floor(timeDiff / 60000);
           
           console.log(`🔍 ${machineName}:`);
-          console.log(`  Status: ${machineData.status}`);
-          console.log(`  Last seen: ${timeDiffMinutes}m ${Math.floor((timeDiff % 60000) / 1000)}s ago`);
-          console.log(`  Email alerts: offline=${machine?.configuration.notifications?.enableOfflineAlerts}, error=${machine?.configuration.notifications?.enableErrorAlerts}`);
-          console.log(`  Email addresses: ${machine?.configuration.notifications?.emailAddresses?.join(', ') || 'None'}`);
-          console.log(`  Threshold exceeded: ${timeDiff > offlineThreshold}`);
+          console.log(`  Durum: ${machineData.status}`);
+          console.log(`  Son görülme: ${timeDiffMinutes}d ${Math.floor((timeDiff % 60000) / 1000)}s önce`);
+          console.log(`  Email uyarıları: offline=${machine?.configuration.notifications?.enableOfflineAlerts}, error=${machine?.configuration.notifications?.enableErrorAlerts}`);
+          console.log(`  Email adresleri: ${machine?.configuration.notifications?.emailAddresses?.join(', ') || 'Yok'}`);
+          console.log(`  Eşik aşıldı: ${timeDiff > offlineThreshold}`);
         }
         
         console.log('=== END DEBUG ===');
@@ -466,10 +466,10 @@ if (process.env.NODE_ENV === 'development') {
     }
   };
   
-  console.log('🔧 Debug tools loaded! Available commands:');
-  console.log('- DebugMachineService.checkMachineStatus() - Check all machine statuses');
-  console.log('- DebugMachineService.forceOfflineCheck() - Force offline detection check');
-  console.log('- DebugMachineService.testEmailForMachine("machineId") - Test email for specific machine');
+  console.log('🔧 Debug araçları yüklendi! Mevcut komutlar:');
+  console.log('- DebugMachineService.checkMachineStatus() - Tüm makine durumlarını kontrol et');
+  console.log('- DebugMachineService.forceOfflineCheck() - Offline algılama kontrolünü zorla');
+  console.log('- DebugMachineService.testEmailForMachine("machineId") - Belirli makine için email test et');
 }
 
 // OfflineMonitoringService removed - no automatic monitoring

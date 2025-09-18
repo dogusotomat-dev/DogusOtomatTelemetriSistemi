@@ -30,12 +30,12 @@ export class RealIoTDeviceSimulator {
       const machines = await MachineService.getAllMachines();
       
       if (machines.length === 0) {
-        console.log('📊 No machines found for IoT simulation');
+        console.log('📊 IoT simülasyonu için makine bulunamadı');
         return;
       }
 
       this.isSimulating = true;
-      console.log(`🚀 [DEVELOPMENT] Starting IoT device simulation for ${machines.length} machines`);
+      console.log(`🚀 [DEVELOPMENT] ${machines.length} makine için IoT cihaz simülasyonu başlatılıyor`);
 
       // Start simulation for each machine
       for (const machine of machines) {
@@ -64,7 +64,7 @@ export class RealIoTDeviceSimulator {
     // Clear all intervals
     this.simulationIntervals.forEach((interval, machineId) => {
       clearInterval(interval);
-      console.log(`🛑 [DEVELOPMENT] Stopped IoT simulation for machine: ${machineId}`);
+      console.log(`🛑 [DEVELOPMENT] Makine için IoT simülasyonu durduruldu: ${machineId}`);
     });
 
     this.simulationIntervals.clear();
@@ -101,7 +101,7 @@ export class RealIoTDeviceSimulator {
       this.simulationIntervals.set(`${machineId}_heartbeat`, heartbeatIntervalId);
       this.simulationIntervals.set(`${machineId}_telemetry`, telemetryIntervalId);
 
-      console.log(`🟢 [DEVELOPMENT] Started IoT simulation for machine: ${machineId} (${iotNumber})`);
+      console.log(`🟢 [DEVELOPMENT] Makine için IoT simülasyonu başlatıldı: ${machineId} (${iotNumber})`);
       
     } catch (error) {
       console.error(`❌ Error starting simulation for machine ${machineId}:`, error);
@@ -280,7 +280,7 @@ export class RealIoTDeviceSimulator {
       this.simulationIntervals.delete(`${machineId}_telemetry`);
     }
 
-    console.log(`🛑 [DEVELOPMENT] Removed machine ${machineId} from IoT simulation`);
+    console.log(`🛑 [DEVELOPMENT] Makine IoT simülasyonundan kaldırıldı: ${machineId}`);
   }
 }
 

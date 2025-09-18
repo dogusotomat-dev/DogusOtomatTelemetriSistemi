@@ -952,19 +952,19 @@ const Dashboard: React.FC = () => {
               // Machine is online if heartbeat is recent (regardless of stored status)
               if (timeDiff <= offlineThreshold) {
                 onlineMachines++;
-                console.log(`✅ Machine ${machine.name} (${machine.serialNumber}) is ONLINE - last seen ${Math.floor(timeDiff / 1000)}s ago`);
+                console.log(`✅ Makine ${machine.name} (${machine.serialNumber}) ÇEVRİMİÇİ - son görülme ${Math.floor(timeDiff / 1000)}s önce`);
               } else {
-                console.log(`❌ Machine ${machine.name} (${machine.serialNumber}) is OFFLINE - last seen ${Math.floor(timeDiff / 1000)}s ago`);
+                console.log(`❌ Makine ${machine.name} (${machine.serialNumber}) ÇEVRİMDIŞI - son görülme ${Math.floor(timeDiff / 1000)}s önce`);
               }
             } else {
-              console.log(`❌ Machine ${machine.name} (${machine.serialNumber}) has NO HEARTBEAT data`);
+              console.log(`❌ Makine ${machine.name} (${machine.serialNumber}) HEARTBEAT VERİSİ YOK`);
             }
           }
         } else {
           console.log('❌ No heartbeat data found in Firebase');
         }
         
-        console.log(`📊 Dashboard: ${onlineMachines}/${totalMachines} machines online`);
+        console.log(`📊 Dashboard: ${onlineMachines}/${totalMachines} makine çevrimiçi`);
         
         setStats(prev => ({
           ...prev,

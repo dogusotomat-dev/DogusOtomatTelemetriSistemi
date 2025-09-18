@@ -22,7 +22,7 @@ export class DirectFirebaseService {
     }
   ): Promise<{ success: boolean; message: string }> {
     try {
-      console.log(`🔄 Processing emulator heartbeat: Machine ${machineId}, IoT ${iotNumber}`);
+      console.log(`🔄 Emülatör heartbeat işleniyor: Makine ${machineId}, IoT ${iotNumber}`);
       
       const timestamp = new Date().toISOString();
       const now = Date.now();
@@ -54,7 +54,7 @@ export class DirectFirebaseService {
         });
       }
       
-      console.log(`✅ Emulator heartbeat processed successfully: Machine ${machineId}`);
+      console.log(`✅ Emülatör heartbeat başarıyla işlendi: Makine ${machineId}`);
       
       return {
         success: true,
@@ -79,7 +79,7 @@ export class DirectFirebaseService {
       const machineSnapshot = await get(machineRef);
       
       if (!machineSnapshot.exists()) {
-        console.log(`Creating machine record for ${machineId}`);
+        console.log(`Makine kaydı oluşturuluyor: ${machineId}`);
         
         const machineData = {
           id: machineId, // Add the missing id field
@@ -123,7 +123,7 @@ export class DirectFirebaseService {
         };
         
         await set(machineRef, machineData);
-        console.log(`✅ Created machine record: ${machineId}`);
+        console.log(`✅ Makine kaydı oluşturuldu: ${machineId}`);
       }
     } catch (error) {
       console.error(`❌ Error ensuring machine exists:`, error);
@@ -140,7 +140,7 @@ export class DirectFirebaseService {
     telemetryData: any
   ): Promise<{ success: boolean; message: string }> {
     try {
-      console.log(`🔄 Processing emulator telemetry: Machine ${machineId}`);
+      console.log(`🔄 Emülatör telemetri işleniyor: Makine ${machineId}`);
       
       const timestamp = new Date().toISOString();
       
@@ -180,7 +180,7 @@ export class DirectFirebaseService {
         }
       });
       
-      console.log(`✅ Emulator telemetry processed successfully: Machine ${machineId}`);
+      console.log(`✅ Emülatör telemetri başarıyla işlendi: Makine ${machineId}`);
       
       return {
         success: true,

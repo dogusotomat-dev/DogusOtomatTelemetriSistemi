@@ -64,7 +64,7 @@ export class MachineCommandService {
 
       // Log command creation
       const machineName = `${machine.name} (${machine.serialNumber})`;
-      console.log(`📤 Command sent to ${machineName}: ${commandType} (ID: ${commandId})`);
+      console.log(`📤 Komut gönderildi ${machineName}: ${commandType} (ID: ${commandId})`);
 
       // If machine is online, try to notify immediately
       if (machine.connectionInfo.status === 'online') {

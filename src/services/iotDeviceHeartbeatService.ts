@@ -27,7 +27,7 @@ export class IoTDeviceHeartbeatService {
     this.machineId = machineId;
     this.isServiceRunning = true;
     
-    console.log(`🚀 IoT Device Heartbeat Service initialized for machine: ${machineId}`);
+    console.log(`🚀 IoT Cihaz Heartbeat Servisi makine için başlatıldı: ${machineId}`);
     
     // Send initial heartbeat
     await this.sendHeartbeat();
@@ -77,7 +77,7 @@ export class IoTDeviceHeartbeatService {
       };
 
       await MachineService.updateHeartbeat(this.machineId, deviceData);
-      console.log(`✅ Heartbeat sent for machine: ${this.machineId}`);
+      console.log(`✅ Makine için heartbeat gönderildi: ${this.machineId}`);
     } catch (error) {
       console.error(`❌ Failed to send heartbeat for machine ${this.machineId}:`, error);
     }
@@ -130,7 +130,7 @@ export class IoTDeviceHeartbeatService {
       };
 
       await MachineService.updateHeartbeat(this.machineId, deviceData);
-      console.log(`🚨 Error heartbeat sent for machine: ${this.machineId} - ${errorCode}`);
+      console.log(`🚨 Makine için hata heartbeat gönderildi: ${this.machineId} - ${errorCode}`);
     } catch (error) {
       console.error(`❌ Failed to send error heartbeat for machine ${this.machineId}:`, error);
     }
@@ -157,9 +157,9 @@ if (process.env.NODE_ENV === 'development') {
   (window as any).IoTDeviceHeartbeatService = IoTDeviceHeartbeatService;
   
   console.log('🔧 IoT Device Heartbeat Service loaded!');
-  console.log('Available commands in browser console:');
-  console.log('- IoTDeviceHeartbeatService.initialize("machineId") // Initialize with machine ID');
-  console.log('- IoTDeviceHeartbeatService.sendHeartbeat() // Send manual heartbeat');
+  console.log('Tarayıcı konsolunda mevcut komutlar:');
+  console.log('- IoTDeviceHeartbeatService.initialize("machineId") // Makine ID ile başlat');
+  console.log('- IoTDeviceHeartbeatService.sendHeartbeat() // Manuel heartbeat gönder');
   console.log('- IoTDeviceHeartbeatService.sendError("ERROR_CODE", "Error message") // Send error');
   console.log('- IoTDeviceHeartbeatService.getStatus() // Get service status');
   console.log('- IoTDeviceHeartbeatService.stop() // Stop service\n');

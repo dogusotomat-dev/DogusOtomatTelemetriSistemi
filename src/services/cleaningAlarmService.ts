@@ -85,7 +85,7 @@ export class CleaningAlarmService {
         id: alarmId
       });
 
-      console.log(`🧹 Cleaning alarm created: ${alarmId} for machine ${machineName}`);
+      console.log(`🧹 Temizlik alarmı oluşturuldu: ${alarmId} - Makine: ${machineName}`);
       
       return alarmId;
       
