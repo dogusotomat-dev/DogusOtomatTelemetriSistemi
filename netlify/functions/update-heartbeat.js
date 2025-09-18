@@ -2,17 +2,24 @@ const admin = require('firebase-admin');
 
 // Initialize Firebase Admin SDK
 if (!admin.apps.length) {
-  // Use Firebase Admin SDK credentials for server-side functions
-  // These environment variables should be set in Netlify dashboard
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault(),
-    databaseURL: process.env.FIREBASE_DATABASE_URL || process.env.REACT_APP_FIREBASE_DATABASE_URL
-  });
+  try {
+    // Use Firebase Admin SDK credentials for server-side functions
+    // These environment variables should be set in Netlify dashboard
+    admin.initializeApp({
+      credential: admin.credential.applicationDefault(),
+      databaseURL: process.env.FIREBASE_DATABASE_URL || process.env.REACT_APP_FIREBASE_DATABASE_URL
+    });
+    console.log('✅ Firebase Admin initialized successfully');
+  } catch (error) {
+    console.error('❌ Firebase Admin initialization failed:', error);
+  }
 }
 
 const db = admin.database();
 
 exports.handler = async (event, context) => {
+  console.log('🚀 Function started:', event.httpMethod, event.path);
+  
   // Handle preflight requests
   if (event.httpMethod === 'OPTIONS') {
     return {
@@ -22,6 +29,23 @@ exports.handler = async (event, context) => {
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
       }
+    };
+  }
+
+  // Simple test endpoint
+  if (event.queryStringParameters?.test === 'true') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        success: true, 
+        message: 'Function is working!',
+        timestamp: new Date().toISOString(),
+        method: event.httpMethod
+      })
     };
   }
 
