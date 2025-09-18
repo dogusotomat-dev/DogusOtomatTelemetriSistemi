@@ -39,8 +39,24 @@ exports.handler = async (event, context) => {
     return { statusCode: 200, headers, body: '' };
   }
 
+  // Allow both GET and POST (GET for manual testing, POST for scheduled execution)
+  if (event.httpMethod !== 'GET' && event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      headers,
+      body: JSON.stringify({ error: 'Method Not Allowed' })
+    };
+  }
+
+  // Check if this is a scheduled execution
+  const isScheduled = event.headers && event.headers['x-netlify-scheduled-function'];
+
   try {
-    console.log('🔍 Starting machine monitoring...');
+    if (isScheduled) {
+      console.log('⏰ Scheduled machine monitoring started (every 2 minutes)');
+    } else {
+      console.log('🔍 Manual machine monitoring started');
+    }
     
     // Get all machines
     const machinesSnapshot = await db.ref('machines').once('value');
@@ -122,8 +138,9 @@ exports.handler = async (event, context) => {
     
     const result = {
       success: true,
-      message: 'Machine monitoring completed',
+      message: isScheduled ? 'Scheduled machine monitoring completed' : 'Manual machine monitoring completed',
       timestamp: new Date().toISOString(),
+      executionType: isScheduled ? 'scheduled' : 'manual',
       stats: {
         totalMachines: validMachines.length,
         offlineMachines: offlineCount,
