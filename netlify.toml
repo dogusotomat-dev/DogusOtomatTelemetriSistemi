@@ -11,4 +11,4 @@
   targetPort = 3000
 
 [secrets_scanning]
-  enabled = false
+  omit_paths = [".firebaserc", "build/static/js/main.*.js", "build/static/js/main.*.js.map"]
