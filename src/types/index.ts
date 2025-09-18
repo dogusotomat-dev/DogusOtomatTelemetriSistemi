@@ -558,7 +558,7 @@ export interface TelemetryData {
     diskSpace: number;
   };
   // Machine operational mode
-  operationalMode?: 'normal' | 'maintenance' | 'cleaning' | 'error';
+  operationalMode?: 'Automatic' | 'Auto' | 'Keep Fresh' | 'Preservation' | 'Standby';
   // Real-time temperature monitoring for ice cream and snack machines
   temperatureReadings?: {
     internalTemperature: number;    // Internal temperature (°C)
