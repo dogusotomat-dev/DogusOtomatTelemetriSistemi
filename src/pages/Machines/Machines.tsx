@@ -1040,7 +1040,7 @@ const Machines: React.FC = () => {
                         </TableCell>
                         <TableCell>
                           <Chip 
-                            label={machine.type.replace('_', ' ').toUpperCase()} 
+                            label={(machine.type || 'unknown').replace('_', ' ').toUpperCase()} 
                             size="small" 
                             sx={{
                               background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)',

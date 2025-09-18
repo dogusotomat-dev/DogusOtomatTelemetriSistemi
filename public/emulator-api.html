@@ -158,47 +158,10 @@
                 setStatus('Processing telemetry...', 'info');
                 addLog(`Telemetry request: Machine ${machineId}, IoT ${iotNumber}`);
 
-                const timestamp = new Date().toISOString();
-
-                // Ensure machine exists
-                await ensureMachineExists(machineId, iotNumber, timestamp);
-
-                // Add telemetry data
-                const telemetryData = {
-                    timestamp: timestamp,
-                    powerStatus: true,
-                    doorStatus: false,
-                    errors: [],
-                    slotStatus: {},
-                    systemInfo: {
-                        uptime: 3600000,
-                        memoryUsage: 75,
-                        diskSpace: 85
-                    },
-                    temperatureReadings: {
-                        internalTemperature: -15,
-                        ambientTemperature: 20,
-                        refrigerationTemperature: -18,
-                        compressorStatus: 'on',
-                        temperatureZone: 'main'
-                    },
-                    salesData: {
-                        todaySales: 150,
-                        todayTransactions: 5,
-                        weeklySales: 800,
-                        monthlySales: 3200
-                    },
-                    cleaningStatus: {
-                        isInCleaningMode: false,
-                        lastCleaningTimestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-                        daysSinceLastCleaning: 2
-                    }
-                };
-
-                await database.ref(`machines/${machineId}/telemetry/${Date.now()}`).set(telemetryData);
-
-                setStatus('Telemetry processed successfully', 'success');
-                addLog(`✅ Telemetri başarıyla işlendi: Machine ${machineId}`);
+                // For now, telemetry is handled by heartbeat
+                // In a real system, this would be a separate endpoint
+                addLog(`Telemetry data will be sent with next heartbeat`);
+                setStatus('Telemetry info logged', 'success');
 
             } catch (error) {
                 setStatus('Telemetry failed', 'error');
@@ -207,60 +170,9 @@
         }
 
         async function ensureMachineExists(machineId, iotNumber, timestamp) {
-            try {
-                const machineRef = database.ref(`machines/${machineId}`);
-                const machineSnapshot = await machineRef.once('value');
-
-                if (!machineSnapshot.exists()) {
-                    addLog(`Creating machine record for ${machineId}`);
-
-                    const machineData = {
-                        serialNumber: machineId,
-                        type: 'ice_cream',
-                        model: 'DGS-ICE-EMULATOR',
-                        name: `Emülatör Makinesi ${machineId}`,
-                        iotNumber: iotNumber,
-                        location: {
-                            address: 'Emülatör Lokasyonu',
-                            latitude: 0,
-                            longitude: 0
-                        },
-                        connectionInfo: {
-                            version: '1.0.0',
-                            status: 'online',
-                            lastHeartbeat: timestamp
-                        },
-                        configuration: {
-                            slots: {},
-                            settings: {
-                                modes: ['normal'],
-                                currentMode: 'normal',
-                                temperature: -15,
-                                features: {},
-                                capabilities: {
-                                    hasTemperatureControl: true,
-                                    hasAutoCleaning: false,
-                                    supportedPayments: ['cash']
-                                }
-                            },
-                            notifications: {
-                                emailAddresses: [],
-                                enableOfflineAlerts: true,
-                                enableErrorAlerts: true,
-                                alertThresholdMinutes: 5
-                            }
-                        },
-                        createdAt: timestamp,
-                        updatedAt: timestamp
-                    };
-
-                    await machineRef.set(machineData);
-                    addLog(`✅ Created machine record: ${machineId}`);
-                }
-            } catch (error) {
-                addLog(`❌ Error ensuring machine exists: ${error.message}`);
-                throw error;
-            }
+            // Machine creation is now handled by the Netlify function
+            // No need to create machine records here
+            addLog(`Machine ${machineId} will be created by Netlify function if needed`);
         }
 
         function testHeartbeat() {
