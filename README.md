@@ -90,6 +90,37 @@ npm start
 
 Tarayıcınızda `http://localhost:3000` adresini açın.
 
+## 🌐 Dağıtım (Deployment)
+
+### Netlify Üzerinde Dağıtım
+
+1. Netlify hesabınızda yeni bir site oluşturun
+2. GitHub repository'nizi bağlayın
+3. Build ayarlarını yapılandırın:
+   - Build command: `npm run build`
+   - Publish directory: `build`
+4. Environment variables ayarlayın:
+   Netlify dashboard > Site settings > Build & deploy > Environment:
+   ```
+   REACT_APP_FIREBASE_API_KEY=                         # Firebase web API key (public)
+   REACT_APP_FIREBASE_AUTH_DOMAIN=                     # Firebase auth domain
+   REACT_APP_FIREBASE_DATABASE_URL=                    # Firebase database URL
+   REACT_APP_FIREBASE_PROJECT_ID=                      # Firebase project ID
+   REACT_APP_FIREBASE_STORAGE_BUCKET=                  # Firebase storage bucket
+   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=             # Firebase messaging sender ID
+   REACT_APP_FIREBASE_APP_ID=                          # Firebase app ID
+   ```
+   
+   Not: Bu değişkenler build sırasında client bundle'a dahil edilir.
+   Yalnızca Firebase web API key gibi herkese açık olması gereken bilgileri kullanın.
+   Firebase service account key gibi hassas bilgileri asla environment variables olarak ayarlamayın.
+5. Deploy işlemini başlatın
+
+### Önemli Güvenlik Notları
+- `REACT_APP_` prefix'li environment variables build sırasında client bundle'a dahil edilir
+- Bu nedenle yalnızca Firebase web API key gibi herkese açık olması gereken bilgileri kullanın
+- Firebase service account key gibi hassas bilgileri asla environment variables olarak ayarlamayın
+
 ## 👤 İlk Giriş
 
 1. Sisteme ilk kez giriş yaptığınızda otomatik olarak **Yönetici** yetkisi alırsınız

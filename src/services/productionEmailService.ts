@@ -27,7 +27,7 @@ export interface EmailData {
 class ProductionEmailService {
   private static config: EmailConfig = {
     provider: window.location.hostname === 'localhost' ? 'console' : 'netlify-function', // Use Netlify Function in production
-    apiKey: process.env.REACT_APP_SENDGRID_API_KEY,
+    apiKey: process.env.REACT_APP_SENDGRID_API_KEY || undefined,
     senderEmail: process.env.REACT_APP_EMAIL_SENDER || 'noreply@dogusotomat.com',
     senderName: process.env.REACT_APP_EMAIL_SENDER_NAME || 'Doğuş Otomat Telemetri Sistemi'
   };
@@ -219,7 +219,12 @@ class ProductionEmailService {
       .replace(/&gt;/g, '>')
       .replace(/&quot;/g, '"')
       .replace(/&#39;/g, "'")
-      .replace(/\n\s*\n\s*\n/g, '\n\n') // Remove excessive line breaks
+      .replace(/
+\s*
+\s*
+/g, '
+
+') // Remove excessive line breaks
       .trim();
   }
 
@@ -229,18 +234,18 @@ class ProductionEmailService {
       to: [recipientEmail],
       subject: '🧪 Doğuş Otomat Test Email - Email Service Working!',
       htmlContent: `
-        <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">
-          <div style=\"background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center;\">
-            <h1 style=\"margin: 0; font-size: 24px;\">🧪 Test Email Successful</h1>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">🧪 Test Email Successful</h1>
           </div>
-          <div style=\"padding: 20px; background: #f8f9fa;\">
-            <div style=\"background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);\">
-              <h2 style=\"color: #667eea; margin-top: 0;\">Email Service is Working!</h2>
+          <div style="padding: 20px; background: #f8f9fa;">
+            <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+              <h2 style="color: #667eea; margin-top: 0;">Email Service is Working!</h2>
               <p>This is a test email from the Doğuş Otomat Telemetry System.</p>
               <p><strong>Timestamp:</strong> ${new Date().toLocaleString('tr-TR')}</p>
               <p><strong>Email Provider:</strong> ${this.config.provider}</p>
-              <div style=\"background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 15px 0;\">
-                <p style=\"margin: 0; color: #2e7d32;\"><strong>✅ Success:</strong> Email notifications are now configured and working properly.</p>
+              <div style="background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                <p style="margin: 0; color: #2e7d32;"><strong>✅ Success:</strong> Email notifications are now configured and working properly.</p>
               </div>
               <p>If you receive this email, it means:</p>
               <ul>
@@ -249,7 +254,7 @@ class ProductionEmailService {
                 <li>Error notifications will be sent</li>
                 <li>System monitoring is operational</li>
               </ul>
-              <p style=\"color: #666; font-size: 12px; margin-top: 20px;\">This email was generated automatically by the Doğuş Otomat Telemetry System.</p>
+              <p style="color: #666; font-size: 12px; margin-top: 20px;">This email was generated automatically by the Doğuş Otomat Telemetry System.</p>
             </div>
           </div>
         </div>
@@ -358,22 +363,22 @@ export class IntegratedEmailService {
   private static createOfflineEmailContent(machine: any, customMessage?: string): string {
     const now = new Date().toLocaleString('tr-TR');
     return `
-      <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">
-        <div style=\"background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center;\">
-          <h1 style=\"margin: 0; font-size: 24px;\">🚨 Makine Çevrimdışı Uyarısı</h1>
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center;">
+          <h1 style="margin: 0; font-size: 24px;">🚨 Makine Çevrimdışı Uyarısı</h1>
         </div>
-        <div style=\"padding: 20px; background: #f8f9fa;\">
-          <div style=\"background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);\">
-            <h2 style=\"color: #d32f2f; margin-top: 0;\">Makine Çevrimdışı Duruma Geçti</h2>
+        <div style="padding: 20px; background: #f8f9fa;">
+          <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h2 style="color: #d32f2f; margin-top: 0;">Makine Çevrimdışı Duruma Geçti</h2>
             <p><strong>Makine Adı:</strong> ${machine.name}</p>
             <p><strong>Seri Numarası:</strong> ${machine.serialNumber}</p>
             <p><strong>Konum:</strong> ${machine.location.address}</p>
             <p><strong>Uyarı Zamanı:</strong> ${now}</p>
             ${customMessage ? `<p><strong>Ek Bilgi:</strong> ${customMessage}</p>` : ''}
-            <div style=\"background: #ffebee; padding: 15px; border-radius: 5px; margin: 15px 0;\">
-              <p style=\"margin: 0; color: #c62828;\"><strong>⚠️ İşlem Gerekli:</strong> Lütfen makineyi hemen kontrol edin. Bu durum elektrik kesintisi, ağ bağlantı sorunu veya donanım arızası gösterebilir.</p>
+            <div style="background: #ffebee; padding: 15px; border-radius: 5px; margin: 15px 0;">
+              <p style="margin: 0; color: #c62828;"><strong>⚠️ İşlem Gerekli:</strong> Lütfen makineyi hemen kontrol edin. Bu durum elektrik kesintisi, ağ bağlantı sorunu veya donanım arızası gösterebilir.</p>
             </div>
-            <p style=\"color: #666; font-size: 12px; margin-top: 20px;\">Bu uyarı Doğuş Otomat Telemetri Sistemi tarafından otomatik olarak oluşturulmuştur.</p>
+            <p style="color: #666; font-size: 12px; margin-top: 20px;">Bu uyarı Doğuş Otomat Telemetri Sistemi tarafından otomatik olarak oluşturulmuştur.</p>
           </div>
         </div>
       </div>
@@ -384,27 +389,27 @@ export class IntegratedEmailService {
   private static createErrorEmailContent(machine: any, customMessage?: string): string {
     const now = new Date().toLocaleString('tr-TR');
     return `
-      <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">
-        <div style=\"background: linear-gradient(135deg, #ff5722 0%, #f44336 100%); color: white; padding: 20px; text-align: center;\">
-          <h1 style=\"margin: 0; font-size: 24px;\">⚠️ Makine Hata Uyarısı</h1>
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: linear-gradient(135deg, #ff5722 0%, #f44336 100%); color: white; padding: 20px; text-align: center;">
+          <h1 style="margin: 0; font-size: 24px;">⚠️ Makine Hata Uyarısı</h1>
         </div>
-        <div style=\"padding: 20px; background: #f8f9fa;\">
-          <div style=\"background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);\">
-            <h2 style=\"color: #f44336; margin-top: 0;\">Makine Hatası Tespit Edildi</h2>
+        <div style="padding: 20px; background: #f8f9fa;">
+          <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h2 style="color: #f44336; margin-top: 0;">Makine Hatası Tespit Edildi</h2>
             <p><strong>Makine Adı:</strong> ${machine.name}</p>
             <p><strong>Seri Numarası:</strong> ${machine.serialNumber}</p>
             <p><strong>Konum:</strong> ${machine.location.address}</p>
             <p><strong>Uyarı Zamanı:</strong> ${now}</p>
             ${customMessage ? `<p><strong>Hata Detayları:</strong> ${customMessage}</p>` : ''}
-            <div style=\"background: #fff3e0; padding: 15px; border-radius: 5px; margin: 15px 0;\">
-              <p style=\"margin: 0; color: #e65100;\"><strong>📋 Önerilen İşlemler:</strong></p>
-              <ul style=\"margin: 10px 0 0 0; color: #e65100;\">
+            <div style="background: #fff3e0; padding: 15px; border-radius: 5px; margin: 15px 0;">
+              <p style="margin: 0; color: #e65100;"><strong>📋 Önerilen İşlemler:</strong></p>
+              <ul style="margin: 10px 0 0 0; color: #e65100;">
                 <li>Makine durumunu hemen kontrol edin</li>
                 <li>Bakım kılavuzunda hata kodunu doğrulayın</li>
                 <li>Sorun devam ederse teknik destek ile iletişime geçin</li>
               </ul>
             </div>
-            <p style=\"color: #666; font-size: 12px; margin-top: 20px;\">Bu uyarı Doğuş Otomat Telemetri Sistemi tarafından otomatik olarak oluşturulmuştur.</p>
+            <p style="color: #666; font-size: 12px; margin-top: 20px;">Bu uyarı Doğuş Otomat Telemetri Sistemi tarafından otomatik olarak oluşturulmuştur.</p>
           </div>
         </div>
       </div>

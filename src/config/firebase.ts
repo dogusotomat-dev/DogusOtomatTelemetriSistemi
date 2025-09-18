@@ -5,25 +5,60 @@ import { getStorage } from 'firebase/storage';
 // Note: Analytics is not available in server-side environments
 // import { getAnalytics } from 'firebase/analytics';
 
-// Environment variables with fallbacks for development
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY || 'dummy-api-key',
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN || 'dummy-auth-domain',
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL || 'https://dummy-database-url.firebaseio.com',
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID || 'dummy-project-id',
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET || 'dummy-storage-bucket',
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID || 'dummy-messaging-sender-id',
-  appId: process.env.REACT_APP_FIREBASE_APP_ID || 'dummy-app-id',
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID || 'dummy-measurement-id'
+// Validate that required environment variables are present
+const requiredEnvVars = [
+  'REACT_APP_FIREBASE_API_KEY',
+  'REACT_APP_FIREBASE_AUTH_DOMAIN',
+  'REACT_APP_FIREBASE_DATABASE_URL',
+  'REACT_APP_FIREBASE_PROJECT_ID',
+  'REACT_APP_FIREBASE_STORAGE_BUCKET',
+  'REACT_APP_FIREBASE_MESSAGING_SENDER_ID',
+  'REACT_APP_FIREBASE_APP_ID'
+];
+
+// Check if we're in a browser environment
+const isBrowser = typeof window !== 'undefined';
+
+// Only validate environment variables in browser environment
+if (isBrowser) {
+  const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
+  if (missingEnvVars.length > 0) {
+    console.warn('Missing Firebase environment variables:', missingEnvVars);
+  }
+}
+
+// Environment variables - only use actual values in browser environment
+const firebaseConfig = isBrowser ? {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+} : {
+  // Empty config for server-side builds to avoid exposing secrets
+  apiKey: undefined,
+  authDomain: undefined,
+  databaseURL: undefined,
+  projectId: undefined,
+  storageBucket: undefined,
+  messagingSenderId: undefined,
+  appId: undefined,
+  measurementId: undefined
 };
 
 // Only initialize analytics in browser environment
 let analytics;
 try {
   // Dynamically import analytics only in browser
-  if (typeof window !== 'undefined') {
+  if (isBrowser) {
     import('firebase/analytics').then(({ getAnalytics }) => {
-      analytics = getAnalytics(app);
+      if (firebaseConfig.apiKey) {
+        const app = initializeApp(firebaseConfig);
+        analytics = getAnalytics(app);
+      }
     }).catch(() => {
       console.log('Analytics not available in this environment');
     });
@@ -32,13 +67,23 @@ try {
   console.log('Error initializing analytics:', error);
 }
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase only in browser environment
+let app;
+let database;
+let auth;
+let storage;
 
-// Initialize Firebase services
-export const database = getDatabase(app);
-export const auth = getAuth(app);
-export const storage = getStorage(app);
-export { analytics };
+if (isBrowser && firebaseConfig.apiKey) {
+  try {
+    app = initializeApp(firebaseConfig);
+    database = getDatabase(app);
+    auth = getAuth(app);
+    storage = getStorage(app);
+  } catch (error) {
+    console.error('Error initializing Firebase:', error);
+  }
+}
+
+export { database, auth, storage, analytics, app };
 
 export default app;

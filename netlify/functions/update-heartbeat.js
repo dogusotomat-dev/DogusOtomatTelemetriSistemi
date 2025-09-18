@@ -2,9 +2,11 @@ const admin = require('firebase-admin');
 
 // Initialize Firebase Admin SDK
 if (!admin.apps.length) {
+  // Use Firebase Admin SDK credentials for server-side functions
+  // These environment variables should be set in Netlify dashboard
   admin.initializeApp({
     credential: admin.credential.applicationDefault(),
-    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL
+    databaseURL: process.env.FIREBASE_DATABASE_URL || process.env.REACT_APP_FIREBASE_DATABASE_URL
   });
 }
 

@@ -64,7 +64,8 @@
   "netlify": {
     "functions": {
       "node_modules": [
-        "firebase-admin"
+        "firebase-admin",
+        "node-fetch"
       ]
     }
   }

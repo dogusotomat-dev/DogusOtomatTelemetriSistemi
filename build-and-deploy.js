@@ -47,7 +47,6 @@ function execCommand(command, options = {}) {
 // Check if required files exist
 function checkRequiredFiles() {
   const requiredFiles = [
-    '.env',
     'package.json',
     'src/App.tsx',
     'src/config/firebase.ts'
@@ -65,30 +64,28 @@ function checkRequiredFiles() {
   log.success('All required files present');
 }
 
-// Validate environment variables
+// Validate environment variables (without exposing them)
 function validateEnv() {
-  log.info('Validating environment variables...');
+  log.info('Validating environment setup...');
   
-  if (!fs.existsSync('.env')) {
-    log.warn('.env file not found. Using example values.');
+  // Check if we're in a CI/CD environment (like Netlify)
+  const isCI = process.env.CI === 'true' || process.env.NETLIFY === 'true';
+  
+  if (isCI) {
+    log.info('Running in CI/CD environment. Skipping .env file check.');
+    log.info('Environment variables should be set in the deployment platform.');
     return;
   }
   
-  const envContent = fs.readFileSync('.env', 'utf8');
-  const requiredVars = [
-    'REACT_APP_FIREBASE_API_KEY',
-    'REACT_APP_FIREBASE_AUTH_DOMAIN',
-    'REACT_APP_FIREBASE_DATABASE_URL',
-    'REACT_APP_FIREBASE_PROJECT_ID'
-  ];
-  
-  for (const varName of requiredVars) {
-    if (!envContent.includes(varName)) {
-      log.warn(`Environment variable not found: ${varName}`);
-    }
+  // For local development, check if .env file exists
+  if (!fs.existsSync('.env')) {
+    log.warn('.env file not found. Please create one from .env.example');
+    log.info('For local development, copy .env.example to .env and add your Firebase credentials');
+    log.info('For deployment, set environment variables in your deployment platform');
+    return;
   }
   
-  log.success('Environment validation completed');
+  log.success('Environment setup validation completed');
 }
 
 // Clean previous builds
@@ -179,6 +176,10 @@ function showDeploymentInstructions() {
   log.info('- Upload the contents of the "build" folder to your hosting provider');
   log.info('- Upload the "netlify/functions" folder separately for API endpoints');
   log.info('- Ensure the _redirects file is in the build folder for proper routing');
+  log.info('\nImportant Security Note:');
+  log.info('- Environment variables should be set in your deployment platform (Netlify, Vercel, etc.)');
+  log.info('- Never commit actual credentials to version control');
+  log.info('- Only use Firebase web API keys (meant to be public) in REACT_APP_ variables');
 }
 
 // Verify build output

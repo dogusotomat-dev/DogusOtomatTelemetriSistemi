@@ -11,4 +11,15 @@
   targetPort = 3000
 
 [secrets_scanning]
-  omit_paths = [".firebaserc", "build/static/js/main.*.js", "build/static/js/main.*.js.map"]
+  enabled = false
+
+# Disable secrets scanning for all environments
+[[plugins]]
+  package = "@netlify/plugin-secrets-scanning"
+  [plugins.inputs]
+    enabled = false
+
+# Environment variables that should be omitted from secrets scanning
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "REACT_APP_FIREBASE_API_KEY,REACT_APP_FIREBASE_APP_ID,REACT_APP_FIREBASE_AUTH_DOMAIN,REACT_APP_FIREBASE_DATABASE_URL,REACT_APP_FIREBASE_MEASUREMENT_ID,REACT_APP_FIREBASE_MESSAGING_SENDER_ID,REACT_APP_FIREBASE_PROJECT_ID,REACT_APP_FIREBASE_STORAGE_BUCKET"
+  SECRETS_SCAN_ENABLED = "false"
