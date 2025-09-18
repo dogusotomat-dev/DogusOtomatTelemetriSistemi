@@ -5,9 +5,6 @@
 [functions]
   directory = "netlify/functions"
 
-[[plugins]]
-  package = "@netlify/plugin-react"
-
 [dev]
   command = "npm start"
   port = 3000
