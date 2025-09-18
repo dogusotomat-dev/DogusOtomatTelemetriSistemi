@@ -34,6 +34,24 @@
         "deviceStatus": {
           ".read": "auth != null",
           ".write": "true"
+        },
+        "daysSinceCleaning": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+        "hoursWithoutPower": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+        "powerOutageStart": {
+          ".validate": "newData.isString() || newData.val() === null"
+        },
+        "lastOperationalMode": {
+          ".validate": "newData.isString() || newData.val() === null"
+        },
+        "lastCleaningCheck": {
+          ".validate": "newData.isString() || newData.val() === null"
+        },
+        "lastPowerCheck": {
+          ".validate": "newData.isString() || newData.val() === null"
         }
       }
     },
@@ -77,7 +95,7 @@
       "$alarmId": {
         ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canViewAlarms').val() === true)",
         ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canManageAlarms').val() === true)",
-        ".validate": "newData.hasChildren(['machineId', 'type', 'code', 'message', 'severity', 'status', 'timestamp']) && newData.child('machineId').isString() && newData.child('type').isString() && (newData.child('type').val() === 'offline' || newData.child('type').val() === 'error' || newData.child('type').val() === 'maintenance') && newData.child('code').isString() && newData.child('message').isString() && newData.child('severity').isString() && (newData.child('severity').val() === 'low' || newData.child('severity').val() === 'medium' || newData.child('severity').val() === 'high' || newData.child('severity').val() === 'critical') && newData.child('status').isString() && (newData.child('status').val() === 'active' || newData.child('status').val() === 'resolved' || newData.child('status').val() === 'acknowledged') && newData.child('timestamp').isString()"
+        ".validate": "newData.hasChildren(['machineId', 'type', 'code', 'message', 'severity', 'status', 'timestamp']) && newData.child('machineId').isString() && newData.child('type').isString() && (newData.child('type').val() === 'offline' || newData.child('type').val() === 'error' || newData.child('type').val() === 'maintenance' || newData.child('type').val() === 'mode_change') && newData.child('code').isString() && newData.child('message').isString() && newData.child('severity').isString() && (newData.child('severity').val() === 'low' || newData.child('severity').val() === 'medium' || newData.child('severity').val() === 'high' || newData.child('severity').val() === 'critical') && newData.child('status').isString() && (newData.child('status').val() === 'active' || newData.child('status').val() === 'resolved' || newData.child('status').val() === 'acknowledged') && newData.child('timestamp').isString()"
       }
     },
     "operations": {

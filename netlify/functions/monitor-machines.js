@@ -236,9 +236,72 @@ async function checkTelemetryAlarms(machine) {
     
     const telemetryData = Object.values(telemetrySnapshot.val())[0];
     
+    // Check for operational mode changes
+    if (telemetryData.operationalMode) {
+      const currentMode = telemetryData.operationalMode;
+      const lastMode = machine.lastOperationalMode;
+      
+      // Valid modes: Automatic/Auto, Keep Fresh/Preservation, Standby
+      const validModes = ['Automatic', 'Auto', 'Keep Fresh', 'Preservation', 'Standby'];
+      
+      if (lastMode && lastMode !== currentMode && validModes.includes(currentMode)) {
+        console.log(`🔄 Mode change detected for ${machine.name}: ${lastMode} → ${currentMode}`);
+        
+        // Create mode change alarm
+        const alarmRef = await db.ref('alarms').push();
+        await alarmRef.set({
+          machineId: machine.id,
+          type: 'mode_change',
+          code: 'MODE_CHANGE',
+          message: `Çalışma modu değişti: ${lastMode} → ${currentMode}`,
+          severity: 'medium',
+          status: 'active',
+          timestamp: new Date().toISOString(),
+          details: {
+            previousMode: lastMode,
+            currentMode: currentMode
+          }
+        });
+        
+        // Send email notification
+        await sendEmailNotification(machine, {
+          type: 'mode_change',
+          code: 'MODE_CHANGE',
+          message: `Çalışma modu değişti: ${lastMode} → ${currentMode}`,
+          severity: 'medium',
+          timestamp: new Date().toISOString(),
+          status: 'active'
+        });
+        
+        // Update machine's last operational mode
+        await db.ref(`machines/${machine.id}`).update({
+          lastOperationalMode: currentMode
+        });
+      }
+    }
+    
     // Check for power issues
     if (telemetryData.powerStatus === false) {
       await createTelemetryAlarm(machine, 'POWER_OFF', 'Makine güç kesintisi');
+      
+      // Update power outage counter
+      const powerOutageStart = machine.powerOutageStart || new Date().toISOString();
+      const hoursWithoutPower = Math.floor((new Date().getTime() - new Date(powerOutageStart).getTime()) / (60 * 60 * 1000));
+      
+      await db.ref(`machines/${machine.id}`).update({
+        powerOutageStart: powerOutageStart,
+        hoursWithoutPower: hoursWithoutPower,
+        lastPowerCheck: new Date().toISOString()
+      });
+    } else {
+      // Power is back - reset counter
+      if (machine.powerOutageStart) {
+        await db.ref(`machines/${machine.id}`).update({
+          powerOutageStart: null,
+          hoursWithoutPower: 0,
+          lastPowerCheck: new Date().toISOString()
+        });
+      }
     }
     
     // Check for errors
@@ -318,18 +381,27 @@ async function checkCleaningRequirements(machines) {
         .limitToLast(1)
         .once('value');
       
+      let daysSinceCleaning = 0;
+      
       if (!cleaningLogsSnapshot.exists()) {
-        // No cleaning logs - create alarm
+        // No cleaning logs - create alarm and set counter
+        daysSinceCleaning = Math.floor((now - new Date(machine.createdAt || now).getTime()) / (24 * 60 * 60 * 1000));
         await createCleaningAlarm(machine, 'NEVER_CLEANED');
-        continue;
+      } else {
+        const lastCleaning = Object.values(cleaningLogsSnapshot.val())[0];
+        const timeSinceCleaning = now - new Date(lastCleaning.timestamp).getTime();
+        daysSinceCleaning = Math.floor(timeSinceCleaning / (24 * 60 * 60 * 1000));
+        
+        if (timeSinceCleaning > CLEANING_THRESHOLD) {
+          await createCleaningAlarm(machine, 'CLEANING_OVERDUE');
+        }
       }
       
-      const lastCleaning = Object.values(cleaningLogsSnapshot.val())[0];
-      const timeSinceCleaning = now - new Date(lastCleaning.timestamp).getTime();
-      
-      if (timeSinceCleaning > CLEANING_THRESHOLD) {
-        await createCleaningAlarm(machine, 'CLEANING_OVERDUE');
-      }
+      // Update cleaning counter in machine data
+      await db.ref(`machines/${machine.id}`).update({
+        daysSinceCleaning: daysSinceCleaning,
+        lastCleaningCheck: new Date().toISOString()
+      });
     }
     
   } catch (error) {
@@ -466,6 +538,8 @@ function getAlarmTitle(alarmType) {
       return 'Makine Hatası';
     case 'maintenance':
       return 'Bakım Gerekli';
+    case 'mode_change':
+      return 'Çalışma Modu Değişikliği';
     default:
       return 'Sistem Alarmı';
   }
