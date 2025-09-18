@@ -20,13 +20,13 @@ exports.handler = async (event, context) => {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS'
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
       }
     };
   }
 
-  // Only allow POST requests
-  if (event.httpMethod !== 'POST') {
+  // Allow both GET and POST requests
+  if (event.httpMethod !== 'POST' && event.httpMethod !== 'GET') {
     return {
       statusCode: 405,
       body: JSON.stringify({ error: 'Method Not Allowed' })
@@ -34,8 +34,19 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    // Parse the request body
-    const { machineId, deviceData } = JSON.parse(event.body);
+    // Parse the request data (from body for POST or query for GET)
+    let requestData;
+    if (event.httpMethod === 'POST') {
+      requestData = JSON.parse(event.body);
+    } else {
+      // For GET requests, parse from query string
+      requestData = {
+        machineId: event.queryStringParameters?.machineId,
+        deviceData: event.queryStringParameters?.deviceData ? JSON.parse(event.queryStringParameters.deviceData) : null
+      };
+    }
+    
+    const { machineId, deviceData } = requestData;
     
     // Validate required fields
     if (!machineId) {

@@ -15,14 +15,15 @@
       }
     },
     "machines": {
-      ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || root.child('users').child(auth.uid).child('permissions').child('canViewMachines').val() === true)",
+      ".read": "auth != null",
       "$machineId": {
         ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'admin' || (root.child('users').child(auth.uid).child('permissions').child('canViewMachines').val() === true && (root.child('users').child(auth.uid).child('assignedMachineIds').hasChild($machineId) || root.child('users').child(auth.uid).child('assignedGroupIds').hasChildren())))",
         ".write": "true",
         ".validate": "newData.hasChildren(['serialNumber', 'type', 'name', 'iotNumber', 'location', 'connectionInfo']) && newData.child('serialNumber').isString() && newData.child('type').isString() && newData.child('name').isString()",
         "telemetry": {
           ".read": "auth != null",
-          ".write": "auth != null"
+          ".write": "auth != null",
+          ".indexOn": ["timestamp"]
         },
         "configuration": {
           ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'admin'"

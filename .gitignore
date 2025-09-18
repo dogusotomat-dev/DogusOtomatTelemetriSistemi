@@ -63,3 +63,4 @@ database.rules.json
 
 # Build scripts
 build-and-deploy.js
+database.rules.json
