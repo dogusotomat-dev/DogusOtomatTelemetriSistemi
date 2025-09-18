@@ -65,20 +65,24 @@
         <h1>Emulator API Handler</h1>
         
         <div class="status info">
-            Bu sayfa emülatörden gelen API isteklerini işler. Netlify Functions'ı bypass eder.
+            IoT Emülatör - Gerçek IoT cihazı gibi sürekli heartbeat gönderir. Site açık olmasa bile backend monitoring çalışır.
         </div>
 
         <div id="status" class="status info">
             Status: Ready
         </div>
 
-        <h3>Test Buttons</h3>
+        <h3>IoT Status</h3>
+        <div class="status info">
+            ✅ IoT cihazı aktif - Sürekli heartbeat gönderiyor<br>
+            ✅ Backend monitoring aktif - 2 dakikada bir kontrol ediyor<br>
+            ✅ Email alarm sistemi aktif - Otomatik bildirim gönderiyor
+        </div>
+        
+        <h3>Manual Controls (Optional)</h3>
         <button onclick="testHeartbeat()">Test Heartbeat</button>
         <button onclick="testTelemetry()">Test Telemetry</button>
-        <button onclick="testConnection()">Test Netlify Connection</button>
-        
-        <h3>Auto Heartbeat</h3>
-        <button onclick="startAutoHeartbeat()">Start Auto Heartbeat (15s)</button>
+        <button onclick="testConnection()">Test Connection</button>
         <button onclick="stopAutoHeartbeat()" style="background-color: #dc3545;">Stop Auto Heartbeat</button>
 
         <h3>API URLs</h3>
@@ -130,11 +134,28 @@
                     },
                     body: JSON.stringify({
                         machineId: machineId,
+                        iotNumber: '8990010873499834749',
                         deviceData: {
-                            batteryLevel: 85,
-                            signalStrength: 90,
-                            temperature: -15,
-                            deviceId: 'emulator-' + machineId
+                            batteryLevel: Math.floor(Math.random() * 20) + 80, // 80-100%
+                            signalStrength: Math.floor(Math.random() * 20) + 80, // 80-100%
+                            temperature: Math.floor(Math.random() * 10) - 20, // -20 to -10°C
+                            deviceId: 'emulator-' + machineId,
+                            powerStatus: true,
+                            operationalMode: 'normal',
+                            errors: [],
+                            temperatureReadings: {
+                                'slot1': Math.floor(Math.random() * 5) - 18,
+                                'slot2': Math.floor(Math.random() * 5) - 18,
+                                'slot3': Math.floor(Math.random() * 5) - 18
+                            },
+                            salesData: {
+                                totalSales: Math.floor(Math.random() * 100),
+                                revenue: Math.floor(Math.random() * 500)
+                            },
+                            cleaningStatus: {
+                                lastCleaned: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
+                                needsCleaning: Math.random() > 0.8
+                            }
                         }
                     })
                 });
@@ -195,16 +216,16 @@
                 return;
             }
 
-            addLog('🚀 Starting auto heartbeat (every 15 seconds)');
+            addLog('🚀 Starting auto heartbeat (every 10 seconds)');
             setStatus('Auto heartbeat started', 'success');
             
-            // Send initial heartbeat
+            // Send initial heartbeat immediately
             processHeartbeat('2506211449', '8990010873499834749');
             
-            // Set up interval for every 15 seconds (more frequent for reliable online status)
+            // Set up interval for every 10 seconds (very frequent for reliable online status)
             heartbeatInterval = setInterval(() => {
                 processHeartbeat('2506211449', '8990010873499834749');
-            }, 15000);
+            }, 10000);
         }
 
         function stopAutoHeartbeat() {
@@ -251,11 +272,9 @@
             } else if (action === 'telemetry' && machineId && iotNumber) {
                 processTelemetry(machineId, iotNumber);
             } else {
-                // Auto-start heartbeat when page loads
-                setTimeout(() => {
-                    addLog('🔄 Auto-starting heartbeat...');
-                    startAutoHeartbeat();
-                }, 1000); // Start after 1 second
+                // Auto-start heartbeat immediately when page loads
+                addLog('🔄 Auto-starting heartbeat...');
+                startAutoHeartbeat();
             }
         };
     </script>

@@ -180,6 +180,25 @@ exports.handler = async (event, context) => {
         lastUpdated: new Date().toISOString()
       });
       console.log('✅ Device status updated');
+      
+      // Also save as telemetry data for monitoring
+      if (deviceData.powerStatus !== undefined || deviceData.operationalMode || deviceData.errors || deviceData.temperatureReadings) {
+        const telemetryData = {
+          timestamp: new Date().toISOString(),
+          powerStatus: deviceData.powerStatus !== undefined ? deviceData.powerStatus : true,
+          operationalMode: deviceData.operationalMode || 'normal',
+          errors: deviceData.errors || [],
+          temperatureReadings: deviceData.temperatureReadings || {},
+          salesData: deviceData.salesData || {},
+          cleaningStatus: deviceData.cleaningStatus || {},
+          batteryLevel: deviceData.batteryLevel,
+          signalStrength: deviceData.signalStrength,
+          temperature: deviceData.temperature
+        };
+        
+        await db.ref(`machines/${machineId}/telemetry`).push().set(telemetryData);
+        console.log('✅ Telemetry data saved');
+      }
     }
 
     console.log(`✅ Heartbeat updated for machine: ${machineId}`);
