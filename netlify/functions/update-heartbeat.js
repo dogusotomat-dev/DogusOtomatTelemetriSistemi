@@ -1,60 +1,32 @@
-// Simple HTTP client for Firebase REST API
-const https = require('https');
+const admin = require('firebase-admin');
 
-// Firebase REST API helper
-function firebaseRequest(path, method = 'GET', data = null) {
-  return new Promise((resolve, reject) => {
-    const databaseURL = process.env.REACT_APP_FIREBASE_DATABASE_URL;
-    if (!databaseURL) {
-      reject(new Error('Firebase Database URL not found'));
-      return;
-    }
-
-    const url = new URL(`${databaseURL}${path}.json`);
+// Initialize Firebase Admin SDK
+if (!admin.apps.length) {
+  try {
+    let credential;
     
-    const options = {
-      hostname: url.hostname,
-      port: 443,
-      path: url.pathname + url.search,
-      method: method,
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    };
-
-    if (data) {
-      const postData = JSON.stringify(data);
-      options.headers['Content-Length'] = Buffer.byteLength(postData);
-    }
-
-    const req = https.request(options, (res) => {
-      let responseData = '';
-      
-      res.on('data', (chunk) => {
-        responseData += chunk;
-      });
-      
-      res.on('end', () => {
-        try {
-          const parsedData = responseData ? JSON.parse(responseData) : null;
-          resolve(parsedData);
-        } catch (error) {
-          resolve(responseData);
-        }
-      });
-    });
-
-    req.on('error', (error) => {
-      reject(error);
-    });
-
-    if (data) {
-      req.write(JSON.stringify(data));
+    // Check if we have service account JSON in environment variables
+    if (process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON) {
+      const serviceAccount = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
+      credential = admin.credential.cert(serviceAccount);
+      console.log('✅ Using service account credentials from environment');
+    } else {
+      // Fallback to application default credentials
+      credential = admin.credential.applicationDefault();
+      console.log('✅ Using application default credentials');
     }
     
-    req.end();
-  });
+    admin.initializeApp({
+      credential: credential,
+      databaseURL: process.env.FIREBASE_DATABASE_URL || process.env.REACT_APP_FIREBASE_DATABASE_URL
+    });
+    console.log('✅ Firebase Admin initialized successfully');
+  } catch (error) {
+    console.error('❌ Firebase Admin initialization failed:', error);
+  }
 }
+
+const db = admin.database();
 
 exports.handler = async (event, context) => {
   console.log('🚀 Function started:', event.httpMethod, event.path);
@@ -131,8 +103,8 @@ exports.handler = async (event, context) => {
     const now = Date.now();
     console.log('⏰ Updating heartbeat for machine:', machineId, 'at', new Date(now).toISOString());
     
-    // Update heartbeat data using Firebase REST API
-    await firebaseRequest(`heartbeat/${machineId}`, 'PATCH', {
+    // Update heartbeat data
+    await db.ref(`heartbeat/${machineId}`).update({
       lastSeen: now,
       status: 'online',
       deviceId: deviceData?.deviceId || null,
@@ -141,7 +113,7 @@ exports.handler = async (event, context) => {
     console.log('✅ Heartbeat data updated');
 
     // Update machine connection info
-    await firebaseRequest(`machines/${machineId}/connectionInfo`, 'PATCH', {
+    await db.ref(`machines/${machineId}/connectionInfo`).update({
       status: 'online',
       lastHeartbeat: new Date(now).toISOString()
     });
@@ -149,7 +121,7 @@ exports.handler = async (event, context) => {
 
     // Update device-specific data if provided
     if (deviceData) {
-      await firebaseRequest(`machines/${machineId}/deviceStatus`, 'PATCH', {
+      await db.ref(`machines/${machineId}/deviceStatus`).update({
         batteryLevel: deviceData.batteryLevel,
         signalStrength: deviceData.signalStrength,
         temperature: deviceData.temperature,
