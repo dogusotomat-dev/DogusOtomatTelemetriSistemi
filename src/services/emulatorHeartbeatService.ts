@@ -31,10 +31,11 @@ export class EmulatorHeartbeatService {
       // Check if machine exists
       const machine = await MachineService.getMachine(machineId);
       if (!machine) {
-        console.warn(`⚠️ Machine ${machineId} not found, creating basic record`);
-        
-        // Create basic machine record for emulator
-        await this.createEmulatorMachine(machineId, iotNumber);
+        console.error(`❌ Machine ${machineId} not found - automatic creation disabled`);
+        return {
+          success: false,
+          message: `Machine ${machineId} does not exist. Please create the machine manually through the admin interface.`
+        };
       }
       
       const timestamp = new Date().toISOString();
@@ -81,52 +82,12 @@ export class EmulatorHeartbeatService {
   }
   
   /**
-   * Create basic machine record for emulator
+   * Create basic machine record for emulator - DISABLED
+   * This function is disabled to prevent automatic test machine creation
    */
   private static async createEmulatorMachine(machineId: string, iotNumber: string): Promise<void> {
-    const machineData = {
-      id: machineId, // Add the missing id field
-      serialNumber: machineId,
-      type: 'ice_cream',
-      model: 'DGS-ICE-EMULATOR',
-      name: `Emülatör Makinesi ${machineId}`,
-      iotNumber: iotNumber,
-      location: {
-        address: 'Emülatör Lokasyonu',
-        latitude: 0,
-        longitude: 0
-      },
-      connectionInfo: {
-        version: '1.0.0',
-        status: 'online',
-        lastHeartbeat: new Date().toISOString()
-      },
-      configuration: {
-        slots: {},
-        settings: {
-          modes: ['normal'],
-          currentMode: 'normal',
-          temperature: -15,
-          features: {},
-          capabilities: {
-            hasTemperatureControl: true,
-            hasAutoCleaning: false,
-            supportedPayments: ['cash']
-          }
-        },
-        notifications: {
-          emailAddresses: [],
-          enableOfflineAlerts: true,
-          enableErrorAlerts: true,
-          alertThresholdMinutes: 5
-        }
-      },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    };
-    
-    await set(ref(database, `machines/${machineId}`), machineData);
-    console.log(`✅ Emülatör makine kaydı oluşturuldu: ${machineId}`);
+    // DISABLED: Automatic machine creation is not allowed
+    throw new Error(`Automatic machine creation is disabled. Please create machine ${machineId} manually through the admin interface.`);
   }
   
   /**

@@ -111,27 +111,13 @@ export class DebugService {
   }
   
   /**
-   * Clean up test data and recreate machine
+   * Clean up test data and recreate machine - DISABLED
+   * This function is disabled to prevent automatic test machine creation
    */
   static async recreateTestMachine(machineId: string): Promise<void> {
-    try {
-      console.log(`🧹 Makine temizleniyor ve yeniden oluşturuluyor: ${machineId}`);
-      
-      // Remove existing machine and heartbeat data
-      const { ref, remove } = await import('firebase/database');
-      await remove(ref(database, `machines/${machineId}`));
-      await remove(ref(database, `heartbeat/${machineId}`));
-      
-      console.log(`✅ Makine için mevcut veriler temizlendi: ${machineId}`);
-      
-      // Force heartbeat update to recreate machine
-      await this.forceHeartbeatUpdate(machineId);
-      
-      console.log(`✅ Makine yeniden oluşturuldu: ${machineId}`);
-      
-    } catch (error) {
-      console.error('❌ Error recreating test machine:', error);
-    }
+    // DISABLED: Automatic machine recreation is not allowed
+    console.error(`❌ Automatic machine recreation is disabled: ${machineId}`);
+    throw new Error(`Automatic machine recreation is disabled. Please create machine ${machineId} manually through the admin interface.`);
   }
 }
 

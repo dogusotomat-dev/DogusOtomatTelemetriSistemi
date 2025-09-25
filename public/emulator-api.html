@@ -201,31 +201,23 @@
         }
 
         function testHeartbeat() {
-            processHeartbeat('2506211449', '8990010873499834749');
+            // DISABLED: Test heartbeat disabled to prevent automatic test machine creation
+            addLog('❌ Test heartbeat disabled - automatic test machine creation is not allowed');
+            setStatus('Test heartbeat disabled', 'error');
         }
 
         function testTelemetry() {
-            processTelemetry('2506211449', '8990010873499834749');
+            // DISABLED: Test telemetry disabled to prevent automatic test machine creation
+            addLog('❌ Test telemetry disabled - automatic test machine creation is not allowed');
+            setStatus('Test telemetry disabled', 'error');
         }
 
         let heartbeatInterval = null;
 
         function startAutoHeartbeat() {
-            if (heartbeatInterval) {
-                addLog('❌ Auto heartbeat already running');
-                return;
-            }
-
-            addLog('🚀 Starting auto heartbeat (every 10 seconds)');
-            setStatus('Auto heartbeat started', 'success');
-            
-            // Send initial heartbeat immediately
-            processHeartbeat('2506211449', '8990010873499834749');
-            
-            // Set up interval for every 10 seconds (very frequent for reliable online status)
-            heartbeatInterval = setInterval(() => {
-                processHeartbeat('2506211449', '8990010873499834749');
-            }, 10000);
+            // DISABLED: Auto heartbeat disabled to prevent automatic test machine creation
+            addLog('❌ Auto heartbeat disabled - automatic test machine creation is not allowed');
+            setStatus('Auto heartbeat disabled', 'error');
         }
 
         function stopAutoHeartbeat() {
@@ -272,9 +264,9 @@
             } else if (action === 'telemetry' && machineId && iotNumber) {
                 processTelemetry(machineId, iotNumber);
             } else {
-                // Auto-start heartbeat immediately when page loads
-                addLog('🔄 Auto-starting heartbeat...');
-                startAutoHeartbeat();
+                // DISABLED: Auto-start disabled to prevent automatic test machine creation
+                addLog('❌ Auto-start disabled - automatic test machine creation is not allowed');
+                setStatus('Auto-start disabled', 'error');
             }
         };
     </script>

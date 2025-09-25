@@ -71,64 +71,14 @@ export class DirectFirebaseService {
   }
   
   /**
-   * Ensure machine exists in Firebase
+   * Ensure machine exists in Firebase - DISABLED
+   * Machines must be created manually through the admin interface
    */
   private static async ensureMachineExists(machineId: string, iotNumber: string, timestamp: string): Promise<void> {
-    try {
-      const machineRef = ref(database, `machines/${machineId}`);
-      const machineSnapshot = await get(machineRef);
-      
-      if (!machineSnapshot.exists()) {
-        console.log(`Makine kaydı oluşturuluyor: ${machineId}`);
-        
-        const machineData = {
-          id: machineId, // Add the missing id field
-          serialNumber: machineId,
-          type: 'ice_cream',
-          model: 'DGS-ICE-EMULATOR',
-          name: `Emülatör Makinesi ${machineId}`,
-          iotNumber: iotNumber,
-          location: {
-            address: 'Emülatör Lokasyonu',
-            latitude: 0,
-            longitude: 0
-          },
-          connectionInfo: {
-            version: '1.0.0',
-            status: 'online',
-            lastHeartbeat: timestamp
-          },
-          configuration: {
-            slots: {},
-            settings: {
-              modes: ['normal'],
-              currentMode: 'normal',
-              temperature: -15,
-              features: {},
-              capabilities: {
-                hasTemperatureControl: true,
-                hasAutoCleaning: false,
-                supportedPayments: ['cash']
-              }
-            },
-            notifications: {
-              emailAddresses: [],
-              enableOfflineAlerts: true,
-              enableErrorAlerts: true,
-              alertThresholdMinutes: 5
-            }
-          },
-          createdAt: timestamp,
-          updatedAt: timestamp
-        };
-        
-        await set(machineRef, machineData);
-        console.log(`✅ Makine kaydı oluşturuldu: ${machineId}`);
-      }
-    } catch (error) {
-      console.error(`❌ Error ensuring machine exists:`, error);
-      throw error;
-    }
+    // DISABLED: Automatic machine creation is not allowed
+    // Machines must be created manually through the admin interface
+    console.log(`⚠️ Machine creation disabled: ${machineId} - Please create machine manually`);
+    throw new Error(`Machine ${machineId} does not exist. Please create the machine manually through the admin interface.`);
   }
   
   /**

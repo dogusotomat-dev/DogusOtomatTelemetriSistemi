@@ -79,8 +79,8 @@ const handler = async (event, context) => {
     console.log(`📊 Found ${validMachines.length} valid machines`);
     
     const now = Date.now();
-    const OFFLINE_THRESHOLD = 15 * 60 * 1000; // 15 minutes
-    const CRITICAL_OFFLINE_THRESHOLD = 60 * 60 * 1000; // 60 minutes
+    const OFFLINE_THRESHOLD = 30 * 60 * 1000; // 30 minutes
+    const CRITICAL_OFFLINE_THRESHOLD = 120 * 60 * 1000; // 120 minutes
     
     let offlineCount = 0;
     let criticalOfflineCount = 0;
@@ -89,28 +89,30 @@ const handler = async (event, context) => {
     // Check each machine
     for (const machine of validMachines) {
       try {
+        console.log(`🔍 Checking machine: ${machine.name} (${machine.id})`);
+        
         // Get heartbeat data
         const heartbeatSnapshot = await db.ref(`heartbeat/${machine.id}`).once('value');
         
         if (!heartbeatSnapshot.exists()) {
           // No heartbeat data - machine is offline
           console.log(`⚠️ No heartbeat data for machine: ${machine.name} (${machine.serialNumber})`);
-          await createOfflineAlarm(machine, 'NO_HEARTBEAT');
           offlineCount++;
           continue;
         }
         
         const heartbeatData = heartbeatSnapshot.val();
+        console.log(`📊 Heartbeat data for ${machine.name}:`, heartbeatData);
         
         // Validate lastSeen timestamp
         if (!heartbeatData.lastSeen || typeof heartbeatData.lastSeen !== 'number') {
           console.log(`⚠️ Invalid heartbeat data for machine: ${machine.name} (${machine.serialNumber})`);
-          await createOfflineAlarm(machine, 'INVALID_HEARTBEAT');
           offlineCount++;
           continue;
         }
         
         const timeSinceLastHeartbeat = now - heartbeatData.lastSeen;
+        console.log(`⏰ Time since last heartbeat: ${Math.floor(timeSinceLastHeartbeat / 60000)} minutes`);
         
         // Check if machine is offline
         if (timeSinceLastHeartbeat > OFFLINE_THRESHOLD) {
@@ -118,27 +120,19 @@ const handler = async (event, context) => {
           
           // Check if it's critical offline
           if (timeSinceLastHeartbeat > CRITICAL_OFFLINE_THRESHOLD) {
-            await createOfflineAlarm(machine, 'CRITICAL_OFFLINE');
             criticalOfflineCount++;
-          } else {
-            await createOfflineAlarm(machine, 'OFFLINE');
           }
           
           offlineCount++;
         } else {
           console.log(`✅ Machine online: ${machine.name} (${machine.serialNumber})`);
-          
-          // Check for telemetry-based alarms
-          await checkTelemetryAlarms(machine);
         }
         
       } catch (machineError) {
         console.error(`❌ Error checking machine ${machine.id}:`, machineError);
+        offlineCount++;
       }
     }
-    
-    // Check cleaning requirements
-    await checkCleaningRequirements(validMachines);
     
     const result = {
       success: true,

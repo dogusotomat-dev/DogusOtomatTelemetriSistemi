@@ -11,7 +11,7 @@
 
 // Configuration - Set these values for your specific machine
 const CONFIG = {
-  MACHINE_ID: 'YOUR_MACHINE_ID_HERE', // Replace with actual machine ID
+  MACHINE_ID: 'DISABLED_AUTO_CREATION', // DISABLED: Automatic machine creation is not allowed
   API_ENDPOINT: 'https://dogusotomattelemetrisistemi.netlify.app/.netlify/functions/update-heartbeat',
   HEARTBEAT_INTERVAL: 60000, // 60 seconds
 };
@@ -96,8 +96,9 @@ function startHeartbeatService() {
     return;
   }
 
-  if (!CONFIG.MACHINE_ID || CONFIG.MACHINE_ID === 'YOUR_MACHINE_ID_HERE') {
-    console.error('❌ MACHINE_ID not configured. Please set the MACHINE_ID in the CONFIG object.');
+  if (!CONFIG.MACHINE_ID || CONFIG.MACHINE_ID === 'YOUR_MACHINE_ID_HERE' || CONFIG.MACHINE_ID === 'DISABLED_AUTO_CREATION') {
+    console.error('❌ MACHINE_ID not configured or disabled. Please set a valid MACHINE_ID in the CONFIG object.');
+    console.error('❌ Automatic machine creation is disabled. Please create the machine manually through the admin interface.');
     return;
   }
 
