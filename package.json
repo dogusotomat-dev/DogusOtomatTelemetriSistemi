@@ -42,7 +42,12 @@
     "build:memory": "cross-env CI=false NODE_OPTIONS=--max-old-space-size=8192 react-scripts build",
     "build:deploy": "node build-and-deploy.js",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "bridge": "node socket-bridge.js",
+    "bridge:start": "pm2 start socket-bridge.js --name socket-bridge",
+    "bridge:stop": "pm2 stop socket-bridge",
+    "bridge:restart": "pm2 restart socket-bridge",
+    "bridge:logs": "pm2 logs socket-bridge"
   },
   "eslintConfig": {
     "extends": [
