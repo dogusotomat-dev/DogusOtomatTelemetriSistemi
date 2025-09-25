@@ -86,50 +86,53 @@ const handler = async (event, context) => {
     let criticalOfflineCount = 0;
     let alarmsCreated = 0;
     
-    // Check each machine
+    // Check each machine - SIMPLIFIED VERSION
     for (const machine of validMachines) {
       try {
         console.log(`🔍 Checking machine: ${machine.name} (${machine.id})`);
         
-        // Get heartbeat data
-        const heartbeatSnapshot = await db.ref(`heartbeat/${machine.id}`).once('value');
+        // Get heartbeat data with timeout
+        const heartbeatSnapshot = await Promise.race([
+          db.ref(`heartbeat/${machine.id}`).once('value'),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))
+        ]);
         
         if (!heartbeatSnapshot.exists()) {
-          // No heartbeat data - machine is offline
-          console.log(`⚠️ No heartbeat data for machine: ${machine.name} (${machine.serialNumber})`);
+          console.log(`⚠️ No heartbeat data for machine: ${machine.name}`);
           offlineCount++;
           continue;
         }
         
         const heartbeatData = heartbeatSnapshot.val();
-        console.log(`📊 Heartbeat data for ${machine.name}:`, heartbeatData);
+        const now = Date.now();
         
         // Validate lastSeen timestamp
         if (!heartbeatData.lastSeen || typeof heartbeatData.lastSeen !== 'number') {
-          console.log(`⚠️ Invalid heartbeat data for machine: ${machine.name} (${machine.serialNumber})`);
+          console.log(`⚠️ Invalid heartbeat data for machine: ${machine.name}`);
           offlineCount++;
           continue;
         }
         
         const timeSinceLastHeartbeat = now - heartbeatData.lastSeen;
-        console.log(`⏰ Time since last heartbeat: ${Math.floor(timeSinceLastHeartbeat / 60000)} minutes`);
+        const minutesSinceLastHeartbeat = Math.floor(timeSinceLastHeartbeat / 60000);
         
-        // Check if machine is offline
+        console.log(`⏰ Time since last heartbeat: ${minutesSinceLastHeartbeat} minutes`);
+        
+        // Check if machine is offline (30 minutes threshold)
         if (timeSinceLastHeartbeat > OFFLINE_THRESHOLD) {
-          console.log(`❌ Machine offline: ${machine.name} (${machine.serialNumber}) - ${Math.floor(timeSinceLastHeartbeat / 60000)}m ago`);
+          console.log(`❌ Machine offline: ${machine.name} - ${minutesSinceLastHeartbeat}m ago`);
           
-          // Check if it's critical offline
           if (timeSinceLastHeartbeat > CRITICAL_OFFLINE_THRESHOLD) {
             criticalOfflineCount++;
           }
           
           offlineCount++;
         } else {
-          console.log(`✅ Machine online: ${machine.name} (${machine.serialNumber})`);
+          console.log(`✅ Machine online: ${machine.name} - ${minutesSinceLastHeartbeat}m ago`);
         }
         
       } catch (machineError) {
-        console.error(`❌ Error checking machine ${machine.id}:`, machineError);
+        console.error(`❌ Error checking machine ${machine.id}:`, machineError.message);
         offlineCount++;
       }
     }
