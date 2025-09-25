@@ -12,7 +12,7 @@
 // Configuration - Set these values for your specific machine
 const CONFIG = {
   MACHINE_ID: 'YOUR_MACHINE_ID_HERE', // Replace with actual machine ID
-  API_ENDPOINT: 'https://dogusotomattelemetridemo.netlify.app/.netlify/functions/update-heartbeat',
+  API_ENDPOINT: 'https://dogusotomattelemetrisistemi.netlify.app/.netlify/functions/update-heartbeat',
   HEARTBEAT_INTERVAL: 30000, // 30 seconds
 };
 
