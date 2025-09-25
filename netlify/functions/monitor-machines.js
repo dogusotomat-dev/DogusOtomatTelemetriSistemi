@@ -79,8 +79,8 @@ const handler = async (event, context) => {
     console.log(`📊 Found ${validMachines.length} valid machines`);
     
     const now = Date.now();
-    const OFFLINE_THRESHOLD = 5 * 60 * 1000; // 5 minutes
-    const CRITICAL_OFFLINE_THRESHOLD = 30 * 60 * 1000; // 30 minutes
+    const OFFLINE_THRESHOLD = 15 * 60 * 1000; // 15 minutes
+    const CRITICAL_OFFLINE_THRESHOLD = 60 * 60 * 1000; // 60 minutes
     
     let offlineCount = 0;
     let criticalOfflineCount = 0;

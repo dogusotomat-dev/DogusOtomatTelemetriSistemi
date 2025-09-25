@@ -103,55 +103,24 @@ exports.handler = async (event, context) => {
     const now = Date.now();
     console.log('⏰ Updating heartbeat for machine:', machineId, 'at', new Date(now).toISOString());
     
-    // Check if machine exists, if not create it
+    // Check if machine exists, if not return error
     const machineRef = db.ref(`machines/${machineId}`);
     const machineSnapshot = await machineRef.once('value');
     
     if (!machineSnapshot.exists()) {
-      console.log('🔧 Creating machine record for:', machineId);
-      const timestamp = new Date().toISOString();
-      
-      await machineRef.set({
-        id: machineId,
-        serialNumber: machineId,
-        type: 'ice_cream',
-        model: 'DGS-ICE-TEST',
-        name: `Test Makinesi ${machineId}`,
-        iotNumber: `TEST-${machineId}`,
-        location: {
-          address: 'Test Lokasyonu',
-          latitude: 0,
-          longitude: 0
+      console.log('❌ Machine not found:', machineId);
+      return {
+        statusCode: 404,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
         },
-        connectionInfo: {
-          version: '1.0.0',
-          status: 'online',
-          lastHeartbeat: timestamp
-        },
-        configuration: {
-          slots: {},
-          settings: {
-            modes: ['normal'],
-            currentMode: 'normal',
-            temperature: -15,
-            features: {},
-            capabilities: {
-              hasTemperatureControl: true,
-              hasAutoCleaning: false,
-              supportedPayments: ['cash']
-            }
-          },
-          notifications: {
-            emailAddresses: [],
-            enableOfflineAlerts: true,
-            enableErrorAlerts: true,
-            alertThresholdMinutes: 5
-          }
-        },
-        createdAt: timestamp,
-        updatedAt: timestamp
-      });
-      console.log('✅ Machine record created');
+        body: JSON.stringify({ 
+          success: false, 
+          error: 'Machine not found',
+          message: `Machine with ID ${machineId} does not exist. Please add the machine first.`
+        })
+      };
     }
     
     // Update heartbeat data
